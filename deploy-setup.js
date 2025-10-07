@@ -35,7 +35,8 @@ if (fs.existsSync(sourceImagesDir)) {
 const requiredImages = [
   'selle1.jpg', 'selle2.jpg', 'cross.jpg', 'mixte.jpg', 'obstacle.webp', 'poney.jpg',
   'sangle1.jpg', 'etrivieres1.jpg', 'etriers1.jpg', 'amortisseur1.jpg', 
-  'tapis1.jpg', 'bridon1.jpg', 'couverture1.jpg', 'protections1.jpg'
+  'tapis1.jpg', 'bridon1.jpg', 'couverture1.jpg', 'protections1.jpg',
+  'fond-background1.jpg' // Image de fond ajoutée
 ];
 
 const fallbackImages = ['selle1.jpg', 'selle2.jpg'];
