@@ -13,18 +13,18 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import { Search, Package, Filter, ShoppingBag, Sparkles, TrendingUp, Heart } from "lucide-react";
 
-// Catégories d'accessoires avec icônes
-const accessoryCategories = [
-  { id: "all", name: "Tous les accessoires", icon: Package },
-  { id: "Sangles", name: "Sangles", icon: Package },
-  { id: "Etrivieres", name: "Étrivières", icon: Package },
-  { id: "Etriers", name: "Étriers", icon: Package },
-  { id: "Amortisseurs", name: "Amortisseurs", icon: Package },
-  { id: "Tapis", name: "Tapis de selle", icon: Package },
-  { id: "Briderie", name: "Briderie", icon: Package },
-  { id: "Couvertures", name: "Couvertures", icon: Package },
-  { id: "Protections", name: "Protections", icon: Package },
-  { id: "Autre", name: "Autres accessoires", icon: ShoppingBag },
+// Fonction pour obtenir les catégories traduites
+const getAccessoryCategories = (t: (key: string) => string) => [
+  { id: "all", name: t("accessories.allCategories"), icon: Package },
+  { id: "Sangles", name: t("subcategories.sangles"), icon: Package },
+  { id: "Etrivieres", name: t("subcategories.etrivieres"), icon: Package },
+  { id: "Etriers", name: t("subcategories.etriers"), icon: Package },
+  { id: "Amortisseurs", name: t("subcategories.amortisseurs"), icon: Package },
+  { id: "Tapis", name: t("subcategories.tapis"), icon: Package },
+  { id: "Briderie", name: t("subcategories.briderie"), icon: Package },
+  { id: "Couvertures", name: t("subcategories.couvertures"), icon: Package },
+  { id: "Protections", name: t("subcategories.protections"), icon: Package },
+  { id: "Autre", name: t("accessories.otherAccessories"), icon: ShoppingBag },
 ];
 
 export default function Accessories() {
@@ -36,6 +36,9 @@ export default function Accessories() {
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 500]);
   const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
   const [selectedConditions, setSelectedConditions] = useState<string[]>([]);
+  
+  // Obtenir les catégories traduites
+  const accessoryCategories = getAccessoryCategories(t);
 
   useEffect(() => {
     scrollToTop();
@@ -127,23 +130,23 @@ export default function Accessories() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Accessoires d'Équitation
+              {t("accessories.title")}
             </h1>
             <p className="text-xl opacity-90 mb-8">
-              Découvrez notre sélection d'accessoires de qualité pour compléter votre équipement
+              {t("accessories.subtitle")}
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Badge className="bg-white/20 text-white border-white/30 px-4 py-2">
                 <Sparkles className="h-4 w-4 mr-2" />
-                {accessories.length} produits disponibles
+                {accessories.length} {t("accessories.available")}
               </Badge>
               <Badge className="bg-white/20 text-white border-white/30 px-4 py-2">
                 <TrendingUp className="h-4 w-4 mr-2" />
-                Nouveautés chaque semaine
+                {t("accessories.newWeekly")}
               </Badge>
               <Badge className="bg-white/20 text-white border-white/30 px-4 py-2">
                 <Heart className="h-4 w-4 mr-2" />
-                Sélection premium
+                {t("accessories.premiumSelection")}
               </Badge>
             </div>
           </div>
@@ -157,7 +160,7 @@ export default function Accessories() {
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
               <Input
-                placeholder="Rechercher un accessoire..."
+                placeholder={t("accessories.searchPlaceholder")}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-10 h-12"
@@ -166,13 +169,13 @@ export default function Accessories() {
             
             <Select value={sortBy} onValueChange={setSortBy}>
               <SelectTrigger className="w-full lg:w-48 h-12">
-                <SelectValue placeholder="Trier par" />
+                <SelectValue placeholder={t("accessories.sortBy")} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="name">Nom A-Z</SelectItem>
-                <SelectItem value="price-low">Prix croissant</SelectItem>
-                <SelectItem value="price-high">Prix décroissant</SelectItem>
-                <SelectItem value="newest">Plus récents</SelectItem>
+                <SelectItem value="name">{t("accessories.sortName")}</SelectItem>
+                <SelectItem value="price-low">{t("accessories.sortPriceLow")}</SelectItem>
+                <SelectItem value="price-high">{t("accessories.sortPriceHigh")}</SelectItem>
+                <SelectItem value="newest">{t("accessories.sortNewest")}</SelectItem>
               </SelectContent>
             </Select>
 
@@ -181,7 +184,7 @@ export default function Accessories() {
               className="h-12"
               onClick={() => navigate("/catalog")}
             >
-              Voir les selles
+              {t("accessories.viewSaddles")}
             </Button>
           </div>
         </div>
@@ -189,7 +192,7 @@ export default function Accessories() {
         {/* Catégories */}
         <div className="mb-8">
           <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">
-            Catégories
+            {t("accessories.categories")}
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {categoryStats.map((cat) => {
@@ -208,7 +211,7 @@ export default function Accessories() {
                     <Icon className="h-8 w-8 mx-auto mb-2 text-primary" />
                     <h3 className="font-semibold text-sm">{cat.name}</h3>
                     <Badge variant="secondary" className="mt-2">
-                      {cat.count} articles
+                      {cat.count} {t("accessories.articles")}
                     </Badge>
                   </CardContent>
                 </Card>
@@ -223,7 +226,7 @@ export default function Accessories() {
             {/* Filtre par prix */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">Prix</CardTitle>
+                <CardTitle className="text-lg">{t("accessories.price")}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -247,7 +250,7 @@ export default function Accessories() {
             {availableSizes.length > 0 && (
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-lg">Tailles</CardTitle>
+                  <CardTitle className="text-lg">{t("accessories.sizes")}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-2">
@@ -277,7 +280,7 @@ export default function Accessories() {
             {availableConditions.length > 0 && (
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-lg">État</CardTitle>
+                  <CardTitle className="text-lg">{t("accessories.condition")}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-2">
@@ -311,7 +314,7 @@ export default function Accessories() {
                 <CardHeader>
                   <CardTitle className="text-lg flex items-center">
                     <TrendingUp className="h-5 w-5 mr-2 text-primary" />
-                    Populaires
+                    {t("accessories.popular")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
@@ -344,7 +347,7 @@ export default function Accessories() {
             {/* Résultats */}
             <div className="mb-4 flex items-center justify-between">
               <p className="text-gray-600 dark:text-gray-400">
-                {sortedAccessories.length} accessoire{sortedAccessories.length !== 1 ? 's' : ''} trouvé{sortedAccessories.length !== 1 ? 's' : ''}
+                {sortedAccessories.length} {sortedAccessories.length !== 1 ? t("accessories.foundPlural") : t("accessories.found")} {sortedAccessories.length !== 1 ? t("accessories.foundTextPlural") : t("accessories.foundText")}
               </p>
               {(selectedSizes.length > 0 || selectedConditions.length > 0 || searchTerm) && (
                 <Button
@@ -375,9 +378,9 @@ export default function Accessories() {
             ) : sortedAccessories.length === 0 ? (
               <Card className="p-16 text-center">
                 <Package className="h-24 w-24 mx-auto mb-4 text-gray-300" />
-                <h3 className="text-xl font-semibold mb-2">Aucun accessoire trouvé</h3>
+                <h3 className="text-xl font-semibold mb-2">{t("accessories.noResults")}</h3>
                 <p className="text-gray-600 dark:text-gray-400 mb-4">
-                  Essayez de modifier vos critères de recherche
+                  {t("accessories.noResultsDesc")}
                 </p>
                 <Button
                   variant="outline"
