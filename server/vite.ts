@@ -20,11 +20,12 @@ export function log(message: string, source = "express") {
 
 // ---- DEV ONLY: import('vite') au runtime, pas d'import top-level ----
 export async function setupVite(app: Express, server: Server) {
-  // Import dynamique pour éviter la résolution de 'vite' en production
-  const { createServer: createViteServer, createLogger } = await import("vite");
-  // idem pour le fichier de config (il dépend de plugins dev)
-  const viteConfigMod = await import("../vite.config");
-  const viteConfig = viteConfigMod.default;
+  try {
+    // Import dynamique pour éviter la résolution de 'vite' en production
+    const { createServer: createViteServer, createLogger } = await import("vite");
+    // idem pour le fichier de config (il dépend de plugins dev)
+    const viteConfigMod = await import("../vite.config");
+    const viteConfig = viteConfigMod.default;
 
   const viteLogger = createLogger();
 
@@ -73,11 +74,17 @@ export async function setupVite(app: Express, server: Server) {
       next(e);
     }
   });
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    nowLog("setupVite", `Failed to setup Vite in development mode: ${errorMessage}`);
+    // Fallback to static serving if Vite setup fails
+    serveStatic(app);
+  }
 }
 
 // ---- PROD: sert simplement dist/public sans 'vite' ----
 export function serveStatic(app: Express) {
-  const distPath = path.resolve(import.meta.dirname, "public");
+  const distPath = path.resolve(import.meta.dirname, "..", "dist", "public");
 
   if (!fs.existsSync(distPath)) {
     throw new Error(
