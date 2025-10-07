@@ -1,0 +1,183 @@
+[StripeFix] Creating payment intent for amount: 1150
+(anonymous) @ checkout.tsx:419
+commitHookEffectListMount @ chunk-RPCDYKBN.js?v=60fe000a:16915
+commitPassiveMountOnFiber @ chunk-RPCDYKBN.js?v=60fe000a:18156
+commitPassiveMountEffects_complete @ chunk-RPCDYKBN.js?v=60fe000a:18129
+commitPassiveMountEffects_begin @ chunk-RPCDYKBN.js?v=60fe000a:18119
+commitPassiveMountEffects @ chunk-RPCDYKBN.js?v=60fe000a:18109
+flushPassiveEffectsImpl @ chunk-RPCDYKBN.js?v=60fe000a:19490
+flushPassiveEffects @ chunk-RPCDYKBN.js?v=60fe000a:19447
+commitRootImpl @ chunk-RPCDYKBN.js?v=60fe000a:19416
+commitRoot @ chunk-RPCDYKBN.js?v=60fe000a:19277
+performSyncWorkOnRoot @ chunk-RPCDYKBN.js?v=60fe000a:18895
+flushSyncCallbacks @ chunk-RPCDYKBN.js?v=60fe000a:9119
+(anonymous) @ chunk-RPCDYKBN.js?v=60fe000a:18627Understand this warning
+sw.js:58 [SW] Skipping non-GET request: POST https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/api/create-payment-intent
+checkout.tsx:433 [StripeFix] Payment intent created successfully
+(anonymous) @ checkout.tsx:433
+Promise.then
+(anonymous) @ checkout.tsx:428
+commitHookEffectListMount @ chunk-RPCDYKBN.js?v=60fe000a:16915
+commitPassiveMountOnFiber @ chunk-RPCDYKBN.js?v=60fe000a:18156
+commitPassiveMountEffects_complete @ chunk-RPCDYKBN.js?v=60fe000a:18129
+commitPassiveMountEffects_begin @ chunk-RPCDYKBN.js?v=60fe000a:18119
+commitPassiveMountEffects @ chunk-RPCDYKBN.js?v=60fe000a:18109
+flushPassiveEffectsImpl @ chunk-RPCDYKBN.js?v=60fe000a:19490
+flushPassiveEffects @ chunk-RPCDYKBN.js?v=60fe000a:19447
+commitRootImpl @ chunk-RPCDYKBN.js?v=60fe000a:19416
+commitRoot @ chunk-RPCDYKBN.js?v=60fe000a:19277
+performSyncWorkOnRoot @ chunk-RPCDYKBN.js?v=60fe000a:18895
+flushSyncCallbacks @ chunk-RPCDYKBN.js?v=60fe000a:9119
+(anonymous) @ chunk-RPCDYKBN.js?v=60fe000a:18627Understand this warning
+controller-with-preconnect-3eeeaaf65580a57fa4db91a8e104cfaa.js:1 [Stripe.js] It looks like you are using Payment Element in an iframe.
+      Avoid placing the Payment Element within another iframe because some payment methods require redirecting to another page for payment confirmation.
+warn @ controller-with-preconnect-3eeeaaf65580a57fa4db91a8e104cfaa.js:1
+warn @ controller-with-preconnect-3eeeaaf65580a57fa4db91a8e104cfaa.js:1
+value @ controller-with-preconnect-3eeeaaf65580a57fa4db91a8e104cfaa.js:1
+(anonymous) @ controller-with-preconnect-3eeeaaf65580a57fa4db91a8e104cfaa.js:1Understand this warning
+[Violation] Potential permissions policy violation: publickey-credentials-get is not allowed in this document.Understand this error
+controller-with-preconnect-3eeeaaf65580a57fa4db91a8e104cfaa.js:1 [Stripe.js] The following payment method types are not activated:
+
+- link
+- eps
+- amazon_pay
+- klarna
+- bancontact
+
+They will be displayed in test mode, but hidden in live mode. Please activate the payment method types in your dashboard (https://dashboard.stripe.com/settings/payment_methods) and ensure your account is enabled for any preview features that you are trying to use.
+warn @ controller-with-preconnect-3eeeaaf65580a57fa4db91a8e104cfaa.js:1
+(anonymous) @ controller-with-preconnect-3eeeaaf65580a57fa4db91a8e104cfaa.js:1
+Uh @ controller-with-preconnect-3eeeaaf65580a57fa4db91a8e104cfaa.js:1
+(anonymous) @ controller-with-preconnect-3eeeaaf65580a57fa4db91a8e104cfaa.js:1Understand this warning
+controller-with-preconnect-3eeeaaf65580a57fa4db91a8e104cfaa.js:1 [Stripe.js] You have not registered or verified the domain, so the following payment methods are not enabled in the Payment Element: 
+
+- apple_pay
+
+Please follow https://stripe.com/docs/payments/payment-methods/pmd-registration to register and verify the domain.
+warn @ controller-with-preconnect-3eeeaaf65580a57fa4db91a8e104cfaa.js:1
+warn @ controller-with-preconnect-3eeeaaf65580a57fa4db91a8e104cfaa.js:1
+value @ controller-with-preconnect-3eeeaaf65580a57fa4db91a8e104cfaa.js:1
+value @ shared-ff47c3d242500…bcf20dbad802fa.js:1
+u._sendControllerMessage @ shared-ff47c3d242500…bcf20dbad802fa.js:1
+u.warn @ shared-ff47c3d242500…bcf20dbad802fa.js:1
+(anonymous) @ elements-inner-payme…e150b30df5d1a4.js:4
+lr @ elements-inner-payme…e150b30df5d1a4.js:1
+Ur @ elements-inner-payme…e150b30df5d1a4.js:1
+n.unstable_runWithPriority @ elements-inner-payme…e150b30df5d1a4.js:1
+Tn @ elements-inner-payme…e150b30df5d1a4.js:1
+Vr @ elements-inner-payme…e150b30df5d1a4.js:1
+Sr @ elements-inner-payme…e150b30df5d1a4.js:1
+(anonymous) @ elements-inner-payme…e150b30df5d1a4.js:1
+n.unstable_runWithPriority @ elements-inner-payme…e150b30df5d1a4.js:1
+Tn @ elements-inner-payme…e150b30df5d1a4.js:1
+Zn @ elements-inner-payme…e150b30df5d1a4.js:1
+In @ elements-inner-payme…e150b30df5d1a4.js:1
+xr @ elements-inner-payme…e150b30df5d1a4.js:1
+(anonymous) @ elements-inner-payme…e150b30df5d1a4.js:1
+(anonymous) @ shared-ff47c3d242500…bcf20dbad802fa.js:1
+setTimeout
+r @ shared-ff47c3d242500…bcf20dbad802fa.js:1
+(anonymous) @ elements-inner-payme…e150b30df5d1a4.js:1
+(anonymous) @ elements-inner-payme…e150b30df5d1a4.js:1
+(anonymous) @ shared-ff47c3d242500…bcf20dbad802fa.js:1
+r.test._emit @ shared-ff47c3d242500…bcf20dbad802fa.js:1
+value @ shared-ff47c3d242500…bcf20dbad802fa.js:1
+value @ shared-ff47c3d242500…bcf20dbad802fa.js:1
+(anonymous) @ shared-ff47c3d242500…bcf20dbad802fa.js:1
+value @ controller-with-preconnect-3eeeaaf65580a57fa4db91a8e104cfaa.js:1
+(anonymous) @ controller-with-preconnect-3eeeaaf65580a57fa4db91a8e104cfaa.js:1
+value @ controller-with-preconnect-3eeeaaf65580a57fa4db91a8e104cfaa.js:1
+(anonymous) @ controller-with-preconnect-3eeeaaf65580a57fa4db91a8e104cfaa.js:1
+n @ shared-ff47c3d242500066edbcf20dbad802fa.js:1
+(anonymous) @ shared-ff47c3d242500066edbcf20dbad802fa.js:1
+(anonymous) @ shared-ff47c3d242500066edbcf20dbad802fa.js:1
+a @ shared-ff47c3d242500066edbcf20dbad802fa.js:1
+i @ shared-ff47c3d242500066edbcf20dbad802fa.js:1
+Promise.then
+a @ shared-ff47c3d242500066edbcf20dbad802fa.js:1
+i @ shared-ff47c3d242500066edbcf20dbad802fa.js:1
+(anonymous) @ shared-ff47c3d242500066edbcf20dbad802fa.js:1
+(anonymous) @ shared-ff47c3d242500066edbcf20dbad802fa.js:1
+(anonymous) @ controller-with-preconnect-3eeeaaf65580a57fa4db91a8e104cfaa.js:1
+(anonymous) @ controller-with-preconnect-3eeeaaf65580a57fa4db91a8e104cfaa.js:1
+dispatch @ controller-with-preconnect-3eeeaaf65580a57fa4db91a8e104cfaa.js:1
+(anonymous) @ controller-with-preconnect-3eeeaaf65580a57fa4db91a8e104cfaa.js:1
+n @ shared-ff47c3d242500066edbcf20dbad802fa.js:1
+(anonymous) @ shared-ff47c3d242500066edbcf20dbad802fa.js:1
+(anonymous) @ shared-ff47c3d242500066edbcf20dbad802fa.js:1
+a @ shared-ff47c3d242500066edbcf20dbad802fa.js:1
+i @ shared-ff47c3d242500066edbcf20dbad802fa.js:1
+Promise.then
+a @ shared-ff47c3d242500066edbcf20dbad802fa.js:1
+i @ shared-ff47c3d242500066edbcf20dbad802fa.js:1
+Promise.then
+a @ shared-ff47c3d242500066edbcf20dbad802fa.js:1
+i @ shared-ff47c3d242500066edbcf20dbad802fa.js:1
+(anonymous) @ shared-ff47c3d242500066edbcf20dbad802fa.js:1
+(anonymous) @ shared-ff47c3d242500066edbcf20dbad802fa.js:1
+(anonymous) @ controller-with-preconnect-3eeeaaf65580a57fa4db91a8e104cfaa.js:1
+(anonymous) @ controller-with-preconnect-3eeeaaf65580a57fa4db91a8e104cfaa.js:1
+(anonymous) @ controller-with-preconnect-3eeeaaf65580a57fa4db91a8e104cfaa.js:1
+(anonymous) @ controller-with-preconnect-3eeeaaf65580a57fa4db91a8e104cfaa.js:1
+(anonymous) @ controller-with-preconnect-3eeeaaf65580a57fa4db91a8e104cfaa.js:1
+n @ shared-ff47c3d242500066edbcf20dbad802fa.js:1
+(anonymous) @ shared-ff47c3d242500066edbcf20dbad802fa.js:1
+(anonymous) @ shared-ff47c3d242500066edbcf20dbad802fa.js:1
+a @ shared-ff47c3d242500066edbcf20dbad802fa.js:1
+i @ shared-ff47c3d242500066edbcf20dbad802fa.js:1
+Promise.then
+a @ shared-ff47c3d242500066edbcf20dbad802fa.js:1
+i @ shared-ff47c3d242500066edbcf20dbad802fa.js:1
+(anonymous) @ shared-ff47c3d242500066edbcf20dbad802fa.js:1
+(anonymous) @ shared-ff47c3d242500066edbcf20dbad802fa.js:1
+(anonymous) @ controller-with-preconnect-3eeeaaf65580a57fa4db91a8e104cfaa.js:1
+(anonymous) @ controller-with-preconnect-3eeeaaf65580a57fa4db91a8e104cfaa.js:1
+(anonymous) @ controller-with-preconnect-3eeeaaf65580a57fa4db91a8e104cfaa.js:1
+value @ controller-with-preconnect-3eeeaaf65580a57fa4db91a8e104cfaa.js:1
+(anonymous) @ shared-ff47c3d242500…bcf20dbad802fa.js:1
+n @ shared-ff47c3d242500…bcf20dbad802fa.js:1
+(anonymous) @ shared-ff47c3d242500…bcf20dbad802fa.js:1
+(anonymous) @ shared-ff47c3d242500…bcf20dbad802fa.js:1
+a @ shared-ff47c3d242500…bcf20dbad802fa.js:1
+i @ shared-ff47c3d242500…bcf20dbad802fa.js:1
+(anonymous) @ shared-ff47c3d242500…bcf20dbad802fa.js:1
+(anonymous) @ shared-ff47c3d242500…bcf20dbad802fa.js:1
+u.innerAction @ shared-ff47c3d242500…bcf20dbad802fa.js:1
+a.dispatchAction @ elements-inner-payme…e150b30df5d1a4.js:1
+(anonymous) @ elements-inner-payme…e150b30df5d1a4.js:1
+(anonymous) @ elements-inner-payme…e150b30df5d1a4.js:1
+lr @ elements-inner-payme…e150b30df5d1a4.js:1
+Ur @ elements-inner-payme…e150b30df5d1a4.js:1
+n.unstable_runWithPriority @ elements-inner-payme…e150b30df5d1a4.js:1
+Tn @ elements-inner-payme…e150b30df5d1a4.js:1
+Vr @ elements-inner-payme…e150b30df5d1a4.js:1
+(anonymous) @ elements-inner-payme…e150b30df5d1a4.js:1
+c @ elements-inner-payme…e150b30df5d1a4.js:1
+N.port1.onmessage @ elements-inner-payme…e150b30df5d1a4.js:1Understand this warning
+EquiSaddleStore:1 Each dictionary in the list "icons" should contain a non-empty UTF8 string field "sizes".Understand this warning
+EquiSaddleStore:1 Each dictionary in the list "icons" should contain a non-empty UTF8 string field "type".Understand this warning
+EquiSaddleStore:1 Each dictionary in the list "icons" should contain a non-empty UTF8 string field "sizes".Understand this warning
+EquiSaddleStore:1 Each dictionary in the list "icons" should contain a non-empty UTF8 string field "type".Understand this warning
+[Violation] Potential permissions policy violation: publickey-credentials-get is not allowed in this document.Understand this error
+universal-link-modal-inner-2b3cae29f25662ad3b308316a00a1271.js:1  POST https://errors.stripe.com/api/1572/envelope/?sentry_key=05d34cc2a876431690ded7ee1962eea5&sentry_version=7 429 (Too Many Requests)
+(anonymous) @ universal-link-modal-inner-2b3cae29f25662ad3b308316a00a1271.js:1
+e @ universal-link-modal-inner-2b3cae29f25662ad3b308316a00a1271.js:1
+(anonymous) @ universal-link-modal-inner-2b3cae29f25662ad3b308316a00a1271.js:1
+add @ universal-link-modal-inner-2b3cae29f25662ad3b308316a00a1271.js:1
+t._sendRequest @ universal-link-modal-inner-2b3cae29f25662ad3b308316a00a1271.js:1
+e.sendSession @ universal-link-modal-inner-2b3cae29f25662ad3b308316a00a1271.js:1
+e.sendSession @ universal-link-modal-inner-2b3cae29f25662ad3b308316a00a1271.js:1
+e._sendSession @ universal-link-modal-inner-2b3cae29f25662ad3b308316a00a1271.js:1
+e.captureSession @ universal-link-modal-inner-2b3cae29f25662ad3b308316a00a1271.js:1
+e._sendSessionUpdate @ universal-link-modal-inner-2b3cae29f25662ad3b308316a00a1271.js:1
+e.captureSession @ universal-link-modal-inner-2b3cae29f25662ad3b308316a00a1271.js:1
+E @ universal-link-modal-inner-2b3cae29f25662ad3b308316a00a1271.js:4
+(anonymous) @ universal-link-modal-inner-2b3cae29f25662ad3b308316a00a1271.js:4
+w @ universal-link-modal-inner-2b3cae29f25662ad3b308316a00a1271.js:4
+(anonymous) @ universal-link-modal-inner-2b3cae29f25662ad3b308316a00a1271.js:4
+23485 @ universal-link-modal-inner-2b3cae29f25662ad3b308316a00a1271.js:4
+e @ universal-link-modal-inner-2b3cae29f25662ad3b308316a00a1271.js:1
+(anonymous) @ universal-link-modal-inner-2b3cae29f25662ad3b308316a00a1271.js:4
+e.O @ universal-link-modal-inner-2b3cae29f25662ad3b308316a00a1271.js:4
+(anonymous) @ universal-link-modal-inner-2b3cae29f25662ad3b308316a00a1271.js:4
+(anonymous) @ universal-link-modal-inner-2b3cae29f25662ad3b308316a00a1271.js:4Understand this error

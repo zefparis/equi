@@ -1,0 +1,80 @@
+{
+  "nav": {
+    "home": "Home",
+    "catalog": "Catalogus",
+    "gallery": "Galerij",
+    "contact": "Contact",
+    "admin": "Beheer"
+  },
+  "hero": {
+    "title": "Excellente Zadels",
+    "subtitle": "Ontdek onze collectie handgemaakte zadels voor alle ruiterdisciplines",
+    "cta": "Bekijk catalogus"
+  },
+  "categories": {
+    "title": "Onze Categorieën",
+    "obstacle": "Gespecialiseerde zadels voor springen",
+    "dressage": "Zadels voor klassieke dressuur",
+    "cross": "Robuuste zadels voor cross-country",
+    "mixte": "Veelzijdige zadels voor alle disciplines",
+    "poney": "Zadels aangepast voor pony's en jonge ruiters"
+  },
+  "featured": {
+    "title": "Uitgelichte Producten"
+  },
+  "why": {
+    "title": "Waarom Kiezen voor Equi Zadels?",
+    "quality": "Premium Kwaliteit",
+    "shipping": "Snelle Levering",
+    "custom": "Op Maat",
+    "support": "Expert Ondersteuning"
+  },
+  "newsletter": {
+    "title": "Blijf Geïnformeerd",
+    "subtitle": "Ontvang ons laatste nieuws en exclusieve aanbiedingen direct in je inbox.",
+    "email": "Je e-mailadres",
+    "subscribe": "Abonneren"
+  },
+  "footer": {
+    "products": "Producten",
+    "support": "Ondersteuning",
+    "contact": "Contact"
+  },
+  "cart": {
+    "title": "Winkelwagen",
+    "empty": "Je winkelwagen is leeg",
+    "total": "Totaal",
+    "checkout": "Afrekenen",
+    "continue": "Verder winkelen"
+  },
+  "product": {
+    "addToCart": "Toevoegen aan winkelwagen",
+    "size": "Maat",
+    "price": "Prijs",
+    "description": "Beschrijving"
+  },
+  "checkout": {
+    "title": "Afrekenen",
+    "customerInfo": "Klantgegevens",
+    "name": "Volledige naam",
+    "email": "E-mail",
+    "phone": "Telefoon",
+    "address": "Adres",
+    "city": "Stad",
+    "postalCode": "Postcode",
+    "country": "Land",
+    "payWithStripe": "Betalen met Stripe"
+  },
+  "admin": {
+    "title": "Beheer",
+    "products": "Producten",
+    "gallery": "Galerij",
+    "orders": "Bestellingen"
+  },
+  "filter": {
+    "all": "Alle",
+    "category": "Categorie",
+    "size": "Maat",
+    "price": "Prijs"
+  }
+}

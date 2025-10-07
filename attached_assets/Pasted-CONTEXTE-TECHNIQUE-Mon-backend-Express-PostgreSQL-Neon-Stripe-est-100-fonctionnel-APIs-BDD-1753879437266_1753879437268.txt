@@ -1,0 +1,70 @@
+CONTEXTE TECHNIQUE
+
+Mon backend Express + PostgreSQL (Neon) + Stripe est 100% fonctionnel (APIs, BDD, upload, email…).
+
+Mon frontend (React/TypeScript) est cassé :
+
+App.tsx ultra-simplifié (plus de routing ni de providers)
+
+18 pages dans /pages, mais non connectées au router
+
+Providers LanguageProvider et CartProvider cassés (erreurs JSX/TypeScript)
+
+Hooks (use-language.tsx, use-cart.tsx) avec erreurs de type/JSX
+
+Composants UI disponibles (shadcn/ui) mais non utilisés
+
+Le seul contexte qui marche : AdminAuthContext
+
+APIs backend accessibles (produits, commandes, etc)
+
+OBJECTIF FINAL
+
+Reconstituer un frontend React/TypeScript moderne :
+
+Rétablir un fichier App.tsx avec un routing complet (ex : wouter, react-router-dom…)
+
+Rétablir les providers principaux (LanguageProvider, CartProvider) SANS erreur TypeScript, conformes JSX
+
+Rétablir la connexion de toutes les pages existantes dans le router
+
+Corriger les hooks (useLanguage, useCart…) pour qu’ils utilisent bien les contextes
+
+Connecter les UI Components disponibles pour chaque page
+
+Garder AdminAuthContext intact
+
+Garder la config main.tsx minimale mais fonctionnelle
+
+Le backend, le schéma Drizzle et les APIs ne doivent pas être modifiés.
+
+EXEMPLES DE STRUCTURE ATTENDUE
+
+App.tsx avec providers imbriqués et routing toutes pages (Home, Catalog, Product, Cart, Checkout, Gallery, Contact, etc…)
+
+Providers React standards (Pattern : return <Context.Provider value={...}>{children}</Context.Provider>)
+
+Hooks qui exposent les contextes sans bug de types
+
+main.tsx qui hydrate l’App sans bug
+
+INSTRUCTIONS DÉTAILLÉES
+
+Corrige les providers cassés pour qu’ils retournent bien leur children (pas {}), avec les types attendus.
+
+Réimplémente le routing complet dans App.tsx, incluant toutes les pages du dossier /pages.
+
+Reconnecte les hooks (use-language.tsx, use-cart.tsx) et vérifie leur typage.
+
+Utilise les composants UI disponibles (shadcn/ui) pour chaque page/routing.
+
+Valide que chaque page du site soit accessible via son URL (même NotFound).
+
+Garde tous les endpoints backend intacts.
+
+Fournis-moi le code complet des fichiers clés corrigés (App.tsx, main.tsx, LanguageProvider, CartProvider, useLanguage, useCart).
+
+Pas de diff, pas de blabla, juste le code prêt à l’emploi pour remplacer les fichiers actuels.
+
+⚓️ Priorité absolue : Rendre le frontend à nouveau utilisable, navigation 100% rétablie, providers typés, hooks corrigés, UI branchée.
+

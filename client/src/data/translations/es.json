@@ -1,0 +1,80 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "catalog": "Catálogo",
+    "gallery": "Galería",
+    "contact": "Contacto",
+    "admin": "Administración"
+  },
+  "hero": {
+    "title": "Monturas de Excelencia",
+    "subtitle": "Descubre nuestra colección de monturas artesanales para todas las disciplinas ecuestres",
+    "cta": "Ver catálogo"
+  },
+  "categories": {
+    "title": "Nuestras Categorías",
+    "obstacle": "Monturas especializadas para salto de obstáculos",
+    "dressage": "Monturas para doma clásica",
+    "cross": "Monturas robustas para cross-country",
+    "mixte": "Monturas versátiles para todas las disciplinas",
+    "poney": "Monturas adaptadas para ponis y jinetes jóvenes"
+  },
+  "featured": {
+    "title": "Productos Destacados"
+  },
+  "why": {
+    "title": "¿Por qué Elegir Equi Saddles?",
+    "quality": "Calidad Premium",
+    "shipping": "Entrega Rápida",
+    "custom": "A Medida",
+    "support": "Soporte Experto"
+  },
+  "newsletter": {
+    "title": "Mantente Informado",
+    "subtitle": "Recibe nuestras últimas noticias y ofertas exclusivas directamente en tu bandeja de entrada.",
+    "email": "Tu dirección de correo",
+    "subscribe": "Suscribirse"
+  },
+  "footer": {
+    "products": "Productos",
+    "support": "Soporte",
+    "contact": "Contacto"
+  },
+  "cart": {
+    "title": "Carrito",
+    "empty": "Tu carrito está vacío",
+    "total": "Total",
+    "checkout": "Finalizar compra",
+    "continue": "Seguir comprando"
+  },
+  "product": {
+    "addToCart": "Añadir al carrito",
+    "size": "Talla",
+    "price": "Precio",
+    "description": "Descripción"
+  },
+  "checkout": {
+    "title": "Finalizar compra",
+    "customerInfo": "Información del cliente",
+    "name": "Nombre completo",
+    "email": "Email",
+    "phone": "Teléfono",
+    "address": "Dirección",
+    "city": "Ciudad",
+    "postalCode": "Código postal",
+    "country": "País",
+    "payWithStripe": "Pagar con Stripe"
+  },
+  "admin": {
+    "title": "Administración",
+    "products": "Productos",
+    "gallery": "Galería",
+    "orders": "Pedidos"
+  },
+  "filter": {
+    "all": "Todos",
+    "category": "Categoría",
+    "size": "Talla",
+    "price": "Precio"
+  }
+}

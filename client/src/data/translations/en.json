@@ -1,0 +1,80 @@
+{
+  "nav": {
+    "home": "Home",
+    "catalog": "Catalog",
+    "gallery": "Gallery",
+    "contact": "Contact",
+    "admin": "Administration"
+  },
+  "hero": {
+    "title": "Excellence Saddles",
+    "subtitle": "Discover our collection of handcrafted saddles for all equestrian disciplines",
+    "cta": "View catalog"
+  },
+  "categories": {
+    "title": "Our Categories",
+    "obstacle": "Specialized saddles for show jumping",
+    "dressage": "Saddles for classical dressage",
+    "cross": "Robust saddles for cross-country",
+    "mixte": "Versatile saddles for all disciplines",
+    "poney": "Saddles adapted for ponies and young riders"
+  },
+  "featured": {
+    "title": "Featured Products"
+  },
+  "why": {
+    "title": "Why Choose Equi Saddles?",
+    "quality": "Premium Quality",
+    "shipping": "Fast Delivery",
+    "custom": "Custom Made",
+    "support": "Expert Support"
+  },
+  "newsletter": {
+    "title": "Stay Informed",
+    "subtitle": "Receive our latest news and exclusive offers directly in your inbox.",
+    "email": "Your email address",
+    "subscribe": "Subscribe"
+  },
+  "footer": {
+    "products": "Products",
+    "support": "Support",
+    "contact": "Contact"
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Your cart is empty",
+    "total": "Total",
+    "checkout": "Checkout",
+    "continue": "Continue shopping"
+  },
+  "product": {
+    "addToCart": "Add to cart",
+    "size": "Size",
+    "price": "Price",
+    "description": "Description"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "customerInfo": "Customer Information",
+    "name": "Full name",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "city": "City",
+    "postalCode": "Postal code",
+    "country": "Country",
+    "payWithStripe": "Pay with Stripe"
+  },
+  "admin": {
+    "title": "Administration",
+    "products": "Products",
+    "gallery": "Gallery",
+    "orders": "Orders"
+  },
+  "filter": {
+    "all": "All",
+    "category": "Category",
+    "size": "Size",
+    "price": "Price"
+  }
+}

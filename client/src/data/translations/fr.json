@@ -1,0 +1,80 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "catalog": "Catalogue",
+    "gallery": "Galerie",
+    "contact": "Contact",
+    "admin": "Administration"
+  },
+  "hero": {
+    "title": "Selles d'Excellence",
+    "subtitle": "Découvrez notre collection de selles artisanales pour toutes les disciplines équestres",
+    "cta": "Voir le catalogue"
+  },
+  "categories": {
+    "title": "Nos Catégories",
+    "obstacle": "Selles spécialisées pour le saut d'obstacles",
+    "dressage": "Selles pour le dressage classique",
+    "cross": "Selles robustes pour le cross-country",
+    "mixte": "Selles polyvalentes pour toutes disciplines",
+    "poney": "Selles adaptées aux poneys et jeunes cavaliers"
+  },
+  "featured": {
+    "title": "Produits en Vedette"
+  },
+  "why": {
+    "title": "Pourquoi Choisir Equi Saddles ?",
+    "quality": "Qualité Premium",
+    "shipping": "Livraison Rapide",
+    "custom": "Sur Mesure",
+    "support": "Support Expert"
+  },
+  "newsletter": {
+    "title": "Restez Informé",
+    "subtitle": "Recevez nos dernières nouveautés et offres exclusives directement dans votre boîte mail.",
+    "email": "Votre adresse email",
+    "subscribe": "S'abonner"
+  },
+  "footer": {
+    "products": "Produits",
+    "support": "Support",
+    "contact": "Contact"
+  },
+  "cart": {
+    "title": "Panier",
+    "empty": "Votre panier est vide",
+    "total": "Total",
+    "checkout": "Commander",
+    "continue": "Continuer mes achats"
+  },
+  "product": {
+    "addToCart": "Ajouter au panier",
+    "size": "Taille",
+    "price": "Prix",
+    "description": "Description"
+  },
+  "checkout": {
+    "title": "Commande",
+    "customerInfo": "Informations client",
+    "name": "Nom complet",
+    "email": "Email",
+    "phone": "Téléphone",
+    "address": "Adresse",
+    "city": "Ville",
+    "postalCode": "Code postal",
+    "country": "Pays",
+    "payWithStripe": "Payer avec Stripe"
+  },
+  "admin": {
+    "title": "Administration",
+    "products": "Produits",
+    "gallery": "Galerie",
+    "orders": "Commandes"
+  },
+  "filter": {
+    "all": "Toutes",
+    "category": "Catégorie",
+    "size": "Taille",
+    "price": "Prix"
+  }
+}

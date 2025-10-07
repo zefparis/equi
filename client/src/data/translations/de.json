@@ -1,0 +1,80 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "catalog": "Katalog",
+    "gallery": "Galerie",
+    "contact": "Kontakt",
+    "admin": "Verwaltung"
+  },
+  "hero": {
+    "title": "Exzellente Sättel",
+    "subtitle": "Entdecken Sie unsere Kollektion handgefertigter Sättel für alle Reitsportdisziplinen",
+    "cta": "Katalog anzeigen"
+  },
+  "categories": {
+    "title": "Unsere Kategorien",
+    "obstacle": "Spezialsättel für Springreiten",
+    "dressage": "Sättel für klassische Dressur",
+    "cross": "Robuste Sättel für Cross-Country",
+    "mixte": "Vielseitige Sättel für alle Disziplinen",
+    "poney": "Sättel angepasst für Ponys und junge Reiter"
+  },
+  "featured": {
+    "title": "Empfohlene Produkte"
+  },
+  "why": {
+    "title": "Warum Equi Saddles wählen?",
+    "quality": "Premium Qualität",
+    "shipping": "Schnelle Lieferung",
+    "custom": "Maßgeschneidert",
+    "support": "Fachkundiger Support"
+  },
+  "newsletter": {
+    "title": "Bleiben Sie informiert",
+    "subtitle": "Erhalten Sie unsere neuesten Nachrichten und exklusiven Angebote direkt in Ihr Postfach.",
+    "email": "Ihre E-Mail-Adresse",
+    "subscribe": "Abonnieren"
+  },
+  "footer": {
+    "products": "Produkte",
+    "support": "Support",
+    "contact": "Kontakt"
+  },
+  "cart": {
+    "title": "Warenkorb",
+    "empty": "Ihr Warenkorb ist leer",
+    "total": "Gesamt",
+    "checkout": "Zur Kasse",
+    "continue": "Weiter einkaufen"
+  },
+  "product": {
+    "addToCart": "In den Warenkorb",
+    "size": "Größe",
+    "price": "Preis",
+    "description": "Beschreibung"
+  },
+  "checkout": {
+    "title": "Zur Kasse",
+    "customerInfo": "Kundeninformationen",
+    "name": "Vollständiger Name",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "address": "Adresse",
+    "city": "Stadt",
+    "postalCode": "Postleitzahl",
+    "country": "Land",
+    "payWithStripe": "Mit Stripe bezahlen"
+  },
+  "admin": {
+    "title": "Verwaltung",
+    "products": "Produkte",
+    "gallery": "Galerie",
+    "orders": "Bestellungen"
+  },
+  "filter": {
+    "all": "Alle",
+    "category": "Kategorie",
+    "size": "Größe",
+    "price": "Preis"
+  }
+}
