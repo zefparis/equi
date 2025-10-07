@@ -30,6 +30,7 @@ import { queryClient } from "./lib/queryClient";
 import Header from "./components/layout/header";
 import Footer from "./components/layout/footer";
 import ChatButton from "./components/chat/chat-button";
+import BackgroundWrapper from "./components/layout/background-wrapper";
 
 function Router() {
   const [location] = useLocation();
@@ -39,7 +40,9 @@ function Router() {
     return (
       <QueryClientProvider client={queryClient}>
         <AdminAuthProvider>
-          <Admin />
+          <BackgroundWrapper>
+            <Admin />
+          </BackgroundWrapper>
           <Toaster />
         </AdminAuthProvider>
       </QueryClientProvider>
@@ -52,11 +55,11 @@ function Router() {
       <LanguageProvider>
         <CartProvider>
           <AdminAuthProvider>
-            <div className="min-h-screen flex flex-col">
-
-              <Header />
-              <main className="flex-1">
-                <Switch>
+            <BackgroundWrapper>
+              <div className="min-h-screen flex flex-col">
+                <Header />
+                <main className="flex-1">
+                  <Switch>
                   <Route path="/" component={Home} />
                   <Route path="/home" component={Home} />
                   <Route path="/catalog" component={Catalog} />
@@ -78,12 +81,13 @@ function Router() {
                   <Route path="/customer-service" component={CustomerService} />
                   <Route component={NotFound} />
                 </Switch>
-              </main>
-              <Footer />
-              
-              {/* Chat Button flottant pour toutes les pages publiques */}
-              <ChatButton />
-            </div>
+                </main>
+                <Footer />
+                
+                {/* Chat Button flottant pour toutes les pages publiques */}
+                <ChatButton />
+              </div>
+            </BackgroundWrapper>
             <Toaster />
           </AdminAuthProvider>
         </CartProvider>
