@@ -106,8 +106,8 @@ export default function Header() {
 
           {/* Header Actions */}
           <div className="flex items-center space-x-1 md:space-x-2 flex-shrink-0">
-            {/* PWA Install Button */}
-            {!isInstalled && (
+            {/* PWA Install Button - Désactivé temporairement */}
+            {false && !isInstalled && (
               <button
                 onClick={promptInstall}
                 className="hidden lg:flex items-center gap-2 px-3 py-2 text-sm text-white hover:text-[#FFD700] border border-white/20 rounded-lg transition"
@@ -210,8 +210,8 @@ export default function Header() {
                         {item.name}
                       </Link>
                     ))}
-                    {/* PWA Install (mobile) */}
-                    {!isInstalled && (
+                    {/* PWA Install (mobile) - Désactivé temporairement */}
+                    {false && !isInstalled && (
                       <button
                         onClick={() => {
                           setIsMobileMenuOpen(false);
