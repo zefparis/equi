@@ -65,8 +65,10 @@ app.use((req, res, next) => {
   // this serves both the API and the client.
   // Railway sets PORT automatically, fallback to 5000 for local dev
   const port = Number(process.env.PORT) || 5000;
-  const host = process.env.HOST || "localhost";
+  // Use 0.0.0.0 in production to accept connections from any IP
+  const host = process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost';
+  
   server.listen(port, host, () => {
-   log(`serving on http://${host}:${port}`);
-});
+    log(`serving on http://${host}:${port}`);
+  });
 })();
