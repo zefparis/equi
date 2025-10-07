@@ -23,6 +23,7 @@ import Returns from "./pages/returns";
 import Delivery from "./pages/delivery";
 import CustomerService from "./pages/customer-service";  
 import NotFound from "./pages/not-found";
+import Accessories from "./pages/accessories";
 
 // Import the queryClient from the lib to get the default queryFn
 import { queryClient } from "./lib/queryClient";
@@ -59,6 +60,7 @@ function Router() {
                   <Route path="/" component={Home} />
                   <Route path="/home" component={Home} />
                   <Route path="/catalog" component={Catalog} />
+                  <Route path="/accessories" component={Accessories} />
                   <Route path="/product/:id" component={ProductPage} />
                   <Route path="/cart" component={Cart} />
                   <Route path="/checkout" component={Checkout} />
