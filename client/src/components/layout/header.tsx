@@ -71,7 +71,12 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-1 md:gap-3 flex-1 min-w-0">
             <img 
-              src="/images/logo.jpg?v=1" 
+              src="/images/logo.jpg?v=2" 
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.onerror = null;
+                img.src = "/images/logo (3).png?v=2"; // fallback temporaire
+              }}
               alt="Equi Saddles"
               className="h-12 w-auto object-contain md:h-20 flex-shrink-0"
               style={{ maxHeight: "80px", maxWidth: "200px" }}

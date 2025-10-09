@@ -48,7 +48,7 @@ export default function Catalog() {
     categories: [] as string[],
     subcategories: [] as string[],
     sizes: [] as string[],
-    priceRange: [0, 2000] as [number, number],
+    condition: "" as string,
   });
 
   // Scroll to top when page loads
@@ -112,10 +112,12 @@ export default function Catalog() {
       return false;
     }
 
-    // Price filter
-    const price = parseFloat(product.price);
-    if (price < filters.priceRange[0] || price > filters.priceRange[1]) {
-      return false;
+    // Condition filter (neuve / occasion) - applies to all categories if provided
+    if (filters.condition) {
+      const pcond = (product as any).condition?.toLowerCase?.() || "neuve";
+      if (pcond !== filters.condition.toLowerCase()) {
+        return false;
+      }
     }
 
     return true;

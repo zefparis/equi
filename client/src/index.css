@@ -92,7 +92,7 @@
   }
 
   /* Header and hero section text */
-  header, .text-white, [class*="text-white"] h1, [class*="text-white"] h2, [class*="text-white"] h3,
+  .text-white, [class*="text-white"] h1, [class*="text-white"] h2, [class*="text-white"] h3,
   [class*="text-white"] h4, [class*="text-white"] h5, [class*="text-white"] h6,
   [class*="text-white"] p, [class*="text-white"] span, [class*="text-white"] div,
   [class*="text-white"] a {
@@ -143,7 +143,8 @@
   }
   
   .btn-primary:hover {
-    background-color: rgba(var(--primary), 0.9);
+    /* Use HSL with alpha instead of invalid rgba(var(--primary), ...) */
+    background-color: hsl(var(--primary-hue), 35%, 25%, 0.9);
   }
 
   .btn-secondary {
@@ -156,7 +157,7 @@
   }
   
   .btn-secondary:hover {
-    background-color: rgba(var(--secondary), 0.9);
+    background-color: hsl(var(--secondary-hue), 30%, 88%, 0.9);
   }
 
   .btn-accent {
@@ -169,7 +170,7 @@
   }
   
   .btn-accent:hover {
-    background-color: rgba(var(--accent), 0.9);
+    background-color: hsl(var(--accent-hue), 90%, 38%, 0.9);
   }
 
   .lightbox-overlay {

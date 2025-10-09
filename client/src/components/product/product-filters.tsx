@@ -3,8 +3,8 @@ import { useLanguage } from "../../hooks/use-language";
 import { Button } from "../ui/button";
 import { Label } from "../ui/label";
 import { Checkbox } from "../ui/checkbox";
-import { Slider } from "../ui/slider";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { Filter, X } from "lucide-react";
 
 interface ProductFiltersProps {
@@ -13,7 +13,7 @@ interface ProductFiltersProps {
     categories: string[];
     subcategories: string[];
     sizes: string[];
-    priceRange: [number, number];
+    condition: string;
   }) => void;
 }
 
@@ -26,7 +26,7 @@ export default function ProductFilters({ activeTab, onFiltersChange }: ProductFi
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedSubcategories, setSelectedSubcategories] = useState<string[]>([]);
   const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 2000]);
+  const [condition, setCondition] = useState<string>("");
 
   const handleCategoryChange = (category: string, checked: boolean) => {
     const newCategories = checked
@@ -38,7 +38,7 @@ export default function ProductFilters({ activeTab, onFiltersChange }: ProductFi
       categories: newCategories,
       subcategories: selectedSubcategories,
       sizes: selectedSizes,
-      priceRange
+      condition
     });
   };
 
@@ -52,17 +52,17 @@ export default function ProductFilters({ activeTab, onFiltersChange }: ProductFi
       categories: selectedCategories,
       subcategories: selectedSubcategories,
       sizes: newSizes,
-      priceRange
+      condition
     });
   };
 
-  const handlePriceChange = (newRange: [number, number]) => {
-    setPriceRange(newRange);
+  const handleConditionChange = (value: string) => {
+    setCondition(value);
     onFiltersChange({
       categories: selectedCategories,
       subcategories: selectedSubcategories,
       sizes: selectedSizes,
-      priceRange: newRange
+      condition: value
     });
   };
 
@@ -76,7 +76,7 @@ export default function ProductFilters({ activeTab, onFiltersChange }: ProductFi
       categories: selectedCategories,
       subcategories: newSubcategories,
       sizes: selectedSizes,
-      priceRange
+      condition
     });
   };
 
@@ -84,12 +84,12 @@ export default function ProductFilters({ activeTab, onFiltersChange }: ProductFi
     setSelectedCategories([]);
     setSelectedSubcategories([]);
     setSelectedSizes([]);
-    setPriceRange([0, 2000]);
+    setCondition("");
     onFiltersChange({
       categories: [],
       subcategories: [],
       sizes: [],
-      priceRange: [0, 2000]
+      condition: ""
     });
   };
 
@@ -182,25 +182,21 @@ export default function ProductFilters({ activeTab, onFiltersChange }: ProductFi
           </div>
         )}
 
-        {/* Price Range */}
+        {/* Condition (Neuve / Occasion) */}
         <div>
           <Label className="text-sm font-medium mb-3 block">
-            {t("filter.price")}
+            {t("accessories.condition")}
           </Label>
-          <div className="px-2">
-            <Slider
-              value={priceRange}
-              onValueChange={handlePriceChange}
-              max={2000}
-              min={0}
-              step={50}
-              className="w-full"
-            />
-            <div className="flex justify-between text-sm text-gray-600 mt-2">
-              <span>{priceRange[0]} €</span>
-              <span>{priceRange[1]} €</span>
-            </div>
-          </div>
+          <Select value={condition} onValueChange={handleConditionChange}>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder={t("filter.all")} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="">{t("filter.all")}</SelectItem>
+              <SelectItem value="neuve">Neuve</SelectItem>
+              <SelectItem value="occasion">Occasion</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </CardContent>
     </Card>

@@ -8,6 +8,11 @@ const app = express();
 // Serve static files from public directory FIRST
 app.use(express.static(path.join(process.cwd(), 'public')));
 
+// Serve the attached logo.jpg directly at /images/logo.jpg if it's not in public
+app.get('/images/logo.jpg', (_req, res) => {
+  res.sendFile(path.join(process.cwd(), 'attached_assets', 'logo.jpg'));
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
