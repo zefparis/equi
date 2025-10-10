@@ -83,8 +83,8 @@ export default function Catalog() {
         return false;
       }
     } else {
-      // Pour les accessoires, filtrer par nom exact sauf si "tous" est sélectionné
-      if (searchTerm && searchTerm !== "tous" && product.name !== searchTerm) {
+      // Pour les accessoires, filtrer par id sélectionné sauf si "tous" est sélectionné
+      if (searchTerm && searchTerm !== "tous" && String(product.id) !== searchTerm) {
         return false;
       }
     }
@@ -114,7 +114,8 @@ export default function Catalog() {
 
     // Condition filter (neuve / occasion) - applies to all categories if provided
     if (filters.condition) {
-      const pcond = (product as any).condition?.toLowerCase?.() || "neuve";
+      const rawCond = (product as any).condition;
+      const pcond = typeof rawCond === "string" ? rawCond.toLowerCase() : "neuve";
       if (pcond !== filters.condition.toLowerCase()) {
         return false;
       }
@@ -136,7 +137,7 @@ export default function Catalog() {
   });
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-transparent">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
@@ -175,7 +176,7 @@ export default function Catalog() {
                   <SelectContent>
                     <SelectItem value="tous">{t("catalog.allAccessories")}</SelectItem>
                     {accessoires.map((accessoire) => (
-                      <SelectItem key={accessoire.id} value={accessoire.name}>
+                      <SelectItem key={accessoire.id} value={String(accessoire.id)}>
                         {accessoire.subcategory === "Autre" && accessoire.customSubcategory 
                           ? `${accessoire.name} (${accessoire.customSubcategory})`
                           : getTranslatedProductName(accessoire.name)}

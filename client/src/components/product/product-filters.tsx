@@ -57,12 +57,13 @@ export default function ProductFilters({ activeTab, onFiltersChange }: ProductFi
   };
 
   const handleConditionChange = (value: string) => {
-    setCondition(value);
+    const next = value === "all" ? "" : value;
+    setCondition(next);
     onFiltersChange({
       categories: selectedCategories,
       subcategories: selectedSubcategories,
       sizes: selectedSizes,
-      condition: value
+      condition: next
     });
   };
 
@@ -187,12 +188,12 @@ export default function ProductFilters({ activeTab, onFiltersChange }: ProductFi
           <Label className="text-sm font-medium mb-3 block">
             {t("accessories.condition")}
           </Label>
-          <Select value={condition} onValueChange={handleConditionChange}>
+          <Select value={condition || 'all'} onValueChange={handleConditionChange}>
             <SelectTrigger className="w-full">
               <SelectValue placeholder={t("filter.all")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">{t("filter.all")}</SelectItem>
+              <SelectItem value="all">{t("filter.all")}</SelectItem>
               <SelectItem value="neuve">Neuve</SelectItem>
               <SelectItem value="occasion">Occasion</SelectItem>
             </SelectContent>

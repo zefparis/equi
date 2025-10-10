@@ -76,6 +76,7 @@
 
   html {
     scroll-behavior: smooth;
+    min-height: 100%;
   }
 
   body {
@@ -84,6 +85,15 @@
     -moz-osx-font-smoothing: grayscale;
     background-color: var(--background);
     color: var(--foreground);
+    min-height: 100%;
+    /* Global background: same image, darker overlay to reduce brightness */
+    background-image:
+      linear-gradient(120deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+      url("/images/fond%20background1.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
   }
 
   /* Consolidated text color rules */
@@ -103,6 +113,17 @@
   .dark body, .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6,
   .dark p, .dark span, .dark div:not([class*="text-white"]):not([class*="text-primary"]), .dark main {
     color: var(--foreground);
+  }
+
+  /* Dark mode: stronger overlay for readability */
+  .dark body {
+    background-image:
+      linear-gradient(120deg, rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0.60)),
+      url("/images/fond%20background1.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
   }
 }
 
@@ -131,6 +152,68 @@
   
   .dark .product-card:hover {
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Wow Card Styles */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(8px) saturate(110%);
+    -webkit-backdrop-filter: blur(8px) saturate(110%);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    will-change: transform, box-shadow;
+  }
+
+  .dark .glass-card {
+    background: rgba(24, 24, 24, 0.6);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  }
+
+  .gradient-border {
+    border: 1px solid transparent;
+    background: linear-gradient(to right, rgba(255,255,255,0.9), rgba(255,255,255,0.9)) padding-box,
+                linear-gradient(135deg, #d4af37, #a6782b 35%, #d4af37 65%, #f6e27a) border-box;
+    border-radius: 16px;
+  }
+
+  .dark .gradient-border {
+    background: linear-gradient(to right, rgba(30,30,30,0.8), rgba(30,30,30,0.8)) padding-box,
+                linear-gradient(135deg, #b78727, #6b4b15 35%, #b78727 65%, #e3c652) border-box;
+  }
+
+  .wow-hover-lift:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 44px rgba(0, 0, 0, 0.22);
+  }
+
+  .sheen-on-hover { position: relative; overflow: hidden; }
+  .sheen-on-hover::after {
+    content: "";
+    position: absolute;
+    top: -120%; left: -140%;
+    width: 60%; height: 320%;
+    transform: rotate(25deg);
+    background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.26), rgba(255,255,255,0));
+    transition: left 0.6s ease, opacity 0.6s ease;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .sheen-on-hover:hover::after { left: 130%; opacity: 0.8; }
+
+  .image-zoom { overflow: hidden; }
+  .image-zoom img { transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1); }
+  .image-zoom:hover img { transform: scale(1.06); }
+
+  .image-gradient { position: relative; }
+  .image-gradient::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,0.35) 100%);
+    pointer-events: none;
   }
 
   .btn-primary {
@@ -295,6 +378,12 @@
 
     .tap-target {
       padding: 0.75rem;
+    }
+
+    /* Mobile/touch: avoid background-attachment: fixed issues */
+    body {
+      background-attachment: scroll;
+      background-position: center top;
     }
   }
 }

@@ -23,13 +23,13 @@ export default function ProductCard({ product }: ProductCardProps) {
   const hasDiscount = product.originalPrice && parseFloat(product.originalPrice) > parseFloat(product.price);
 
   return (
-    <Card className="product-card overflow-hidden bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+    <Card className="group product-card glass-card gradient-border sheen-on-hover wow-hover-lift overflow-hidden">
       <Link href={`/product/${product.id}`}>
-        <div className="relative overflow-hidden">
+        <div className="relative image-zoom image-gradient">
           <img
             src={product.image}
             alt={product.name}
-            className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-64 object-cover transition-transform duration-500 ease-out group-hover:scale-105"
           />
 
           {hasDiscount && (

@@ -9,7 +9,7 @@ export default function BackgroundWrapper({ children }: BackgroundWrapperProps) 
     <div 
       className="min-h-screen relative overflow-x-hidden"
       style={{
-        backgroundImage: `url('/images/fond-background1.jpg')`,
+        backgroundImage: `url('/images/fond%20background1.jpg')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',

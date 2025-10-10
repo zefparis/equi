@@ -22,8 +22,8 @@ const languages = [
   { code: "de", name: "Deutsch", flag: <svg className="w-4 h-4" viewBox="0 0 24 16"><rect width="24" height="5.33" fill="#000000"/><rect width="24" height="5.33" y="5.33" fill="#dd0000"/><rect width="24" height="5.33" y="10.67" fill="#ffce00"/></svg> },
 ];
 
-// Effet cuir SVG background (tu peux coller dans un fichier CSS global si tu préfères)
-const leatherTexture = "url(\"data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle fill='%23644529' fill-opacity='0.21' cx='5' cy='5' r='1.5'/%3E%3Ccircle fill='%23644529' fill-opacity='0.18' cx='15' cy='15' r='1.2'/%3E%3Ccircle fill='%23644529' fill-opacity='0.16' cx='14' cy='6' r='0.8'/%3E%3Ccircle fill='%23644529' fill-opacity='0.15' cx='6' cy='14' r='1'/%3E%3C/svg%3E\")";
+// Texture cuir photo (fond-de-texture-de-cuir-marron-d-origine.jpg) avec overlay discret
+const leatherTexture = "linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('/images/fond-de-texture-de-cuir-marron-d-origine.jpg')";
 
 export default function Header() {
   const { language, setLanguage, t } = useLanguage();
@@ -57,10 +57,11 @@ export default function Header() {
 
   // Custom style pour le fond "cuir"
   const leatherBg = {
-    backgroundColor: "#6B4226",
+    backgroundColor: "#6B4226", // fallback si l'image ne charge pas
     backgroundImage: leatherTexture,
-    backgroundRepeat: "repeat",
-    backgroundSize: "auto",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
     border: "none"
   };
 

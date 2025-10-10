@@ -36,7 +36,27 @@ export default function Accessories() {
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 500]);
   const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
   const [selectedConditions, setSelectedConditions] = useState<string[]>([]);
-  
+
+  // Images du carrousel (servies depuis /public/images)
+  const carouselImages = [
+    "/images/56704-864-Equitation-et-cheval-840x473.jpg",
+    "/images/cavalier-monte-sur-le-cheval-alezan-promenades-sur-un-gros-plan-de-l-hippodrome.jpg",
+    "/images/monter-a-cheval.jpg",
+    "/images/un-homme-a-cheval.jpg",
+    "/images/obstacle.webp",
+    "/images/dressage.jpg",
+  ];
+
+  // Index de l'image courante et rotation automatique
+  const [currentSlide, setCurrentSlide] = useState(0);
+  useEffect(() => {
+    if (carouselImages.length <= 1) return;
+    const id = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+    }, 5000);
+    return () => clearInterval(id);
+  }, [carouselImages.length]);
+
   // Obtenir les catégories traduites
   const accessoryCategories = getAccessoryCategories(t);
 
@@ -124,32 +144,54 @@ export default function Accessories() {
   const popularAccessories = accessories.slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
-      {/* Hero Section */}
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              {t("accessories.title")}
-            </h1>
-            <p className="text-xl opacity-90 mb-8">
-              {t("accessories.subtitle")}
-            </p>
-            <div className="flex flex-wrap gap-4 justify-center">
-              <Badge className="bg-white/20 text-white border-white/30 px-4 py-2">
-                <Sparkles className="h-4 w-4 mr-2" />
-                {accessories.length} {t("accessories.available")}
-              </Badge>
-              <Badge className="bg-white/20 text-white border-white/30 px-4 py-2">
-                <TrendingUp className="h-4 w-4 mr-2" />
-                {t("accessories.newWeekly")}
-              </Badge>
-              <Badge className="bg-white/20 text-white border-white/30 px-4 py-2">
-                <Heart className="h-4 w-4 mr-2" />
-                {t("accessories.premiumSelection")}
-              </Badge>
+    <div className="min-h-screen bg-transparent">
+      {/* Hero Section - Carousel Background */}
+      <div className="relative h-[320px] md:h-[420px] text-white">
+        {carouselImages.map((src, i) => (
+          <div
+            key={src}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${i === currentSlide ? 'opacity-100' : 'opacity-0'}`}
+          >
+            <img src={src} alt="" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50" />
+          </div>
+        ))}
+        <div className="relative z-10 h-full flex items-center">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto text-center">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">
+                {t("accessories.title")}
+              </h1>
+              <p className="text-xl opacity-90 mb-8">
+                {t("accessories.subtitle")}
+              </p>
+              <div className="flex flex-wrap gap-4 justify-center">
+                <Badge className="bg-white/20 text-white border-white/30 px-4 py-2">
+                  <Sparkles className="h-4 w-4 mr-2" />
+                  {accessories.length} {t("accessories.available")}
+                </Badge>
+                <Badge className="bg-white/20 text-white border-white/30 px-4 py-2">
+                  <TrendingUp className="h-4 w-4 mr-2" />
+                  {t("accessories.newWeekly")}
+                </Badge>
+                <Badge className="bg-white/20 text-white border-white/30 px-4 py-2">
+                  <Heart className="h-4 w-4 mr-2" />
+                  {t("accessories.premiumSelection")}
+                </Badge>
+              </div>
             </div>
           </div>
+        </div>
+        {/* Indicateurs (points) */}
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+          {carouselImages.map((_, i) => (
+            <button
+              key={i}
+              aria-label={`Aller à l'image ${i + 1}`}
+              onClick={() => setCurrentSlide(i)}
+              className={`h-2.5 w-2.5 rounded-full transition-all ${i === currentSlide ? 'bg-white w-6' : 'bg-white/60'}`}
+            />
+          ))}
         </div>
       </div>
 
@@ -200,17 +242,20 @@ export default function Accessories() {
               return (
                 <Card
                   key={cat.id}
-                  className={`cursor-pointer transition-all hover:shadow-lg ${
-                    selectedCategory === cat.id 
-                      ? 'ring-2 ring-primary border-primary' 
-                      : 'hover:border-primary/50'
+                  className={`group cursor-pointer transition-all glass-card gradient-border sheen-on-hover wow-hover-lift ${
+                    selectedCategory === cat.id
+                      ? 'ring-2 ring-[#FFD700]/70 border-transparent'
+                      : 'hover:border-transparent'
                   }`}
                   onClick={() => setSelectedCategory(cat.id)}
                 >
-                  <CardContent className="p-4 text-center">
-                    <Icon className="h-8 w-8 mx-auto mb-2 text-primary" />
-                    <h3 className="font-semibold text-sm">{cat.name}</h3>
-                    <Badge variant="secondary" className="mt-2">
+                  <CardContent className="p-5 text-center">
+                    <Icon className="h-9 w-9 mx-auto mb-2 text-[#FFD700]" />
+                    <h3 className="font-semibold text-sm tracking-wide text-gray-900 dark:text-gray-100">{cat.name}</h3>
+                    <Badge
+                      variant="secondary"
+                      className="mt-2 bg-white/60 dark:bg-white/10 border-white/30 text-gray-700 dark:text-gray-200 backdrop-blur-sm"
+                    >
                       {cat.count} {t("accessories.articles")}
                     </Badge>
                   </CardContent>
