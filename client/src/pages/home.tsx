@@ -85,7 +85,7 @@ export default function Home() {
       </section>
 
       {/* Categories Section */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-800">
+      <section className="py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-gray-100">
             {t("categories.title")}
@@ -120,7 +120,7 @@ export default function Home() {
       </section>
 
       {/* Featured Products */}
-      <section className="py-16 bg-white dark:bg-gray-900">
+      <section className="py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-gray-100">
             {t("featured.title")}
@@ -147,7 +147,7 @@ export default function Home() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-16 bg-secondary dark:bg-gray-800">
+      <section className="py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-gray-100">
             {t("why.title")}
@@ -196,7 +196,7 @@ export default function Home() {
 
 
       {/* Newsletter */}
-      <section className="py-16 bg-primary text-white">
+      <section className="py-16 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">{t("newsletter.title")}</h2>
           <p className="text-lg mb-8 max-w-2xl mx-auto">

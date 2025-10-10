@@ -242,21 +242,29 @@ export default function Accessories() {
               return (
                 <Card
                   key={cat.id}
-                  className={`group cursor-pointer transition-all glass-card gradient-border sheen-on-hover wow-hover-lift ${
+                  aria-pressed={selectedCategory === cat.id}
+                  className={`group cursor-pointer transition-all rounded-2xl bg-white/70 border border-white/60 shadow-md hover:bg-white/80 hover:shadow-lg hover:-translate-y-0.5 ${
                     selectedCategory === cat.id
-                      ? 'ring-2 ring-[#FFD700]/70 border-transparent'
-                      : 'hover:border-transparent'
+                      ? 'ring-2 ring-[#D4AF37] border-[#D4AF37]/60'
+                      : 'hover:border-[#D4AF37]/50'
                   }`}
                   onClick={() => setSelectedCategory(cat.id)}
                 >
                   <CardContent className="p-5 text-center">
-                    <Icon className="h-9 w-9 mx-auto mb-2 text-[#FFD700]" />
-                    <h3 className="font-semibold text-sm tracking-wide text-gray-900 dark:text-gray-100">{cat.name}</h3>
+                    <div className="mx-auto mb-3 h-12 w-12 rounded-full bg-[#FFD700]/85 border border-[#D4AF37]/80 flex items-center justify-center shadow-sm">
+                      <Icon className="h-6 w-6 text-[#6B4226]" />
+                    </div>
+                    <h3
+                      className="font-semibold text-sm tracking-wide text-[#3b2a20]"
+                      style={{ fontFamily: "'Cinzel', 'Playfair Display', serif" }}
+                    >
+                      {cat.name}
+                    </h3>
                     <Badge
                       variant="secondary"
-                      className="mt-2 bg-white/60 dark:bg-white/10 border-white/30 text-gray-700 dark:text-gray-200 backdrop-blur-sm"
+                      className="mt-2 bg-white/90 border-white/90 text-[#3b2a20]"
                     >
-                      {cat.count} {t("accessories.articles")}
+                      {cat.count} {t('accessories.articles')}
                     </Badge>
                   </CardContent>
                 </Card>
