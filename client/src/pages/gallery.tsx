@@ -39,6 +39,22 @@ export default function Gallery() {
 
   return (
     <div className="min-h-screen bg-transparent">
+      {/* Hero Video just under navbar */}
+      <section className="relative w-full overflow-hidden">
+        <div className="relative h-56 md:h-80 lg:h-96">
+          <video
+            className="absolute inset-0 w-full h-full object-cover"
+            src="/videos/gif.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+          />
+          {/* Subtle gradient for readability on top of the video */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/15 to-transparent pointer-events-none" />
+        </div>
+      </section>
+
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-12">
