@@ -220,7 +220,20 @@ export default function ProductImageManager({ productId }: ProductImageManagerPr
               <ImageUpload
                 onImageSelect={({ url, file }) => {
                   setSelectedImageFile(file);
-                  setUploadForm({ ...uploadForm, url });
+                  // Ne pas injecter l'URL blob: dans le champ URL (bloque la validation du formulaire)
+                  // Pré-remplir les métadonnées depuis le fichier sélectionné
+                  if (file) {
+                    setUploadForm({
+                      ...uploadForm,
+                      url: "",
+                      filename: file.name || uploadForm.filename,
+                      originalName: file.name || uploadForm.originalName,
+                      mimeType: file.type || uploadForm.mimeType,
+                      size: file.size || uploadForm.size,
+                    });
+                  } else {
+                    setUploadForm({ ...uploadForm, url });
+                  }
                 }}
                 currentImage={uploadForm.url}
                 placeholder="Sélectionner une image (téléphone/ordinateur)"
@@ -229,12 +242,15 @@ export default function ProductImageManager({ productId }: ProductImageManagerPr
                 <Label htmlFor="url">URL de l'image</Label>
                 <Input
                   id="url"
-                  type="url"
+                  type={selectedImageFile ? "text" : "url"}
                   value={uploadForm.url}
                   onChange={(e) => setUploadForm({ ...uploadForm, url: e.target.value })}
                   placeholder="/images/selle-example.jpg"
                   required={!selectedImageFile && !uploadForm.url}
                 />
+                {selectedImageFile && (
+                  <p className="text-xs text-gray-500 mt-1">Une URL n'est pas nécessaire quand un fichier est sélectionné.</p>
+                )}
               </div>
               <div>
                 <Label htmlFor="alt">Texte alternatif</Label>

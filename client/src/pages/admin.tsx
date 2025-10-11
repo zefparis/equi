@@ -60,6 +60,7 @@ export default function Admin() {
   const [selectedImageFile, setSelectedImageFile] = useState<File | null>(null);
   const [imagesDialogOpen, setImagesDialogOpen] = useState(false);
   const [imagesProductId, setImagesProductId] = useState<number | null>(null);
+  const [resumeEditAfterImages, setResumeEditAfterImages] = useState(false);
 
   // Scroll to top when page loads
   useEffect(() => {
@@ -818,11 +819,20 @@ export default function Admin() {
               />
 
               {editingProduct ? (
-                <div className="pt-4">
-                  <Label>Images du produit (3–5)</Label>
-                  <div className="mt-2">
-                    <ProductImageManager productId={editingProduct.id} />
-                  </div>
+                <div className="pt-2 flex items-center justify-between">
+                  <p className="text-sm text-gray-600">Gérer plusieurs images (3–5)</p>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => {
+                      setImagesProductId(editingProduct.id);
+                      setResumeEditAfterImages(true);
+                      setShowProductDialog(false); // avoid two focus-trapped modals
+                      setImagesDialogOpen(true);
+                    }}
+                  >
+                    Gérer les images
+                  </Button>
                 </div>
               ) : (
                 <p className="text-sm text-gray-500 pt-2">
@@ -914,7 +924,16 @@ export default function Admin() {
         </Dialog>
 
         {/* Product Images Dialog */}
-        <Dialog open={imagesDialogOpen} onOpenChange={setImagesDialogOpen}>
+        <Dialog
+          open={imagesDialogOpen}
+          onOpenChange={(open) => {
+            setImagesDialogOpen(open);
+            if (!open && resumeEditAfterImages) {
+              setShowProductDialog(true);
+              setResumeEditAfterImages(false);
+            }
+          }}
+        >
           <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto mx-4 sm:mx-0">
             <DialogHeader>
               <DialogTitle>Gérer les images du produit</DialogTitle>
