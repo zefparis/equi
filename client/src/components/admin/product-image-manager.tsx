@@ -104,6 +104,14 @@ export default function ProductImageManager({ productId }: ProductImageManagerPr
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (images && images.length >= 5) {
+      toast({
+        title: "Limite atteinte",
+        description: "Vous ne pouvez pas ajouter plus de 5 images.",
+        variant: "destructive",
+      });
+      return;
+    }
     
     // Generate filename from URL if not provided
     const filename = uploadForm.filename || uploadForm.url.split('/').pop() || 'image.jpg';
@@ -142,11 +150,19 @@ export default function ProductImageManager({ productId }: ProductImageManagerPr
 
   return (
     <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div className="text-sm text-gray-600">
+          Images: <span className="font-medium">{images?.length || 0}/5</span>{" "}
+          {images && images.length < 3 && (
+            <span className="text-amber-600 ml-2">Minimum recommandé: 3 images</span>
+          )}
+        </div>
+      </div>
       <div className="flex justify-between items-center">
         <h3 className="text-lg font-semibold">Images du produit</h3>
         <Dialog open={showUploadDialog} onOpenChange={setShowUploadDialog}>
           <DialogTrigger asChild>
-            <Button>
+            <Button disabled={!!images && images.length >= 5}>
               <Upload className="mr-2 h-4 w-4" />
               Ajouter une image
             </Button>
@@ -211,7 +227,7 @@ export default function ProductImageManager({ productId }: ProductImageManagerPr
                 <Button type="button" variant="outline" onClick={() => setShowUploadDialog(false)}>
                   Annuler
                 </Button>
-                <Button type="submit" disabled={createImageMutation.isPending}>
+                <Button type="submit" disabled={createImageMutation.isPending || (!!images && images.length >= 5)}>
                   {createImageMutation.isPending ? "Ajout..." : "Ajouter"}
                 </Button>
               </div>

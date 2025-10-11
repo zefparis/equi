@@ -4,7 +4,7 @@ import { useParams, Link } from "wouter";
 import { useCart } from "../hooks/use-cart";
 import { useLanguage } from "../hooks/use-language";
 import { scrollToTop } from "../lib/utils";
-import { Product } from "@shared/schema";
+import { Product, ProductImage } from "@shared/schema";
 import { Button } from "../components/ui/button";
 import { Badge } from "../components/ui/badge";
 import { Card, CardContent } from "../components/ui/card";
@@ -26,6 +26,11 @@ export default function ProductPage() {
 
   const { data: product, isLoading } = useQuery<Product>({
     queryKey: [`/api/products/${id}`],
+    enabled: !!id,
+  });
+
+  const { data: apiImages } = useQuery<ProductImage[]>({
+    queryKey: [`/api/products/${id}/images`],
     enabled: !!id,
   });
 
@@ -74,7 +79,12 @@ export default function ProductPage() {
     );
   }
 
-  const allImages = [product.image, ...(product.images || [])];
+  const apiImageUrls = (apiImages && apiImages.length > 0)
+    ? [...apiImages].sort((a, b) => (b.isMain ? 1 : 0) - (a.isMain ? 1 : 0)).map(i => i.url)
+    : [];
+  const allImages = apiImageUrls.length > 0
+    ? apiImageUrls
+    : [product.image, ...(product.images || [])];
   const hasDiscount = product.originalPrice && parseFloat(product.originalPrice) > parseFloat(product.price);
 
   return (
@@ -93,16 +103,16 @@ export default function ProductPage() {
           <div className="space-y-4">
             <div className="aspect-square rounded-lg overflow-hidden bg-white shadow-md">
               <img
-                src={product.image}
+                src={allImages[0]}
                 alt={product.name}
                 className="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-300"
                 onClick={() => openLightbox(0)}
               />
             </div>
             
-            {product.images && product.images.length > 0 && (
+            {allImages.length > 1 && (
               <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
-                {product.images.map((image, index) => (
+                {allImages.slice(1).map((image, index) => (
                   <div
                     key={index}
                     className="aspect-square rounded-lg overflow-hidden bg-white shadow-md cursor-pointer hover:opacity-75 transition-opacity"

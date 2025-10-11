@@ -109,8 +109,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.post("/api/products/:productId/images", async (req, res) => {
     try {
+      const productId = parseInt(req.params.productId);
+      // Enforce max 5 images per product
+      const existing = await storage.getProductImages(productId);
+      if (existing && existing.length >= 5) {
+        return res.status(400).json({ message: "Maximum 5 images par produit." });
+      }
+
       const validatedData = insertProductImageSchema.parse({
-        productId: parseInt(req.params.productId),
+        productId,
         ...req.body
       });
       const image = await storage.createProductImage(validatedData);

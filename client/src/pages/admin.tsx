@@ -58,6 +58,8 @@ export default function Admin() {
   const [showGalleryDialog, setShowGalleryDialog] = useState(false);
   const [uploadingImage, setUploadingImage] = useState(false);
   const [selectedImageFile, setSelectedImageFile] = useState<File | null>(null);
+  const [imagesDialogOpen, setImagesDialogOpen] = useState(false);
+  const [imagesProductId, setImagesProductId] = useState<number | null>(null);
 
   // Scroll to top when page loads
   useEffect(() => {
@@ -434,6 +436,14 @@ export default function Admin() {
                         {parseFloat(product.price).toFixed(2)} €
                       </p>
                       <div className="admin-product-actions">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => { setImagesProductId(product.id); setImagesDialogOpen(true); }}
+                          className="admin-action-button"
+                        >
+                          <Images className="h-4 w-4" />
+                        </Button>
                         <Button
                           variant="outline"
                           size="sm"
@@ -889,7 +899,27 @@ export default function Admin() {
             </form>
           </DialogContent>
         </Dialog>
+
+        {/* Product Images Dialog */}
+        <Dialog open={imagesDialogOpen} onOpenChange={setImagesDialogOpen}>
+          <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto mx-4 sm:mx-0">
+            <DialogHeader>
+              <DialogTitle>Gérer les images du produit</DialogTitle>
+              <DialogDescription>
+                Ajoutez, supprimez et définissez l'image principale. Maximum 5 images, minimum recommandé 3.
+              </DialogDescription>
+            </DialogHeader>
+            {imagesProductId !== null && (
+              <div className="mt-2">
+                <ProductImageManager productId={imagesProductId} />
+              </div>
+            )}
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );
 }
+
+// Images Manager Dialog mounted at root level of Admin page
+// Ensure it renders outside of product cards
