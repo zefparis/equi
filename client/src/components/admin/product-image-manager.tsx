@@ -11,6 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Badge } from "../ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from "../ui/dialog";
 import { Upload, Download, Trash2, Star, StarOff, Image as ImageIcon } from "lucide-react";
+import ImageUpload from "./image-upload";
 
 interface ProductImageManagerProps {
   productId: number;
@@ -20,6 +21,7 @@ export default function ProductImageManager({ productId }: ProductImageManagerPr
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [showUploadDialog, setShowUploadDialog] = useState(false);
+  const [selectedImageFile, setSelectedImageFile] = useState<File | null>(null);
   const [uploadForm, setUploadForm] = useState({
     url: "",
     alt: "",
@@ -41,6 +43,7 @@ export default function ProductImageManager({ productId }: ProductImageManagerPr
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [`/api/products/${productId}/images`] });
       setShowUploadDialog(false);
+      setSelectedImageFile(null);
       setUploadForm({
         url: "",
         alt: "",
@@ -102,7 +105,21 @@ export default function ProductImageManager({ productId }: ProductImageManagerPr
     },
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const uploadImage = async (file: File): Promise<string> => {
+    const formData = new FormData();
+    formData.append('image', file);
+    const response = await fetch('/api/upload/image', {
+      method: 'POST',
+      body: formData,
+    });
+    if (!response.ok) {
+      throw new Error("Erreur lors de l'upload de l'image");
+    }
+    const result = await response.json();
+    return result.url as string;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (images && images.length >= 5) {
       toast({
@@ -112,17 +129,42 @@ export default function ProductImageManager({ productId }: ProductImageManagerPr
       });
       return;
     }
-    
-    // Generate filename from URL if not provided
-    const filename = uploadForm.filename || uploadForm.url.split('/').pop() || 'image.jpg';
-    
-    createImageMutation.mutate({
-      ...uploadForm,
-      productId,
-      filename,
-      originalName: uploadForm.originalName || filename,
-      size: uploadForm.size || 1000, // Default size
-    });
+    try {
+      let url = uploadForm.url;
+      let filename = uploadForm.filename;
+      let originalName = uploadForm.originalName;
+      let mimeType = uploadForm.mimeType;
+      let size = uploadForm.size;
+
+      if (selectedImageFile) {
+        // Upload the local file to get a persistent URL
+        url = await uploadImage(selectedImageFile);
+        filename = url.split('/').pop() || selectedImageFile.name;
+        originalName = selectedImageFile.name;
+        mimeType = selectedImageFile.type || 'image/jpeg';
+        size = selectedImageFile.size;
+      }
+
+      // Generate filename from URL if still missing
+      const finalFilename = filename || (url ? (url.split('/').pop() || 'image.jpg') : 'image.jpg');
+
+      createImageMutation.mutate({
+        productId,
+        url,
+        alt: uploadForm.alt,
+        filename: finalFilename,
+        originalName: originalName || finalFilename,
+        mimeType: mimeType || 'image/jpeg',
+        size: size || 1000,
+        isMain: uploadForm.isMain,
+      });
+    } catch (error: any) {
+      toast({
+        title: "Erreur",
+        description: "Upload impossible. Veuillez réessayer.",
+        variant: "destructive",
+      });
+    }
   };
 
   const handleDownload = (image: ProductImage) => {
@@ -171,10 +213,18 @@ export default function ProductImageManager({ productId }: ProductImageManagerPr
             <DialogHeader>
               <DialogTitle>Ajouter une nouvelle image</DialogTitle>
               <DialogDescription>
-                Ajoutez une nouvelle image pour ce produit en renseignant l'URL et les informations requises.
+                Ajoutez une nouvelle image pour ce produit en sélectionnant un fichier (téléphone/ordinateur) ou en saisissant une URL.
               </DialogDescription>
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4">
+              <ImageUpload
+                onImageSelect={({ url, file }) => {
+                  setSelectedImageFile(file);
+                  setUploadForm({ ...uploadForm, url });
+                }}
+                currentImage={uploadForm.url}
+                placeholder="Sélectionner une image (téléphone/ordinateur)"
+              />
               <div>
                 <Label htmlFor="url">URL de l'image</Label>
                 <Input
@@ -183,7 +233,7 @@ export default function ProductImageManager({ productId }: ProductImageManagerPr
                   value={uploadForm.url}
                   onChange={(e) => setUploadForm({ ...uploadForm, url: e.target.value })}
                   placeholder="/images/selle-example.jpg"
-                  required
+                  required={!selectedImageFile && !uploadForm.url}
                 />
               </div>
               <div>
