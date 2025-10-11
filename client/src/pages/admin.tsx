@@ -817,6 +817,19 @@ export default function Admin() {
                 placeholder="Sélectionner l'image principale"
               />
 
+              {editingProduct ? (
+                <div className="pt-4">
+                  <Label>Images du produit (3–5)</Label>
+                  <div className="mt-2">
+                    <ProductImageManager productId={editingProduct.id} />
+                  </div>
+                </div>
+              ) : (
+                <p className="text-sm text-gray-500 pt-2">
+                  Après la création de l'annonce, vous pourrez ajouter jusqu'à 5 images depuis la gestion des images.
+                </p>
+              )}
+
               <div className="flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-6">
                 <div className="flex items-center space-x-2">
                   <Checkbox
