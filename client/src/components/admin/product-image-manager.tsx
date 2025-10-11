@@ -9,7 +9,7 @@ import { Label } from "../ui/label";
 import { Checkbox } from "../ui/checkbox";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Badge } from "../ui/badge";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from "../ui/dialog";
+import { Dialog } from "../ui/dialog";
 import { Upload, Download, Trash2, Star, StarOff, Image as ImageIcon } from "lucide-react";
 import ImageUpload from "./image-upload";
 
@@ -151,7 +151,7 @@ export default function ProductImageManager({ productId }: ProductImageManagerPr
       createImageMutation.mutate({
         productId,
         url,
-        alt: uploadForm.alt,
+        alt: uploadForm.alt || finalFilename,
         filename: finalFilename,
         originalName: originalName || finalFilename,
         mimeType: mimeType || 'image/jpeg',
@@ -202,26 +202,25 @@ export default function ProductImageManager({ productId }: ProductImageManagerPr
       </div>
       <div className="flex justify-between items-center">
         <h3 className="text-lg font-semibold">Images du produit</h3>
-        <Dialog open={showUploadDialog} onOpenChange={setShowUploadDialog}>
-          <DialogTrigger asChild>
-            <Button disabled={!!images && images.length >= 5}>
-              <Upload className="mr-2 h-4 w-4" />
-              Ajouter une image
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Ajouter une nouvelle image</DialogTitle>
-              <DialogDescription>
-                Ajoutez une nouvelle image pour ce produit en sélectionnant un fichier (téléphone/ordinateur) ou en saisissant une URL.
-              </DialogDescription>
-            </DialogHeader>
+        <Button
+          onClick={() => setShowUploadDialog((v) => !v)}
+          disabled={!!images && images.length >= 5}
+        >
+          <Upload className="mr-2 h-4 w-4" />
+          {showUploadDialog ? "Fermer" : "Ajouter une image"}
+        </Button>
+      </div>
+
+      {showUploadDialog && (
+        <Card>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base">Ajouter une nouvelle image</CardTitle>
+          </CardHeader>
+          <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
               <ImageUpload
                 onImageSelect={({ url, file }) => {
                   setSelectedImageFile(file);
-                  // Ne pas injecter l'URL blob: dans le champ URL (bloque la validation du formulaire)
-                  // Pré-remplir les métadonnées depuis le fichier sélectionné
                   if (file) {
                     setUploadForm({
                       ...uploadForm,
@@ -259,7 +258,7 @@ export default function ProductImageManager({ productId }: ProductImageManagerPr
                   value={uploadForm.alt}
                   onChange={(e) => setUploadForm({ ...uploadForm, alt: e.target.value })}
                   placeholder="Description de l'image"
-                  required
+                  
                 />
               </div>
               <div>
@@ -298,9 +297,9 @@ export default function ProductImageManager({ productId }: ProductImageManagerPr
                 </Button>
               </div>
             </form>
-          </DialogContent>
-        </Dialog>
-      </div>
+          </CardContent>
+        </Card>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {images?.map((image) => (
