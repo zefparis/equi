@@ -10,7 +10,7 @@ import { Badge } from "../components/ui/badge";
 import { Card, CardContent } from "../components/ui/card";
 import { Separator } from "../components/ui/separator";
 import Lightbox from "../components/ui/lightbox";
-import { ArrowLeft, ShoppingCart, Star, Truck, Shield, RotateCcw } from "lucide-react";
+import { ArrowLeft, ShoppingCart, Star } from "lucide-react";
 
 export default function ProductPage() {
   const { id } = useParams<{ id: string }>();
@@ -239,21 +239,7 @@ export default function ProductPage() {
               {product.inStock ? t("product.addToCart") : "Produit vendu"}
             </Button>
 
-            {/* Features */}
-            <div className="space-y-3">
-              <div className="flex items-center space-x-3 text-gray-600">
-                <Truck className="h-5 w-5" />
-                <span>Livraison gratuite à partir de 100€</span>
-              </div>
-              <div className="flex items-center space-x-3 text-gray-600">
-                <Shield className="h-5 w-5" />
-                <span>Garantie 2 ans</span>
-              </div>
-              <div className="flex items-center space-x-3 text-gray-600">
-                <RotateCcw className="h-5 w-5" />
-                <span>Retour sous 30 jours</span>
-              </div>
-            </div>
+            
           </div>
         </div>
 
