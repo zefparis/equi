@@ -6,6 +6,7 @@ import path from "path";
 export default defineConfig({
   base: "/", // important en prod derrière un reverse proxy
   plugins: [react()],
+  publicDir: path.resolve(import.meta.dirname, "public"), // Utiliser le dossier public à la racine
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),
