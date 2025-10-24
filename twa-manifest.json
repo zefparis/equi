@@ -13,15 +13,15 @@
   "backgroundColor": "#6B4226",
   "enableNotifications": true,
   "startUrl": "/?pwa=true",
-  "iconUrl": "https://www.equisaddles.com/icons/icon-512.svg",
-  "maskableIconUrl": "https://www.equisaddles.com/icons/icon-512.svg",
+  "iconUrl": "https://www.equisaddles.com/icons/icon-512.png",
+  "maskableIconUrl": "https://www.equisaddles.com/icons/icon-512-maskable.png",
   "splashScreenFadeOutDuration": 300,
   "signingKey": {
     "path": "/home/ia-solution/Téléchargements/equi/android.keystore",
     "alias": "equisaddles"
   },
-  "appVersionName": "2",
-  "appVersionCode": 2,
+  "appVersionName": "4",
+  "appVersionCode": 4,
   "shortcuts": [],
   "generatorApp": "bubblewrap-cli",
   "webManifestUrl": "https://www.equisaddles.com/manifest.json",
@@ -50,5 +50,5 @@
   "fileHandlers": [],
   "launchHandlerClientMode": "",
   "displayOverride": [],
-  "appVersion": "2"
+  "appVersion": "4"
 }

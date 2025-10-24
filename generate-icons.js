@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const sizes = [72, 96, 128, 144, 152, 192, 384, 512];
-const logoPath = join(__dirname, 'public/images/logo.jpg');
+const logoPath = join(__dirname, 'public/images/logo.png');
 const outputDir = join(__dirname, 'public/icons');
 
 async function generateIcons() {
