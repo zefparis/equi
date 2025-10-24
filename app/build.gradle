@@ -24,7 +24,7 @@ def twaManifest = [
     applicationId: 'com.equisaddles.www.twa',
     hostName: 'www.equisaddles.com', // The domain being opened in the TWA.
     launchUrl: '/?pwa=true', // The start path for the TWA. Must be relative to the domain.
-    name: 'Equi Saddles', // The application name.
+    name: 'Equi Saddles - Selles d\\\'équitation premium', // The application name.
     launcherName: 'Equi Saddles', // The name shown on the Android Launcher.
     themeColor: '#6B4226', // The color used for the status bar.
     themeColorDark: '#000000', // The color used for the dark status bar.
@@ -57,8 +57,8 @@ android {
         applicationId "com.equisaddles.www.twa"
         minSdkVersion 21
         targetSdkVersion 35
-        versionCode 4
-        versionName "4"
+        versionCode 1
+        versionName "1"
 
         // The name for the application
         resValue "string", "appName", twaManifest.name
@@ -209,8 +209,6 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     
         implementation 'com.google.androidbrowserhelper:locationdelegation:1.1.2'
-    
-        implementation 'com.google.androidbrowserhelper:billing:1.1.0'
     
         implementation 'com.google.androidbrowserhelper:androidbrowserhelper:2.6.2'
     

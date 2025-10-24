@@ -1,7 +1,7 @@
 {
   "packageId": "com.equisaddles.www.twa",
   "host": "www.equisaddles.com",
-  "name": "Equi Saddles",
+  "name": "Equi Saddles - Selles d'équitation premium",
   "launcherName": "Equi Saddles",
   "display": "standalone",
   "themeColor": "#6B4226",
@@ -18,18 +18,15 @@
   "splashScreenFadeOutDuration": 300,
   "signingKey": {
     "path": "/home/ia-solution/Téléchargements/equi/android.keystore",
-    "alias": "equisaddles"
+    "alias": "EquiSaddles"
   },
-  "appVersionName": "4",
-  "appVersionCode": 4,
+  "appVersionName": "1",
+  "appVersionCode": 1,
   "shortcuts": [],
   "generatorApp": "bubblewrap-cli",
   "webManifestUrl": "https://www.equisaddles.com/manifest.json",
   "fallbackType": "customtabs",
   "features": {
-    "playBilling": {
-      "enabled": true
-    },
     "locationDelegation": {
       "enabled": true
     }
@@ -50,5 +47,5 @@
   "fileHandlers": [],
   "launchHandlerClientMode": "",
   "displayOverride": [],
-  "appVersion": "4"
+  "appVersion": "1"
 }
