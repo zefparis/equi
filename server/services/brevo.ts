@@ -188,3 +188,46 @@ export async function sendChatResponseToCustomer(customerEmail: string, customer
 
   return await sendEmail(emailData);
 }
+
+export async function sendContactFormEmail(name: string, email: string, subject: string, message: string): Promise<boolean> {
+  const adminEmail = "equisaddles@gmail.com"; // Email de l'admin qui reçoit les messages de contact
+  
+  const emailData: EmailData = {
+    to: adminEmail,
+    subject: `📩 Nouveau message de contact - ${subject}`,
+    htmlContent: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
+        <h2 style="color: #8B5A3C; margin-bottom: 20px;">📩 Nouveau message du formulaire de contact</h2>
+        
+        <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+          <h3 style="margin: 0 0 10px 0; color: #333;">Informations de l'expéditeur:</h3>
+          <p style="margin: 5px 0;"><strong>Nom:</strong> ${name}</p>
+          <p style="margin: 5px 0;"><strong>Email:</strong> ${email}</p>
+          <p style="margin: 5px 0;"><strong>Sujet:</strong> ${subject}</p>
+        </div>
+        
+        <div style="background-color: #fff; padding: 15px; border-left: 4px solid #8B5A3C; margin-bottom: 20px;">
+          <h3 style="margin: 0 0 10px 0; color: #333;">Message:</h3>
+          <p style="margin: 0; line-height: 1.5; white-space: pre-wrap;">${message}</p>
+        </div>
+        
+        <div style="text-align: center; margin: 30px 0;">
+          <a href="mailto:${email}" 
+             style="background-color: #8B5A3C; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; display: inline-block; font-weight: bold;">
+            📧 Répondre à ${name}
+          </a>
+        </div>
+        
+        <hr style="margin: 30px 0; border: none; border-top: 1px solid #eee;">
+        
+        <p style="font-size: 12px; color: #666; text-align: center;">
+          Ce message a été envoyé depuis le formulaire de contact du site Equi Saddles.
+        </p>
+      </div>
+    `,
+    senderName: "Equi Saddles - Formulaire de Contact", 
+    senderEmail: "equisaddles@gmail.com"
+  };
+
+  return await sendEmail(emailData);
+}

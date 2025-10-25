@@ -5,7 +5,7 @@ import { storage } from "./storage";
 import { registerUploadRoutes } from "./routes/upload";
 import { setupChatWebSocket } from "./routes/chat";
 import { insertProductSchema, insertGalleryImageSchema, insertProductImageSchema, insertOrderSchema } from "@shared/schema";
-import { sendChatNotificationToAdmin, sendChatResponseToCustomer } from "./services/brevo";
+import { sendChatNotificationToAdmin, sendChatResponseToCustomer, sendContactFormEmail } from "./services/brevo";
 import { chatStorage } from "./storage/chat";
 import { z } from "zod";
 
@@ -364,6 +364,43 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
     } catch (error: any) {
       res.status(500).json({ message: "Error sending test email: " + error.message });
+    }
+  });
+
+  // Contact form route
+  app.post("/api/contact", async (req, res) => {
+    try {
+      const { name, email, subject, message } = req.body;
+      
+      // Validation
+      if (!name || !email || !subject || !message) {
+        return res.status(400).json({ 
+          success: false,
+          message: "Tous les champs sont requis" 
+        });
+      }
+      
+      // Validation email format
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        return res.status(400).json({ 
+          success: false,
+          message: "Format d'email invalide" 
+        });
+      }
+      
+      const result = await sendContactFormEmail(name, email, subject, message);
+      
+      res.json({ 
+        success: result,
+        message: result ? "Message envoyé avec succès" : "Échec de l'envoi du message"
+      });
+    } catch (error: any) {
+      console.error("Error sending contact form email:", error);
+      res.status(500).json({ 
+        success: false,
+        message: "Erreur lors de l'envoi du message: " + error.message 
+      });
     }
   });
 
