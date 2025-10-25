@@ -8,26 +8,42 @@ async function initializeBrevo() {
   // Utiliser fetch directement pour contourner les problèmes d'API
   return {
     sendEmail: async (emailData: any) => {
+      const payload = {
+        sender: emailData.sender,
+        to: emailData.to,
+        subject: emailData.subject,
+        htmlContent: emailData.htmlContent,
+        textContent: emailData.textContent
+      };
+
+      console.log('📧 Sending email via Brevo:', {
+        to: emailData.to,
+        subject: emailData.subject,
+        sender: emailData.sender
+      });
+
       const response = await fetch('https://api.brevo.com/v3/smtp/email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'api-key': process.env.BREVO_API_KEY!
         },
-        body: JSON.stringify({
-          sender: emailData.sender,
-          to: emailData.to,
-          subject: emailData.subject,
-          htmlContent: emailData.htmlContent,
-          textContent: emailData.textContent
-        })
+        body: JSON.stringify(payload)
       });
       
+      const responseData = await response.json();
+      
       if (!response.ok) {
-        throw new Error(`Brevo API error: ${response.status} ${response.statusText}`);
+        console.error('❌ Brevo API error:', {
+          status: response.status,
+          statusText: response.statusText,
+          error: responseData
+        });
+        throw new Error(`Brevo API error: ${response.status} ${response.statusText} - ${JSON.stringify(responseData)}`);
       }
       
-      return await response.json();
+      console.log('✅ Brevo API response:', responseData);
+      return responseData;
     }
   };
 }
