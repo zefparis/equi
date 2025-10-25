@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useToast } from "@/hooks/use-toast";
 
 export default function EmailTestPage() {
   const [loading, setLoading] = useState(false);
@@ -11,7 +9,6 @@ export default function EmailTestPage() {
   const [customerEmail, setCustomerEmail] = useState("");
   const [message, setMessage] = useState("Ceci est un message de test du système de chat.");
   const [result, setResult] = useState<any>(null);
-  const { toast } = useToast();
 
   const handleTestEmail = async () => {
     setLoading(true);
@@ -35,25 +32,14 @@ export default function EmailTestPage() {
       setResult(data);
 
       if (data.success) {
-        toast({
-          title: "✅ Email envoyé",
-          description: "L'email a été envoyé avec succès à equisaddles@gmail.com",
-        });
+        alert("✅ Email envoyé avec succès à equisaddles@gmail.com");
       } else {
-        toast({
-          title: "❌ Échec de l'envoi",
-          description: data.message || "L'email n'a pas pu être envoyé",
-          variant: "destructive",
-        });
+        alert("❌ Échec: " + (data.message || "L'email n'a pas pu être envoyé"));
       }
     } catch (error: any) {
       console.error("Error:", error);
       setResult({ error: error.message });
-      toast({
-        title: "❌ Erreur",
-        description: error.message,
-        variant: "destructive",
-      });
+      alert("❌ Erreur: " + error.message);
     } finally {
       setLoading(false);
     }
@@ -98,11 +84,12 @@ export default function EmailTestPage() {
               <label className="block text-sm font-medium mb-2">
                 Message test
               </label>
-              <Textarea
+              <textarea
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Message de test..."
                 rows={4}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
