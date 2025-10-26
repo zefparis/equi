@@ -1,6 +1,8 @@
 import type { Express } from "express";
 import multer from "multer";
 import { Readable } from "stream";
+import fs from "fs";
+import path from "path";
 
 // Import conditionnel de Cloudinary
 let cloudinary: any = null;
@@ -107,8 +109,6 @@ export function registerCloudinaryUploadRoutes(app: Express) {
       } else {
         // Fallback : stockage local (sera perdu au redéploiement)
         console.warn("⚠️  Using local storage - image will be lost on redeploy");
-        const fs = require('fs');
-        const path = require('path');
         const uploadDir = path.join(process.cwd(), 'public', 'uploads');
         
         if (!fs.existsSync(uploadDir)) {
@@ -152,8 +152,6 @@ export function registerCloudinaryUploadRoutes(app: Express) {
           imageUrl = await uploadToCloudinary(file.buffer, file.originalname);
         } else {
           // Fallback local
-          const fs = require('fs');
-          const path = require('path');
           const uploadDir = path.join(process.cwd(), 'public', 'uploads');
           
           if (!fs.existsSync(uploadDir)) {
