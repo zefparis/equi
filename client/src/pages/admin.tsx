@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useLanguage } from "../hooks/use-language";
 import { useAdminAuth } from "../contexts/AdminAuthContext";
 import AdminLogin from "../components/admin/AdminLogin";
 import "../styles/admin-responsive.css";
@@ -49,7 +48,6 @@ type ProductFormData = z.infer<typeof insertProductSchema>;
 type GalleryFormData = z.infer<typeof insertGalleryImageSchema>;
 
 export default function Admin() {
-  const { t } = useLanguage();
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const { isAuthenticated, logout } = useAdminAuth();
@@ -213,8 +211,8 @@ export default function Admin() {
       setSelectedImageFile(null);
     } catch (error) {
       toast({
-        title: t("admin.errorTitle"),
-        description: t("admin.uploadError"),
+        title: "Erreur",
+        description: "Erreur lors de l'upload de l'image",
         variant: "destructive",
       });
     } finally {
@@ -240,8 +238,8 @@ export default function Admin() {
       setSelectedImageFile(null);
     } catch (error) {
       toast({
-        title: t("admin.errorTitle"),
-        description: t("admin.uploadError"),
+        title: "Erreur",
+        description: "Erreur lors de l'upload de l'image",
         variant: "destructive",
       });
     } finally {
@@ -324,7 +322,7 @@ export default function Admin() {
           <div>
             <h1 className="admin-header-title text-gray-900 dark:text-gray-100">
               <Settings className="admin-header-icon" />
-              <span>{t("admin.title")}</span>
+              <span>Administration</span>
             </h1>
             <p className="text-gray-600 dark:text-gray-400 mt-2 text-sm sm:text-base">
               Interface d'administration pour publier et gérer vos annonces de selles et accessoires équestres.
