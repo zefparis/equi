@@ -4,33 +4,40 @@ import { Readable } from "stream";
 import fs from "fs";
 import path from "path";
 
-// Import conditionnel de Cloudinary
+// Import Cloudinary
 let cloudinary: any = null;
-try {
-  const cloudinaryModule = require("cloudinary");
-  cloudinary = cloudinaryModule.v2;
-  
-  // Configuration Cloudinary
-  if (process.env.CLOUDINARY_URL) {
-    // Format: cloudinary://API_KEY:API_SECRET@CLOUD_NAME
-    cloudinary.config({
-      cloudinary_url: process.env.CLOUDINARY_URL
-    });
-    console.log("✅ Cloudinary configured");
-  } else if (process.env.CLOUDINARY_CLOUD_NAME && process.env.CLOUDINARY_API_KEY && process.env.CLOUDINARY_API_SECRET) {
-    cloudinary.config({
-      cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-      api_key: process.env.CLOUDINARY_API_KEY,
-      api_secret: process.env.CLOUDINARY_API_SECRET,
-    });
-    console.log("✅ Cloudinary configured with separate credentials");
-  } else {
-    console.warn("⚠️  Cloudinary not configured - images will be stored locally (will be lost on redeploy)");
+
+// Fonction async pour charger Cloudinary
+async function initCloudinary() {
+  try {
+    const { v2 } = await import("cloudinary");
+    cloudinary = v2;
+    
+    // Configuration Cloudinary
+    if (process.env.CLOUDINARY_URL) {
+      // Format: cloudinary://API_KEY:API_SECRET@CLOUD_NAME
+      cloudinary.config({
+        cloudinary_url: process.env.CLOUDINARY_URL
+      });
+      console.log("✅ Cloudinary configured");
+    } else if (process.env.CLOUDINARY_CLOUD_NAME && process.env.CLOUDINARY_API_KEY && process.env.CLOUDINARY_API_SECRET) {
+      cloudinary.config({
+        cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+        api_key: process.env.CLOUDINARY_API_KEY,
+        api_secret: process.env.CLOUDINARY_API_SECRET,
+      });
+      console.log("✅ Cloudinary configured with separate credentials");
+    } else {
+      console.warn("⚠️  Cloudinary not configured - images will be stored locally (will be lost on redeploy)");
+    }
+  } catch (error) {
+    console.warn("⚠️  Cloudinary package not installed - using local storage (images will be lost on redeploy)");
+    cloudinary = null;
   }
-} catch (error) {
-  console.warn("⚠️  Cloudinary package not installed - using local storage (images will be lost on redeploy)");
-  cloudinary = null;
 }
+
+// Initialiser au chargement du module
+initCloudinary();
 
 // Configuration multer pour stocker en mémoire avant upload vers Cloudinary
 const storage = multer.memoryStorage();
