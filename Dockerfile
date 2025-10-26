@@ -17,8 +17,10 @@ COPY . .
 # Build the application
 RUN npm run build
 
-# Clean up dev dependencies after build
-RUN npm prune --production
+# Don't prune drizzle-kit since we need it for runtime migrations
+# Only remove the largest dev dependencies that we don't need
+# Keep drizzle-kit, tsx for migrations and seed
+# RUN npm prune --production
 
 # Set environment variables
 ENV NODE_ENV=production
@@ -26,5 +28,5 @@ ENV NODE_ENV=production
 # Expose port (Railway will set PORT env var)
 EXPOSE $PORT
 
-# Start command
-CMD ["npm", "start"]
+# Start command - migrations will run at startup
+CMD ["npm", "run", "start:railway"]
