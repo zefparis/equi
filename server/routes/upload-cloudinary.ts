@@ -3,41 +3,25 @@ import multer from "multer";
 import { Readable } from "stream";
 import fs from "fs";
 import path from "path";
+import { v2 as cloudinary } from "cloudinary";
 
-// Import Cloudinary
-let cloudinary: any = null;
-
-// Fonction async pour charger Cloudinary
-async function initCloudinary() {
-  try {
-    const { v2 } = await import("cloudinary");
-    cloudinary = v2;
-    
-    // Configuration Cloudinary
-    if (process.env.CLOUDINARY_URL) {
-      // Format: cloudinary://API_KEY:API_SECRET@CLOUD_NAME
-      cloudinary.config({
-        cloudinary_url: process.env.CLOUDINARY_URL
-      });
-      console.log("✅ Cloudinary configured");
-    } else if (process.env.CLOUDINARY_CLOUD_NAME && process.env.CLOUDINARY_API_KEY && process.env.CLOUDINARY_API_SECRET) {
-      cloudinary.config({
-        cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-        api_key: process.env.CLOUDINARY_API_KEY,
-        api_secret: process.env.CLOUDINARY_API_SECRET,
-      });
-      console.log("✅ Cloudinary configured with separate credentials");
-    } else {
-      console.warn("⚠️  Cloudinary not configured - images will be stored locally (will be lost on redeploy)");
-    }
-  } catch (error) {
-    console.warn("⚠️  Cloudinary package not installed - using local storage (images will be lost on redeploy)");
-    cloudinary = null;
-  }
+// Configuration Cloudinary
+if (process.env.CLOUDINARY_URL) {
+  // Format: cloudinary://API_KEY:API_SECRET@CLOUD_NAME
+  cloudinary.config({
+    cloudinary_url: process.env.CLOUDINARY_URL
+  });
+  console.log("✅ Cloudinary configured with URL");
+} else if (process.env.CLOUDINARY_CLOUD_NAME && process.env.CLOUDINARY_API_KEY && process.env.CLOUDINARY_API_SECRET) {
+  cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+  });
+  console.log("✅ Cloudinary configured with credentials");
+} else {
+  console.warn("⚠️  Cloudinary not configured - set CLOUDINARY_URL environment variable");
 }
-
-// Initialiser au chargement du module
-initCloudinary();
 
 // Configuration multer pour stocker en mémoire avant upload vers Cloudinary
 const storage = multer.memoryStorage();
@@ -67,10 +51,6 @@ const upload = multer({
  * Upload un buffer vers Cloudinary
  */
 async function uploadToCloudinary(buffer: Buffer, originalName: string): Promise<string> {
-  if (!cloudinary) {
-    throw new Error('Cloudinary not available');
-  }
-  
   return new Promise((resolve, reject) => {
     const uploadStream = cloudinary.uploader.upload_stream(
       {
@@ -98,7 +78,11 @@ async function uploadToCloudinary(buffer: Buffer, originalName: string): Promise
 }
 
 export function registerCloudinaryUploadRoutes(app: Express) {
-  const isCloudinaryAvailable = cloudinary !== null;
+  // Vérifier si Cloudinary est configuré via les variables d'environnement
+  const isCloudinaryConfigured = !!(
+    process.env.CLOUDINARY_URL || 
+    (process.env.CLOUDINARY_CLOUD_NAME && process.env.CLOUDINARY_API_KEY && process.env.CLOUDINARY_API_SECRET)
+  );
 
   // Route pour upload d'image unique
   app.post('/api/upload/image', upload.single('image'), async (req, res) => {
@@ -109,7 +93,7 @@ export function registerCloudinaryUploadRoutes(app: Express) {
 
       let imageUrl: string;
 
-      if (isCloudinaryAvailable) {
+      if (isCloudinaryConfigured) {
         // Upload vers Cloudinary
         imageUrl = await uploadToCloudinary(req.file.buffer, req.file.originalname);
         console.log(`✅ Image uploaded to Cloudinary: ${imageUrl}`);
@@ -155,7 +139,7 @@ export function registerCloudinaryUploadRoutes(app: Express) {
       for (const file of files) {
         let imageUrl: string;
 
-        if (isCloudinaryAvailable) {
+        if (isCloudinaryConfigured) {
           imageUrl = await uploadToCloudinary(file.buffer, file.originalname);
         } else {
           // Fallback local
@@ -193,7 +177,7 @@ export function registerCloudinaryUploadRoutes(app: Express) {
   // Route pour supprimer une image (uniquement Cloudinary)
   app.delete('/api/upload/:publicId', async (req, res) => {
     try {
-      if (!isCloudinaryAvailable) {
+      if (!isCloudinaryConfigured) {
         return res.status(501).json({ error: 'Cloudinary not configured' });
       }
 
