@@ -9,10 +9,31 @@ import type { IStorage } from "./storage";
  */
 export class PostgresStorage implements IStorage {
   
+  constructor() {
+    // Test de connexion au démarrage
+    this.testConnection();
+  }
+
+  private async testConnection() {
+    try {
+      console.log("🔍 Testing database connection...");
+      const result = await db.select().from(products).limit(1);
+      console.log("✅ Database connection test successful");
+    } catch (error: any) {
+      console.error("❌ Database connection test failed:", error.message);
+      console.error("Full error:", error);
+    }
+  }
+  
   // ==================== PRODUCTS ====================
   
   async getProducts(): Promise<Product[]> {
-    return await db.select().from(products);
+    try {
+      return await db.select().from(products);
+    } catch (error: any) {
+      console.error("❌ Error in getProducts:", error.message);
+      throw error;
+    }
   }
 
   async getProduct(id: number): Promise<Product | undefined> {

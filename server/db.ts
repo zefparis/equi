@@ -8,7 +8,12 @@ if (!process.env.DATABASE_URL) {
   );
 }
 
+// Initialize Neon connection with HTTP
 const sql = neon(process.env.DATABASE_URL);
+
+// Create Drizzle instance
 export const db = drizzle(sql, { schema });
 
+// Test connection
 console.log("✅ PostgreSQL connection established via Neon");
+console.log("📊 Database URL configured:", process.env.DATABASE_URL.substring(0, 30) + "...");
