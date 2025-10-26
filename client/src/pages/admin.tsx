@@ -260,6 +260,7 @@ export default function Admin() {
       image: product.image,
       images: product.images || [],
       inStock: product.inStock !== false,
+      featured: product.featured === true,
       location: product.location || "",
       sellerContact: product.sellerContact || "",
       color: product.color || "",
@@ -282,6 +283,7 @@ export default function Admin() {
         image: "",
         images: [],
         inStock: true,
+        featured: false,
         location: "",
         sellerContact: "",
         color: "",
@@ -299,6 +301,7 @@ export default function Admin() {
         image: "",
         images: [],
         inStock: true,
+        featured: false,
         location: "",
         sellerContact: "",
         color: "",
@@ -838,7 +841,7 @@ export default function Admin() {
                 </p>
               )}
 
-              <div className="flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-6">
+              <div className="flex flex-col space-y-4">
                 <div className="flex items-center space-x-2">
                   <Checkbox
                     id="inStock"
@@ -846,6 +849,17 @@ export default function Admin() {
                     onCheckedChange={(checked) => productForm.setValue("inStock", !!checked)}
                   />
                   <Label htmlFor="inStock">Annonce active (disponible à la vente)</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="featured"
+                    checked={productForm.watch("featured") === true}
+                    onCheckedChange={(checked) => productForm.setValue("featured", !!checked)}
+                  />
+                  <Label htmlFor="featured" className="flex items-center gap-2">
+                    <Star className="h-4 w-4 text-yellow-500" />
+                    Afficher en "Produits en Vedette" sur la page d'accueil
+                  </Label>
                 </div>
               </div>
 
