@@ -21,7 +21,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, Di
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Settings, Package, Images, ShoppingCart, Plus, Edit, Trash2, MessageCircle } from "lucide-react";
+import { Settings, Package, Images, ShoppingCart, Plus, Edit, Trash2, MessageCircle, Star } from "lucide-react";
 import ProductImageManager from "../components/admin/product-image-manager";
 import ImageUpload from "../components/admin/image-upload";
 import ChatAdmin from "../components/admin/chat-admin";
