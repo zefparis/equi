@@ -1,4 +1,4 @@
-import { products, galleryImages, productImages, orders, shippingRates, type Product, type InsertProduct, type ProductImage, type InsertProductImage, type GalleryImage, type InsertGalleryImage, type Order, type InsertOrder, type ShippingRate, type InsertShippingRate } from "@shared/schema";
+import { products, galleryImages, productImages, orders, type Product, type InsertProduct, type ProductImage, type InsertProductImage, type GalleryImage, type InsertGalleryImage, type Order, type InsertOrder } from "@shared/schema";
 import { db } from "./db";
 import { eq, and } from "drizzle-orm";
 
@@ -29,12 +29,6 @@ export interface IStorage {
   getOrder(id: number): Promise<Order | undefined>;
   createOrder(order: InsertOrder): Promise<Order>;
   updateOrder(id: number, order: Partial<InsertOrder>): Promise<Order | undefined>;
-
-  // Shipping rates
-  getShippingRates(): Promise<ShippingRate[]>;
-  getShippingRatesByZone(zone: string): Promise<ShippingRate[]>;
-  createShippingRate(rate: InsertShippingRate): Promise<ShippingRate>;
-  updateShippingRate(id: number, rate: Partial<InsertShippingRate>): Promise<ShippingRate | undefined>;
 }
 
 export class MemStorage implements IStorage {
@@ -42,24 +36,20 @@ export class MemStorage implements IStorage {
   private productImages: Map<number, ProductImage>;
   private galleryImages: Map<number, GalleryImage>;
   private orders: Map<number, Order>;
-  private shippingRates: Map<number, ShippingRate>;
   private currentProductId: number;
   private currentProductImageId: number;
   private currentGalleryId: number;
   private currentOrderId: number;
-  private currentShippingRateId: number;
 
   constructor() {
     this.products = new Map();
     this.productImages = new Map();
     this.galleryImages = new Map();
     this.orders = new Map();
-    this.shippingRates = new Map();
     this.currentProductId = 1;
     this.currentProductImageId = 1;
     this.currentGalleryId = 1;
     this.currentOrderId = 1;
-    this.currentShippingRateId = 1;
 
     // Initialize with sample data
     this.initializeSampleData();
@@ -336,144 +326,8 @@ export class MemStorage implements IStorage {
     });
     this.currentGalleryId = sampleGalleryImages.length + 1;
 
-    // Initialize shipping rates
-    this.initializeShippingRates();
-    
     // Initialize sample product images
     this.initializeProductImages();
-  }
-
-  private initializeShippingRates() {
-    const shippingRates: ShippingRate[] = [
-      // Domestic rates (France)
-      {
-        id: 1,
-        zone: "domestic",
-        service: "DPD_CLASSIC",
-        minWeight: "0",
-        maxWeight: "30",
-        baseRate: "8.50",
-        perKgRate: "2.50",
-        deliveryTime: "2-3 jours",
-        description: "Livraison standard à domicile",
-        active: true
-      },
-      {
-        id: 2,
-        zone: "domestic",
-        service: "DPD_RELAIS",
-        minWeight: "0",
-        maxWeight: "30",
-        baseRate: "5.90",
-        perKgRate: "2.50",
-        deliveryTime: "2-3 jours",
-        description: "Livraison en point relais",
-        active: true
-      },
-      {
-        id: 3,
-        zone: "domestic",
-        service: "DPD_PREDICT",
-        minWeight: "0",
-        maxWeight: "30",
-        baseRate: "10.90",
-        perKgRate: "2.50",
-        deliveryTime: "1-2 jours",
-        description: "Livraison avec créneau horaire",
-        active: true
-      },
-      {
-        id: 4,
-        zone: "domestic",
-        service: "DPD_EXPRESS",
-        minWeight: "0",
-        maxWeight: "30",
-        baseRate: "18.90",
-        perKgRate: "2.50",
-        deliveryTime: "1 jour",
-        description: "Livraison express avant 12h",
-        active: true
-      },
-      // European rates
-      {
-        id: 5,
-        zone: "europe",
-        service: "DPD_CLASSIC",
-        minWeight: "0",
-        maxWeight: "30",
-        baseRate: "15.90",
-        perKgRate: "2.50",
-        deliveryTime: "3-5 jours",
-        description: "Livraison standard à domicile",
-        active: true
-      },
-      {
-        id: 6,
-        zone: "europe",
-        service: "DPD_RELAIS",
-        minWeight: "0",
-        maxWeight: "30",
-        baseRate: "12.90",
-        perKgRate: "2.50",
-        deliveryTime: "3-5 jours",
-        description: "Livraison en point relais",
-        active: true
-      },
-      {
-        id: 7,
-        zone: "europe",
-        service: "DPD_PREDICT",
-        minWeight: "0",
-        maxWeight: "30",
-        baseRate: "18.90",
-        perKgRate: "2.50",
-        deliveryTime: "2-4 jours",
-        description: "Livraison avec créneau horaire",
-        active: true
-      },
-      {
-        id: 8,
-        zone: "europe",
-        service: "DPD_EXPRESS",
-        minWeight: "0",
-        maxWeight: "30",
-        baseRate: "28.90",
-        perKgRate: "2.50",
-        deliveryTime: "1-2 jours",
-        description: "Livraison express avant 12h",
-        active: true
-      },
-      // International rates
-      {
-        id: 9,
-        zone: "international",
-        service: "DPD_CLASSIC",
-        minWeight: "0",
-        maxWeight: "30",
-        baseRate: "35.00",
-        perKgRate: "2.50",
-        deliveryTime: "5-10 jours",
-        description: "Livraison standard à domicile",
-        active: true
-      },
-      {
-        id: 10,
-        zone: "international",
-        service: "DPD_EXPRESS",
-        minWeight: "0",
-        maxWeight: "30",
-        baseRate: "55.00",
-        perKgRate: "2.50",
-        deliveryTime: "2-5 jours",
-        description: "Livraison express avant 12h",
-        active: true
-      }
-    ];
-
-    shippingRates.forEach(rate => {
-      this.shippingRates.set(rate.id, rate);
-    });
-    this.currentShippingRateId = shippingRates.length + 1;
   }
 
   private initializeProductImages() {
@@ -692,13 +546,7 @@ export class MemStorage implements IStorage {
       status: insertOrder.status ?? "pending",
       customerPhone: insertOrder.customerPhone ?? null,
       stripeSessionId: insertOrder.stripeSessionId ?? null,
-      shippingCost: insertOrder.shippingCost ?? null,
-      shippingService: insertOrder.shippingService ?? "standard",
-      shippingZone: insertOrder.shippingZone ?? "Belgium",
-      dpdReference: insertOrder.dpdReference ?? null,
-      estimatedDelivery: insertOrder.estimatedDelivery ?? null,
-      trackingNumber: insertOrder.trackingNumber ?? null,
-      shippingLabelUrl: insertOrder.shippingLabelUrl ?? null,
+      shippingCost: insertOrder.shippingCost ?? "0",
     };
     this.orders.set(id, order);
     return order;
@@ -713,45 +561,6 @@ export class MemStorage implements IStorage {
       ...updateOrder,
     };
     this.orders.set(id, updated);
-    return updated;
-  }
-
-  // Shipping rates
-  async getShippingRates(): Promise<ShippingRate[]> {
-    return Array.from(this.shippingRates.values());
-  }
-
-  async getShippingRatesByZone(zone: string): Promise<ShippingRate[]> {
-    return Array.from(this.shippingRates.values()).filter(rate => rate.zone === zone && rate.active);
-  }
-
-  async createShippingRate(insertRate: InsertShippingRate): Promise<ShippingRate> {
-    const id = this.currentShippingRateId++;
-    const rate: ShippingRate = {
-      id,
-      zone: insertRate.zone,
-      service: insertRate.service,
-      baseRate: insertRate.baseRate,
-      deliveryTime: insertRate.deliveryTime,
-      description: insertRate.description ?? null,
-      minWeight: insertRate.minWeight ?? "0",
-      maxWeight: insertRate.maxWeight ?? "30",
-      perKgRate: insertRate.perKgRate ?? "0",
-      active: insertRate.active ?? true,
-    };
-    this.shippingRates.set(id, rate);
-    return rate;
-  }
-
-  async updateShippingRate(id: number, updateRate: Partial<InsertShippingRate>): Promise<ShippingRate | undefined> {
-    const existing = this.shippingRates.get(id);
-    if (!existing) return undefined;
-
-    const updated: ShippingRate = {
-      ...existing,
-      ...updateRate,
-    };
-    this.shippingRates.set(id, updated);
     return updated;
   }
 }

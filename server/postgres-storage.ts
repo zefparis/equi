@@ -1,5 +1,5 @@
-import { products, galleryImages, productImages, orders, shippingRates, type Product, type InsertProduct, type ProductImage, type InsertProductImage, type GalleryImage, type InsertGalleryImage, type Order, type InsertOrder, type ShippingRate, type InsertShippingRate } from "@shared/schema";
 import { db } from "./db";
+import { products, galleryImages, productImages, orders, type Product, type InsertProduct, type ProductImage, type InsertProductImage, type GalleryImage, type InsertGalleryImage, type Order, type InsertOrder } from "@shared/schema";
 import { eq, and } from "drizzle-orm";
 import type { IStorage } from "./storage";
 
@@ -149,36 +149,6 @@ export class PostgresStorage implements IStorage {
       .update(orders)
       .set(updateOrder)
       .where(eq(orders.id, id))
-      .returning();
-    return result[0];
-  }
-
-  // ==================== SHIPPING RATES ====================
-
-  async getShippingRates(): Promise<ShippingRate[]> {
-    return await db.select().from(shippingRates);
-  }
-
-  async getShippingRatesByZone(zone: string): Promise<ShippingRate[]> {
-    return await db
-      .select()
-      .from(shippingRates)
-      .where(and(
-        eq(shippingRates.zone, zone),
-        eq(shippingRates.active, true)
-      ));
-  }
-
-  async createShippingRate(insertRate: InsertShippingRate): Promise<ShippingRate> {
-    const result = await db.insert(shippingRates).values(insertRate).returning();
-    return result[0];
-  }
-
-  async updateShippingRate(id: number, updateRate: Partial<InsertShippingRate>): Promise<ShippingRate | undefined> {
-    const result = await db
-      .update(shippingRates)
-      .set(updateRate)
-      .where(eq(shippingRates.id, id))
       .returning();
     return result[0];
   }
