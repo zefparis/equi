@@ -1,5 +1,6 @@
-import { drizzle } from "drizzle-orm/neon-http";
-import { neon } from "@neondatabase/serverless";
+import { drizzle } from "drizzle-orm/neon-serverless";
+import { Pool } from "@neondatabase/serverless";
+import { WebSocket } from "ws";
 import * as schema from "@shared/schema";
 
 if (!process.env.DATABASE_URL) {
@@ -8,12 +9,19 @@ if (!process.env.DATABASE_URL) {
   );
 }
 
-// Initialize Neon connection with HTTP
-const sql = neon(process.env.DATABASE_URL);
+// Configure WebSocket for Neon serverless (fixes Railway compatibility)
+// @ts-ignore - WebSocket polyfill for Node.js environments
+if (!globalThis.WebSocket) {
+  // @ts-ignore
+  globalThis.WebSocket = WebSocket;
+}
+
+// Initialize Neon connection pool with WebSocket
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
 // Create Drizzle instance
-export const db = drizzle(sql, { schema });
+export const db = drizzle(pool, { schema });
 
 // Test connection
-console.log("✅ PostgreSQL connection established via Neon");
+console.log("✅ PostgreSQL connection established via Neon (WebSocket)");
 console.log("📊 Database URL configured:", process.env.DATABASE_URL.substring(0, 30) + "...");
