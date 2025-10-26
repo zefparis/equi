@@ -17,7 +17,11 @@ if (!globalThis.WebSocket) {
 }
 
 // Initialize Neon connection pool with WebSocket
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+// Configure SSL for Railway compatibility
+const pool = new Pool({ 
+  connectionString: process.env.DATABASE_URL,
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : undefined
+});
 
 // Create Drizzle instance
 export const db = drizzle(pool, { schema });
