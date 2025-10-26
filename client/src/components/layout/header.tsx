@@ -50,7 +50,7 @@ export default function Header() {
   const navigation = [
     { name: t("nav.home"), href: "/" },
     { name: t("nav.catalog"), href: "/catalog" },
-    { name: "Accessoires", href: "/accessories" },
+    { name: t("nav.accessories"), href: "/accessories" },
     { name: t("nav.gallery"), href: "/gallery" },
     { name: t("nav.contact"), href: "/contact" },
   ];

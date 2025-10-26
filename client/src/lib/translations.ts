@@ -649,7 +649,58 @@ export const translations: Record<string, Record<string, string>> = {
     "admin.dpd.trackingInfo": "Suivi du colis",
     "admin.dpd.trackingStatus": "Statut du colis",
     "admin.dpd.labelError": "Impossible de générer l'étiquette DPD",
-    "admin.dpd.trackingError": "Impossible de suivre le colis"
+    "admin.dpd.trackingError": "Impossible de suivre le colis",
+    
+    // Navigation & Header
+    "nav.accessories": "Accessoires",
+    
+    // Product Card & Product Page
+    "product.sold": "Vendu",
+    "product.available": "Disponible",
+    "product.color": "Couleur:",
+    "product.type": "Type:",
+    "product.condition": "État:",
+    "product.location": "Localisation:",
+    "product.sellerContact": "Contact vendeur:",
+    "product.reviews": "avis",
+    "product.backToCatalog": "Retour au catalogue",
+    "product.productNotFound": "Produit non trouvé",
+    "product.listingDetails": "Détails de l'annonce",
+    "product.status": "Statut:",
+    "product.characteristics": "Caractéristiques",
+    "product.category": "Catégorie:",
+    "product.material": "Matériau:",
+    "product.premiumItalianLeather": "Cuir italien premium",
+    "product.naturalBrown": "Brun naturel",
+    "product.maintenance": "Entretien",
+    "product.maintenanceTip1": "Nettoyage régulier avec un savon glycériné",
+    "product.maintenanceTip2": "Graissage mensuel avec un baume spécialisé",
+    "product.maintenanceTip3": "Stockage dans un endroit sec et aéré",
+    "product.maintenanceTip4": "Éviter l'exposition directe au soleil",
+    
+    // Cart Page
+    "cart.yourItems": "Vos articles",
+    "cart.clearCart": "Vider le panier",
+    "cart.summary": "Récapitulatif",
+    "cart.subtotal": "Sous-total",
+    "cart.delivery": "Livraison",
+    "cart.free": "Gratuite",
+    "cart.addForFreeShipping": "Ajoutez {amount} € pour la livraison gratuite",
+    
+    // Checkout Page
+    "checkout.orderCreatedTitle": "Commande créée - Paiement en cours",
+    "checkout.orderCreatedMessage": "Votre commande a été créée avec succès. Le paiement Stripe s'est ouvert dans un nouvel onglet. Si l'onglet ne s'est pas ouvert automatiquement, cliquez sur le bouton ci-dessous.",
+    "checkout.openPayment": "Ouvrir le paiement Stripe",
+    "checkout.securePayment": "Paiement sécurisé avec Stripe",
+    "checkout.emailConfirmationText": "Confirmation par email après paiement",
+    "checkout.validationFirstName": "Le prénom doit contenir au moins 2 caractères",
+    "checkout.validationLastName": "Le nom doit contenir au moins 2 caractères",
+    "checkout.validationEmail": "Adresse email invalide",
+    "checkout.validationPhone": "Numéro de téléphone invalide",
+    "checkout.validationAddress": "Adresse complète requise",
+    "checkout.validationCity": "Ville requise",
+    "checkout.validationPostalCode": "Code postal requis",
+    "checkout.validationCountry": "Pays requis"
   },
   en: {
     "nav.home": "Home",
@@ -1174,7 +1225,58 @@ export const translations: Record<string, Record<string, string>> = {
     "admin.dpd.trackingInfo": "Package tracking",
     "admin.dpd.trackingStatus": "Package status",
     "admin.dpd.labelError": "Unable to generate DPD label",
-    "admin.dpd.trackingError": "Unable to track package"
+    "admin.dpd.trackingError": "Unable to track package",
+    
+    // Navigation & Header
+    "nav.accessories": "Accessories",
+    
+    // Product Card & Product Page
+    "product.sold": "Sold",
+    "product.available": "Available",
+    "product.color": "Color:",
+    "product.type": "Type:",
+    "product.condition": "Condition:",
+    "product.location": "Location:",
+    "product.sellerContact": "Seller contact:",
+    "product.reviews": "reviews",
+    "product.backToCatalog": "Back to catalog",
+    "product.productNotFound": "Product not found",
+    "product.listingDetails": "Listing details",
+    "product.status": "Status:",
+    "product.characteristics": "Characteristics",
+    "product.category": "Category:",
+    "product.material": "Material:",
+    "product.premiumItalianLeather": "Premium Italian leather",
+    "product.naturalBrown": "Natural brown",
+    "product.maintenance": "Maintenance",
+    "product.maintenanceTip1": "Regular cleaning with glycerin soap",
+    "product.maintenanceTip2": "Monthly oiling with specialized balm",
+    "product.maintenanceTip3": "Storage in a dry and ventilated place",
+    "product.maintenanceTip4": "Avoid direct sunlight exposure",
+    
+    // Cart Page
+    "cart.yourItems": "Your items",
+    "cart.clearCart": "Clear cart",
+    "cart.summary": "Summary",
+    "cart.subtotal": "Subtotal",
+    "cart.delivery": "Delivery",
+    "cart.free": "Free",
+    "cart.addForFreeShipping": "Add {amount} € for free delivery",
+    
+    // Checkout Page
+    "checkout.orderCreatedTitle": "Order created - Payment in progress",
+    "checkout.orderCreatedMessage": "Your order has been successfully created. Stripe payment has opened in a new tab. If the tab didn't open automatically, click the button below.",
+    "checkout.openPayment": "Open Stripe payment",
+    "checkout.securePayment": "Secure payment with Stripe",
+    "checkout.emailConfirmationText": "Email confirmation after payment",
+    "checkout.validationFirstName": "First name must be at least 2 characters",
+    "checkout.validationLastName": "Last name must be at least 2 characters",
+    "checkout.validationEmail": "Invalid email address",
+    "checkout.validationPhone": "Invalid phone number",
+    "checkout.validationAddress": "Complete address required",
+    "checkout.validationCity": "City required",
+    "checkout.validationPostalCode": "Postal code required",
+    "checkout.validationCountry": "Country required"
   },
   nl: {
     "nav.home": "Home",
@@ -1679,7 +1781,58 @@ export const translations: Record<string, Record<string, string>> = {
     "admin.dpd.trackingInfo": "Pakket volgen",
     "admin.dpd.trackingStatus": "Pakket status",
     "admin.dpd.labelError": "Kan DPD label niet genereren",
-    "admin.dpd.trackingError": "Kan pakket niet volgen"
+    "admin.dpd.trackingError": "Kan pakket niet volgen",
+    
+    // Navigation & Header
+    "nav.accessories": "Accessoires",
+    
+    // Product Card & Product Page
+    "product.sold": "Verkocht",
+    "product.available": "Beschikbaar",
+    "product.color": "Kleur:",
+    "product.type": "Type:",
+    "product.condition": "Staat:",
+    "product.location": "Locatie:",
+    "product.sellerContact": "Verkoper contact:",
+    "product.reviews": "beoordelingen",
+    "product.backToCatalog": "Terug naar catalogus",
+    "product.productNotFound": "Product niet gevonden",
+    "product.listingDetails": "Advertentiedetails",
+    "product.status": "Status:",
+    "product.characteristics": "Kenmerken",
+    "product.category": "Categorie:",
+    "product.material": "Materiaal:",
+    "product.premiumItalianLeather": "Premium Italiaans leer",
+    "product.naturalBrown": "Natuurlijk bruin",
+    "product.maintenance": "Onderhoud",
+    "product.maintenanceTip1": "Regelmatige reiniging met glycerinezeep",
+    "product.maintenanceTip2": "Maandelijks invetten met gespecialiseerde balsem",
+    "product.maintenanceTip3": "Opslag op een droge en geventileerde plaats",
+    "product.maintenanceTip4": "Vermijd directe blootstelling aan zonlicht",
+    
+    // Cart Page
+    "cart.yourItems": "Uw artikelen",
+    "cart.clearCart": "Winkelwagen legen",
+    "cart.summary": "Samenvatting",
+    "cart.subtotal": "Subtotaal",
+    "cart.delivery": "Levering",
+    "cart.free": "Gratis",
+    "cart.addForFreeShipping": "Voeg {amount} € toe voor gratis levering",
+    
+    // Checkout Page
+    "checkout.orderCreatedTitle": "Bestelling aangemaakt - Betaling in uitvoering",
+    "checkout.orderCreatedMessage": "Uw bestelling is succesvol aangemaakt. Stripe betaling is geopend in een nieuw tabblad. Als het tabblad niet automatisch is geopend, klik dan op de knop hieronder.",
+    "checkout.openPayment": "Open Stripe betaling",
+    "checkout.securePayment": "Veilige betaling met Stripe",
+    "checkout.emailConfirmationText": "E-mailbevestiging na betaling",
+    "checkout.validationFirstName": "Voornaam moet minimaal 2 tekens bevatten",
+    "checkout.validationLastName": "Achternaam moet minimaal 2 tekens bevatten",
+    "checkout.validationEmail": "Ongeldig e-mailadres",
+    "checkout.validationPhone": "Ongeldig telefoonnummer",
+    "checkout.validationAddress": "Volledig adres vereist",
+    "checkout.validationCity": "Stad vereist",
+    "checkout.validationPostalCode": "Postcode vereist",
+    "checkout.validationCountry": "Land vereist"
   },
   es: {
     "nav.home": "Inicio",
@@ -2184,7 +2337,58 @@ export const translations: Record<string, Record<string, string>> = {
     "admin.dpd.trackingInfo": "Seguimiento del paquete",
     "admin.dpd.trackingStatus": "Estado del paquete",
     "admin.dpd.labelError": "No se pudo generar la etiqueta DPD",
-    "admin.dpd.trackingError": "No se pudo rastrear el paquete"
+    "admin.dpd.trackingError": "No se pudo rastrear el paquete",
+    
+    // Navigation & Header
+    "nav.accessories": "Accesorios",
+    
+    // Product Card & Product Page
+    "product.sold": "Vendido",
+    "product.available": "Disponible",
+    "product.color": "Color:",
+    "product.type": "Tipo:",
+    "product.condition": "Estado:",
+    "product.location": "Ubicación:",
+    "product.sellerContact": "Contacto del vendedor:",
+    "product.reviews": "reseñas",
+    "product.backToCatalog": "Volver al catálogo",
+    "product.productNotFound": "Producto no encontrado",
+    "product.listingDetails": "Detalles del anuncio",
+    "product.status": "Estado:",
+    "product.characteristics": "Características",
+    "product.category": "Categoría:",
+    "product.material": "Material:",
+    "product.premiumItalianLeather": "Cuero italiano premium",
+    "product.naturalBrown": "Marrón natural",
+    "product.maintenance": "Mantenimiento",
+    "product.maintenanceTip1": "Limpieza regular con jabón de glicerina",
+    "product.maintenanceTip2": "Engrase mensual con bálsamo especializado",
+    "product.maintenanceTip3": "Almacenamiento en un lugar seco y ventilado",
+    "product.maintenanceTip4": "Evitar la exposición directa al sol",
+    
+    // Cart Page
+    "cart.yourItems": "Tus artículos",
+    "cart.clearCart": "Vaciar carrito",
+    "cart.summary": "Resumen",
+    "cart.subtotal": "Subtotal",
+    "cart.delivery": "Envío",
+    "cart.free": "Gratis",
+    "cart.addForFreeShipping": "Añade {amount} € para envío gratis",
+    
+    // Checkout Page
+    "checkout.orderCreatedTitle": "Pedido creado - Pago en curso",
+    "checkout.orderCreatedMessage": "Su pedido se ha creado correctamente. El pago de Stripe se ha abierto en una nueva pestaña. Si la pestaña no se abrió automáticamente, haga clic en el botón a continuación.",
+    "checkout.openPayment": "Abrir pago Stripe",
+    "checkout.securePayment": "Pago seguro con Stripe",
+    "checkout.emailConfirmationText": "Confirmación por correo después del pago",
+    "checkout.validationFirstName": "El nombre debe contener al menos 2 caracteres",
+    "checkout.validationLastName": "El apellido debe contener al menos 2 caracteres",
+    "checkout.validationEmail": "Dirección de correo no válida",
+    "checkout.validationPhone": "Número de teléfono no válido",
+    "checkout.validationAddress": "Dirección completa requerida",
+    "checkout.validationCity": "Ciudad requerida",
+    "checkout.validationPostalCode": "Código postal requerido",
+    "checkout.validationCountry": "País requerido"
   },
   de: {
     "nav.home": "Startseite",
@@ -2420,6 +2624,57 @@ export const translations: Record<string, Record<string, string>> = {
     "admin.dpd.trackingStatus": "Paketstatus",
     "admin.dpd.labelError": "DPD-Etikett konnte nicht generiert werden",
     "admin.dpd.trackingError": "Paket konnte nicht verfolgt werden",
+    
+    // Navigation & Header
+    "nav.accessories": "Zubehör",
+    
+    // Product Card & Product Page
+    "product.sold": "Verkauft",
+    "product.available": "Verfügbar",
+    "product.color": "Farbe:",
+    "product.type": "Typ:",
+    "product.condition": "Zustand:",
+    "product.location": "Standort:",
+    "product.sellerContact": "Verkäuferkontakt:",
+    "product.reviews": "Bewertungen",
+    "product.backToCatalog": "Zurück zum Katalog",
+    "product.productNotFound": "Produkt nicht gefunden",
+    "product.listingDetails": "Anzeigendetails",
+    "product.status": "Status:",
+    "product.characteristics": "Eigenschaften",
+    "product.category": "Kategorie:",
+    "product.material": "Material:",
+    "product.premiumItalianLeather": "Premium italienisches Leder",
+    "product.naturalBrown": "Naturbraun",
+    "product.maintenance": "Wartung",
+    "product.maintenanceTip1": "Regelmäßige Reinigung mit Glycerinseife",
+    "product.maintenanceTip2": "Monatliches Einfetten mit Spezialbalsam",
+    "product.maintenanceTip3": "Lagerung an einem trockenen und belüfteten Ort",
+    "product.maintenanceTip4": "Direkte Sonneneinstrahlung vermeiden",
+    
+    // Cart Page
+    "cart.yourItems": "Ihre Artikel",
+    "cart.clearCart": "Warenkorb leeren",
+    "cart.summary": "Zusammenfassung",
+    "cart.subtotal": "Zwischensumme",
+    "cart.delivery": "Lieferung",
+    "cart.free": "Kostenlos",
+    "cart.addForFreeShipping": "Fügen Sie {amount} € für kostenlosen Versand hinzu",
+    
+    // Checkout Page
+    "checkout.orderCreatedTitle": "Bestellung erstellt - Zahlung läuft",
+    "checkout.orderCreatedMessage": "Ihre Bestellung wurde erfolgreich erstellt. Die Stripe-Zahlung wurde in einem neuen Tab geöffnet. Wenn der Tab nicht automatisch geöffnet wurde, klicken Sie auf die Schaltfläche unten.",
+    "checkout.openPayment": "Stripe-Zahlung öffnen",
+    "checkout.securePayment": "Sichere Zahlung mit Stripe",
+    "checkout.emailConfirmationText": "E-Mail-Bestätigung nach Zahlung",
+    "checkout.validationFirstName": "Der Vorname muss mindestens 2 Zeichen enthalten",
+    "checkout.validationLastName": "Der Nachname muss mindestens 2 Zeichen enthalten",
+    "checkout.validationEmail": "Ungültige E-Mail-Adresse",
+    "checkout.validationPhone": "Ungültige Telefonnummer",
+    "checkout.validationAddress": "Vollständige Adresse erforderlich",
+    "checkout.validationCity": "Stadt erforderlich",
+    "checkout.validationPostalCode": "Postleitzahl erforderlich",
+    "checkout.validationCountry": "Land erforderlich",
     
     // Legal Pages
     "legal.support.title": "Kundensupport - Equi Saddles",

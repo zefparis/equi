@@ -62,13 +62,13 @@ export default function Cart() {
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center justify-between">
-                    <span>Vos articles ({totalItems})</span>
+                    <span>{t("cart.yourItems")} ({totalItems})</span>
                     <Button
                       variant="ghost"
                       onClick={clearCart}
                       className="text-red-500 hover:text-red-700"
                     >
-                      Vider le panier
+                      {t("cart.clearCart")}
                     </Button>
                   </CardTitle>
                 </CardHeader>
@@ -86,22 +86,22 @@ export default function Cart() {
             <div className="lg:col-span-1">
               <Card className="sticky top-8">
                 <CardHeader>
-                  <CardTitle>Récapitulatif</CardTitle>
+                  <CardTitle>{t("cart.summary")}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex justify-between">
-                    <span>Sous-total</span>
+                    <span>{t("cart.subtotal")}</span>
                     <span>{totalAmount.toFixed(2)} €</span>
                   </div>
                   
                   <div className="flex justify-between items-center">
                     <div className="flex items-center gap-2">
                       <Truck className="h-4 w-4" />
-                      <span>Livraison</span>
+                      <span>{t("cart.delivery")}</span>
                     </div>
                     <div className="text-right">
                       {shippingCost === 0 ? (
-                        <span className="text-green-600 font-semibold">Gratuite</span>
+                        <span className="text-green-600 font-semibold">{t("cart.free")}</span>
                       ) : (
                         <span>{shippingCost.toFixed(2)} €</span>
                       )}
@@ -111,7 +111,7 @@ export default function Cart() {
                   {totalAmount < 100 && (
                     <div className="text-sm text-gray-600 bg-blue-50 p-3 rounded-lg">
                       <p>
-                        Ajoutez {(100 - totalAmount).toFixed(2)} € pour la livraison gratuite
+                        {t("cart.addForFreeShipping").replace("{amount}", (100 - totalAmount).toFixed(2))}
                       </p>
                     </div>
                   )}

@@ -22,6 +22,18 @@ import { apiRequest } from "../lib/queryClient";
 
 // Plus besoin de charger Stripe côté client avec cette approche
 
+// Function to get translated validation messages - sera appelé pendant la validation
+const getValidationMessages = () => ({
+  firstName: { min: "Le prénom doit contenir au moins 2 caractères" },
+  lastName: { min: "Le nom doit contenir au moins 2 caractères" },
+  email: { invalid: "Adresse email invalide" },
+  phone: { min: "Numéro de téléphone invalide" },
+  address: { min: "Adresse complète requise" },
+  city: { min: "Ville requise" },
+  postalCode: { min: "Code postal requis" },
+  country: { min: "Pays requis" },
+});
+
 // Schema de validation pour le formulaire d'adresse
 const checkoutSchema = z.object({
   firstName: z.string().min(2, "Le prénom doit contenir au moins 2 caractères"),
@@ -38,18 +50,17 @@ const checkoutSchema = z.object({
 type CheckoutFormData = z.infer<typeof checkoutSchema>;
 
 // Composant pour afficher l'état de la commande
-function OrderSummaryCard({ stripeUrl }: { stripeUrl?: string }) {
+function OrderSummaryCard({ stripeUrl, t }: { stripeUrl?: string; t: (key: string) => string }) {
   return (
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <span>✅</span> Commande créée - Paiement en cours
+          <span>✅</span> {t("checkout.orderCreatedTitle")}
         </CardTitle>
       </CardHeader>
       <CardContent>
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-          Votre commande a été créée avec succès. Le paiement Stripe s'est ouvert dans un nouvel onglet. 
-          Si l'onglet ne s'est pas ouvert automatiquement, cliquez sur le bouton ci-dessous.
+          {t("checkout.orderCreatedMessage")}
         </p>
         
         {stripeUrl && (
@@ -58,7 +69,7 @@ function OrderSummaryCard({ stripeUrl }: { stripeUrl?: string }) {
               onClick={() => window.open(stripeUrl, '_blank', 'noopener,noreferrer')}
               className="w-full"
             >
-              Ouvrir le paiement Stripe
+              {t("checkout.openPayment")}
             </Button>
           </div>
         )}
@@ -66,11 +77,11 @@ function OrderSummaryCard({ stripeUrl }: { stripeUrl?: string }) {
         <div className="space-y-2">
           <div className="flex items-center gap-2 text-sm">
             <span>🔒</span>
-            <span>Paiement sécurisé avec Stripe</span>
+            <span>{t("checkout.securePayment")}</span>
           </div>
           <div className="flex items-center gap-2 text-sm">
             <span>📧</span>
-            <span>Confirmation par email après paiement</span>
+            <span>{t("checkout.emailConfirmationText")}</span>
           </div>
         </div>
       </CardContent>
@@ -407,7 +418,7 @@ export default function Checkout() {
             </Card>
 
             {/* État de la commande */}
-            {orderCreated && <OrderSummaryCard stripeUrl={stripeUrl} />}
+            {orderCreated && <OrderSummaryCard stripeUrl={stripeUrl} t={t} />}
           </div>
         </div>
       </div>

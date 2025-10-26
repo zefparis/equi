@@ -70,9 +70,9 @@ export default function ProductPage() {
     return (
       <div className="min-h-screen bg-transparent flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4">Produit non trouvé</h1>
+          <h1 className="text-2xl font-bold mb-4">{t("product.productNotFound")}</h1>
           <Link href="/catalog">
-            <Button>Retour au catalogue</Button>
+            <Button>{t("product.backToCatalog")}</Button>
           </Link>
         </div>
       </div>
@@ -94,7 +94,7 @@ export default function ProductPage() {
         <div className="mb-8">
           <Link href="/catalog" className="flex items-center text-gray-600 hover:text-primary">
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Retour au catalogue
+            {t("product.backToCatalog")}
           </Link>
         </div>
 
@@ -170,49 +170,49 @@ export default function ProductPage() {
 
             {/* Product Details */}
             <div className="space-y-4 p-6 bg-white rounded-lg shadow-sm">
-              <h3 className="text-lg font-semibold mb-4">Détails de l'annonce</h3>
+              <h3 className="text-lg font-semibold mb-4">{t("product.listingDetails")}</h3>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex items-center space-x-3">
-                  <span className="font-medium text-gray-700">Taille:</span>
+                  <span className="font-medium text-gray-700">{t("product.size")}</span>
                   <Badge variant="outline" className="text-base px-3 py-1">
                     {product.size}
                   </Badge>
                 </div>
                 
                 <div className="flex items-center space-x-3">
-                  <span className="font-medium text-gray-700">Statut:</span>
+                  <span className="font-medium text-gray-700">{t("product.status")}</span>
                   {product.inStock ? (
-                    <Badge className="bg-green-600 text-white">Disponible</Badge>
+                    <Badge className="bg-green-600 text-white">{t("product.available")}</Badge>
                   ) : (
-                    <Badge variant="destructive">Vendu</Badge>
+                    <Badge variant="destructive">{t("product.sold")}</Badge>
                   )}
                 </div>
                 
                 {product.color && product.category !== "Accessoires" && (
                   <div className="flex items-center space-x-3">
-                    <span className="font-medium text-gray-700">Couleur:</span>
+                    <span className="font-medium text-gray-700">{t("product.color")}</span>
                     <span className="text-gray-900">{product.color}</span>
                   </div>
                 )}
                 
                 {product.condition && (
                   <div className="flex items-center space-x-3">
-                    <span className="font-medium text-gray-700">État:</span>
+                    <span className="font-medium text-gray-700">{t("product.condition")}</span>
                     <span className="text-gray-900">{product.condition.charAt(0).toUpperCase() + product.condition.slice(1)}</span>
                   </div>
                 )}
                 
                 {product.location && (
                   <div className="flex items-center space-x-3 sm:col-span-2">
-                    <span className="font-medium text-gray-700">Localisation:</span>
+                    <span className="font-medium text-gray-700">{t("product.location")}</span>
                     <span className="text-gray-900">📍 {product.location}</span>
                   </div>
                 )}
                 
                 {product.sellerContact && (
                   <div className="flex items-center space-x-3 sm:col-span-2">
-                    <span className="font-medium text-gray-700">Contact vendeur:</span>
+                    <span className="font-medium text-gray-700">{t("product.sellerContact")}</span>
                     <span className="text-gray-900">{product.sellerContact}</span>
                   </div>
                 )}
@@ -226,7 +226,7 @@ export default function ProductPage() {
                   <Star key={i} className="h-5 w-5 fill-current" />
                 ))}
               </div>
-              <span className="text-gray-600">(24 avis)</span>
+              <span className="text-gray-600">(24 {t("product.reviews")})</span>
             </div>
 
             {/* Add to Cart */}
@@ -236,7 +236,7 @@ export default function ProductPage() {
               disabled={!product.inStock}
             >
               <ShoppingCart className="h-5 w-5 mr-2" />
-              {product.inStock ? t("product.addToCart") : "Produit vendu"}
+              {product.inStock ? t("product.addToCart") : t("product.sold")}
             </Button>
 
             
@@ -256,22 +256,22 @@ export default function ProductPage() {
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                  <h3 className="font-semibold mb-3">Caractéristiques</h3>
+                  <h3 className="font-semibold mb-3">{t("product.characteristics")}</h3>
                   <ul className="space-y-2 text-gray-600">
-                    <li><span className="font-medium">Catégorie:</span> {product.category}</li>
-                    <li><span className="font-medium">Taille:</span> {product.size}</li>
-                    <li><span className="font-medium">Matériau:</span> Cuir italien premium</li>
-                    <li><span className="font-medium">Couleur:</span> Brun naturel</li>
+                    <li><span className="font-medium">{t("product.category")}</span> {product.category}</li>
+                    <li><span className="font-medium">{t("product.size")}</span> {product.size}</li>
+                    <li><span className="font-medium">{t("product.material")}</span> {t("product.premiumItalianLeather")}</li>
+                    <li><span className="font-medium">{t("product.color")}</span> {t("product.naturalBrown")}</li>
                   </ul>
                 </div>
                 
                 <div>
-                  <h3 className="font-semibold mb-3">Entretien</h3>
+                  <h3 className="font-semibold mb-3">{t("product.maintenance")}</h3>
                   <ul className="space-y-2 text-gray-600">
-                    <li>• Nettoyage régulier avec un savon glycériné</li>
-                    <li>• Graissage mensuel avec un baume spécialisé</li>
-                    <li>• Stockage dans un endroit sec et aéré</li>
-                    <li>• Éviter l'exposition directe au soleil</li>
+                    <li>• {t("product.maintenanceTip1")}</li>
+                    <li>• {t("product.maintenanceTip2")}</li>
+                    <li>• {t("product.maintenanceTip3")}</li>
+                    <li>• {t("product.maintenanceTip4")}</li>
                   </ul>
                 </div>
               </div>

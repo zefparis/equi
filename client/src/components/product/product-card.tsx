@@ -57,25 +57,25 @@ export default function ProductCard({ product }: ProductCardProps) {
         {/* Details produit - couleur, état, localisation */}
         <div className="space-y-2 mb-4 text-sm">
           <div className="flex items-center justify-between">
-            <span className="text-gray-600 dark:text-gray-400">Taille: {product.size}</span>
+            <span className="text-gray-600 dark:text-gray-400">{t("product.size")} {product.size}</span>
             {!product.inStock && (
-              <Badge variant="destructive" className="text-xs">Vendu</Badge>
+              <Badge variant="destructive" className="text-xs">{t("product.sold")}</Badge>
             )}
             {product.inStock && (
-              <Badge variant="default" className="text-xs bg-green-600">Disponible</Badge>
+              <Badge variant="default" className="text-xs bg-green-600">{t("product.available")}</Badge>
             )}
           </div>
           
           {product.color && product.category !== "Accessoires" && (
             <div className="text-gray-600 dark:text-gray-400">
-              <span className="font-medium">Couleur:</span> {product.color}
+              <span className="font-medium">{t("product.color")}</span> {product.color}
             </div>
           )}
           
           {/* Afficher la sous-catégorie appropriée pour les accessoires */}
           {product.category === "Accessoires" && (
             <div className="text-gray-600 dark:text-gray-400">
-              <span className="font-medium">Type:</span> {
+              <span className="font-medium">{t("product.type")}</span> {
                 product.subcategory === "Autre" && product.customSubcategory
                   ? product.customSubcategory
                   : product.subcategory
@@ -85,7 +85,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           
           {product.condition && (
             <div className="text-gray-600 dark:text-gray-400">
-              <span className="font-medium">État:</span> {product.condition.charAt(0).toUpperCase() + product.condition.slice(1)}
+              <span className="font-medium">{t("product.condition")}</span> {product.condition.charAt(0).toUpperCase() + product.condition.slice(1)}
             </div>
           )}
           
@@ -115,7 +115,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               <Star key={i} className="h-4 w-4 fill-current" />
             ))}
           </div>
-          <span className="ml-2 text-gray-500 text-sm">(24 avis)</span>
+          <span className="ml-2 text-gray-500 text-sm">(24 {t("product.reviews")})</span>
         </div>
       </CardContent>
 
@@ -126,7 +126,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           disabled={!product.inStock}
         >
           <ShoppingCart className="h-4 w-4 mr-2" />
-          {product.inStock ? t("product.addToCart") : "Produit vendu"}
+          {product.inStock ? t("product.addToCart") : t("product.sold")}
         </Button>
       </CardFooter>
     </Card>
