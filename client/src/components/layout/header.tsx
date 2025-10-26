@@ -31,9 +31,21 @@ export default function Header() {
   const { canInstall, promptInstall, isInstalled } = useInstallPrompt();
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isStandalone, setIsStandalone] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   const currentLanguage = languages.find(lang => lang.code === language);
+
+  // Détecte si l'app est en mode standalone (TWA/PWA installée)
+  useEffect(() => {
+    const checkStandalone = () => {
+      const isInStandalone = window.matchMedia('(display-mode: standalone)').matches ||
+                            (window.navigator as any).standalone === true ||
+                            document.referrer.includes('android-app://');
+      setIsStandalone(isInStandalone);
+    };
+    checkStandalone();
+  }, []);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -81,11 +93,18 @@ export default function Header() {
               className="text-lg md:text-3xl font-bold text-transparent bg-clip-text truncate"
               style={{
                 fontFamily: "'Cinzel', 'Playfair Display', serif",
-                background: "linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF6B35 100%)",
+                // En mode standalone (TWA/PWA), utilise un doré lumineux pour la visibilité
+                // Sinon, garde le dégradé orange-rouge original
+                background: isStandalone 
+                  ? "linear-gradient(135deg, #FFD700 0%, #F4C430 50%, #FFD700 100%)"
+                  : "linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF6B35 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
-                textShadow: "0 2px 4px rgba(0,0,0,0.3)",
+                // Ombre plus contrastée en mode standalone
+                textShadow: isStandalone 
+                  ? "0 2px 6px rgba(0,0,0,0.6), 0 0 10px rgba(255,215,0,0.3)"
+                  : "0 2px 4px rgba(0,0,0,0.3)",
                 letterSpacing: "0.05em"
               }}
             >
