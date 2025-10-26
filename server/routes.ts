@@ -4,6 +4,7 @@ import Stripe from "stripe";
 import { storage } from "./storage";
 import { registerUploadRoutes } from "./routes/upload";
 import { setupChatWebSocket } from "./routes/chat";
+import { registerMigrationRoutes } from "./routes/migrations";
 import { insertProductSchema, insertGalleryImageSchema, insertProductImageSchema, insertOrderSchema } from "@shared/schema";
 import { sendChatNotificationToAdmin, sendChatResponseToCustomer, sendContactFormEmail } from "./services/brevo";
 import { chatStorage } from "./storage/chat";
@@ -27,6 +28,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
     });
   });
 
+  // Register migration routes (admin only)
+  registerMigrationRoutes(app);
+  
   // Register upload routes
   registerUploadRoutes(app);
   
