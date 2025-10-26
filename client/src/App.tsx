@@ -71,8 +71,6 @@ function Router() {
                   <Route path="/gallery" component={Gallery} />
                   <Route path="/contact" component={Contact} />
                   <Route path="/chat" component={lazy(() => import("@/pages/chat"))} />
-                  <Route path="/chat-test" component={lazy(() => import("@/pages/chat-test"))} />
-                  <Route path="/email-test" component={lazy(() => import("@/pages/email-test"))} />
                   <Route path="/simple-chat" component={lazy(() => import("@/pages/simple-chat"))} />
                   <Route path="/support" component={Support} />
                   <Route path="/privacy" component={Privacy} />
