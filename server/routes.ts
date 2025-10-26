@@ -236,7 +236,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(500).json({ message: "Stripe is not configured" });
       }
 
-      const { items, customerInfo, shippingCost = 0 } = req.body;
+      const { items, customerInfo } = req.body;
       
       if (!items || !Array.isArray(items) || items.length === 0) {
         return res.status(400).json({ message: "Items are required" });
@@ -244,7 +244,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       const amount = items.reduce((sum: number, item: any) => {
         return sum + (parseFloat(item.price) * item.quantity);
-      }, 0) + parseFloat(shippingCost);
+      }, 0);
 
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
@@ -270,8 +270,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         success_url: `${req.headers.origin}/confirmation?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${req.headers.origin}/cart`,
         metadata: {
-          customerInfo: JSON.stringify(customerInfo || {}),
-          shippingCost: shippingCost.toString(),
+          customerInfo: JSON.stringify(customerInfo || {})
         },
         shipping_address_collection: {
           allowed_countries: ['BE', 'FR', 'NL', 'DE', 'ES', 'IT', 'LU'],
@@ -370,31 +369,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Simple shipping calculation (without DPD)
-  app.post("/api/calculate-shipping", async (req, res) => {
-    try {
-      const { country, items } = req.body;
-      
-      let shippingCost = 0;
-      
-      // Simple shipping rates by country
-      if (country === 'BE') {
-        shippingCost = 7.50;
-      } else if (['FR', 'NL', 'DE', 'LU'].includes(country)) {
-        shippingCost = 12.90;
-      } else {
-        shippingCost = 19.90;
-      }
-
-      res.json({ 
-        shippingCost: shippingCost.toFixed(2),
-        estimatedDelivery: "2-5 business days",
-        carrier: "Standard Shipping"
-      });
-    } catch (error: any) {
-      res.status(500).json({ message: "Error calculating shipping: " + error.message });
-    }
-  });
 
   // Test email route
   app.post("/api/test-email", async (req, res) => {
