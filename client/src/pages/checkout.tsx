@@ -72,10 +72,6 @@ function OrderSummaryCard({ stripeUrl }: { stripeUrl?: string }) {
             <span>📧</span>
             <span>Confirmation par email après paiement</span>
           </div>
-          <div className="flex items-center gap-2 text-sm">
-            <span>🚚</span>
-            <span>Calcul des frais de port par notre équipe</span>
-          </div>
         </div>
       </CardContent>
     </Card>
@@ -180,10 +176,11 @@ export default function Checkout() {
       } else {
         throw new Error("URL de paiement non reçue");
       }
-    } catch (error) {
+    } catch (error: any) {
+      console.error("Checkout error:", error);
       toast({
         title: "Erreur",
-        description: "Impossible de créer la commande",
+        description: error.message || "Impossible de créer la commande",
         variant: "destructive",
       });
     }
@@ -367,24 +364,6 @@ export default function Checkout() {
               </CardContent>
             </Card>
 
-            {/* Information sur les frais de port */}
-            <Alert>
-              <Info className="h-4 w-4" />
-              <AlertDescription className="space-y-2">
-                <div className="flex items-center gap-2">
-                  <Calculator className="h-4 w-4" />
-                  <strong>Calcul des frais de port</strong>
-                </div>
-                <p>
-                  Les frais de livraison seront calculés par notre équipe avec DPD selon votre adresse. 
-                  Vous recevrez une quotation détaillée par email avant la finalisation de votre commande.
-                </p>
-                <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                  <Mail className="h-3 w-3" />
-                  <span>Expédition depuis: Rue du Vicinal 9, 4141 Louveigné, Belgique</span>
-                </div>
-              </AlertDescription>
-            </Alert>
           </div>
 
           {/* Résumé de commande et paiement */}
