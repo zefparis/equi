@@ -8,8 +8,11 @@ RUN apk add --no-cache python3 make g++ git
 # Copy package files first for better caching
 COPY package*.json ./
 
-# Install ALL dependencies (using ci for clean install)
-RUN npm ci || npm install
+# Clean install - remove any cached node_modules only
+RUN rm -rf node_modules || true
+
+# Install ALL dependencies using lock file
+RUN npm ci --verbose
 
 # Copy all source files
 COPY . .
