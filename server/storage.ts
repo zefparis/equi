@@ -1,4 +1,6 @@
 import { products, galleryImages, productImages, orders, shippingRates, type Product, type InsertProduct, type ProductImage, type InsertProductImage, type GalleryImage, type InsertGalleryImage, type Order, type InsertOrder, type ShippingRate, type InsertShippingRate } from "@shared/schema";
+import { db } from "./db";
+import { eq, and } from "drizzle-orm";
 
 export interface IStorage {
   // Products
@@ -754,4 +756,7 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+// IMPORTANT: Utilise PostgresStorage pour la persistance en base de données
+// MemStorage ci-dessus est conservé uniquement pour référence mais n'est plus utilisé
+import { postgresStorage } from "./postgres-storage";
+export const storage = postgresStorage;

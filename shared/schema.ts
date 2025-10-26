@@ -15,6 +15,7 @@ export const products = pgTable("products", {
   description: text("description").notNull(),
   image: text("image").notNull(),
   images: text("images").array().default([]),
+  featured: boolean("featured").default(false), // true = Affiché en page d'accueil
   inStock: boolean("in_stock").default(true), // true = Disponible, false = Vendu
   location: text("location"), // Ville/région où se trouve l'article
   sellerContact: text("seller_contact"), // Contact du vendeur
