@@ -281,41 +281,87 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Stripe webhook
+  // Stripe webhook - SÉCURISÉ avec validation de signature
   app.post("/webhook", async (req, res) => {
     try {
       if (!stripe) {
+        console.error("Stripe not configured for webhook");
         return res.status(500).json({ message: "Stripe is not configured" });
       }
 
-      const event = req.body;
+      const sig = req.headers['stripe-signature'];
+      
+      if (!sig) {
+        console.error("No Stripe signature found in webhook request");
+        return res.status(400).json({ message: "No signature provided" });
+      }
 
-      if (event.type === 'checkout.session.completed') {
-        const session = event.data.object;
-        
-        const customerInfo = session.metadata?.customerInfo ? 
-          JSON.parse(session.metadata.customerInfo) : {};
+      // Valider la signature du webhook pour s'assurer qu'il provient de Stripe
+      let event;
+      
+      if (process.env.STRIPE_WEBHOOK_SECRET) {
+        try {
+          event = stripe.webhooks.constructEvent(
+            req.body,
+            sig,
+            process.env.STRIPE_WEBHOOK_SECRET
+          );
+          console.log("✅ Webhook signature verified");
+        } catch (err: any) {
+          console.error("❌ Webhook signature verification failed:", err.message);
+          return res.status(400).json({ message: `Webhook signature verification failed: ${err.message}` });
+        }
+      } else {
+        // Mode développement sans webhook secret (non recommandé en production)
+        console.warn("⚠️ STRIPE_WEBHOOK_SECRET not configured - webhook running without signature verification (DEV MODE ONLY)");
+        event = req.body;
+      }
 
-        const orderData = {
-          customerName: session.customer_details?.name || customerInfo.name || "",
-          customerEmail: session.customer_details?.email || customerInfo.email || "",
-          customerPhone: session.customer_details?.phone || customerInfo.phone || "",
-          customerAddress: session.customer_details?.address?.line1 || customerInfo.address || "",
-          customerCity: session.customer_details?.address?.city || customerInfo.city || "",
-          customerPostalCode: session.customer_details?.address?.postal_code || customerInfo.postalCode || "",
-          customerCountry: session.customer_details?.address?.country || customerInfo.country || "",
-          items: JSON.stringify(customerInfo.items || []),
-          totalAmount: (session.amount_total / 100).toString(),
-          shippingCost: session.metadata?.shippingCost || "0",
-          status: "paid",
-          stripeSessionId: session.id,
-        };
+      // Traiter les événements Stripe
+      switch (event.type) {
+        case 'checkout.session.completed':
+          const session = event.data.object;
+          console.log(`Processing checkout.session.completed: ${session.id}`);
+          
+          const customerInfo = session.metadata?.customerInfo ? 
+            JSON.parse(session.metadata.customerInfo) : {};
 
-        await storage.createOrder(orderData);
+          const orderData = {
+            customerName: session.customer_details?.name || customerInfo.name || "",
+            customerEmail: session.customer_details?.email || customerInfo.email || "",
+            customerPhone: session.customer_details?.phone || customerInfo.phone || "",
+            customerAddress: session.customer_details?.address?.line1 || customerInfo.address || "",
+            customerCity: session.customer_details?.address?.city || customerInfo.city || "",
+            customerPostalCode: session.customer_details?.address?.postal_code || customerInfo.postalCode || "",
+            customerCountry: session.customer_details?.address?.country || customerInfo.country || "",
+            items: JSON.stringify(customerInfo.items || []),
+            totalAmount: (session.amount_total / 100).toString(),
+            shippingCost: session.metadata?.shippingCost || "0",
+            status: "paid",
+            stripeSessionId: session.id,
+          };
+
+          await storage.createOrder(orderData);
+          console.log(`✅ Order created for session ${session.id}`);
+          break;
+
+        case 'checkout.session.async_payment_succeeded':
+          console.log(`Async payment succeeded for session: ${event.data.object.id}`);
+          // Gérer les paiements asynchrones réussis
+          break;
+
+        case 'checkout.session.async_payment_failed':
+          console.log(`Async payment failed for session: ${event.data.object.id}`);
+          // Gérer les paiements asynchrones échoués
+          break;
+
+        default:
+          console.log(`Unhandled event type: ${event.type}`);
       }
 
       res.json({ received: true });
     } catch (error: any) {
+      console.error("Webhook processing error:", error);
       res.status(500).json({ message: "Webhook error: " + error.message });
     }
   });

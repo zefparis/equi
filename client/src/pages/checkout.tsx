@@ -88,6 +88,8 @@ export default function Checkout() {
   const { toast } = useToast();
   const [stripeUrl, setStripeUrl] = useState("");
   const [orderCreated, setOrderCreated] = useState(false);
+  const [shippingCost, setShippingCost] = useState<number>(0);
+  const [isCalculatingShipping, setIsCalculatingShipping] = useState(false);
 
   // Scroll to top when page loads
   useEffect(() => {
@@ -115,6 +117,39 @@ export default function Checkout() {
       notes: "",
     },
   });
+
+  // Calculer automatiquement les frais de port quand le pays change
+  const selectedCountry = form.watch("country");
+  
+  useEffect(() => {
+    const calculateShipping = async () => {
+      if (!selectedCountry || items.length === 0) return;
+      
+      setIsCalculatingShipping(true);
+      try {
+        const response = await apiRequest("POST", "/api/calculate-shipping", {
+          country: selectedCountry,
+          items: items.map(item => ({
+            id: item.id,
+            quantity: item.quantity,
+            price: item.price
+          }))
+        });
+        
+        const result = await response.json();
+        if (result.shippingCost) {
+          setShippingCost(parseFloat(result.shippingCost));
+        }
+      } catch (error) {
+        console.error("Error calculating shipping:", error);
+        setShippingCost(0);
+      } finally {
+        setIsCalculatingShipping(false);
+      }
+    };
+    
+    calculateShipping();
+  }, [selectedCountry, items]);
 
   const onSubmit = async (data: CheckoutFormData) => {
     try {
@@ -147,9 +182,16 @@ export default function Checkout() {
           city: data.city,
           postalCode: data.postalCode,
           country: data.country,
-          notes: data.notes || ""
+          notes: data.notes || "",
+          items: items.map(item => ({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity,
+            size: item.size
+          }))
         },
-        shippingCost: 0 // Les frais seront calculés plus tard
+        shippingCost: shippingCost.toFixed(2)
       });
 
       const result = await response.json();
@@ -406,13 +448,26 @@ export default function Checkout() {
                   
                   <Separator />
                   
-                  <div className="flex justify-between items-center font-bold text-lg">
+                  <div className="flex justify-between items-center">
                     <span>Sous-total</span>
                     <span>{totalAmount.toFixed(2)}€</span>
                   </div>
                   
-                  <div className="text-sm text-gray-600 dark:text-gray-400">
-                    <p>+ Frais de livraison (calculés séparément)</p>
+                  <div className="flex justify-between items-center">
+                    <span className="flex items-center gap-2">
+                      Frais de livraison
+                      {isCalculatingShipping && (
+                        <span className="text-xs text-gray-500">Calcul...</span>
+                      )}
+                    </span>
+                    <span>{shippingCost.toFixed(2)}€</span>
+                  </div>
+                  
+                  <Separator />
+                  
+                  <div className="flex justify-between items-center font-bold text-lg">
+                    <span>Total</span>
+                    <span>{(totalAmount + shippingCost).toFixed(2)}€</span>
                   </div>
                 </div>
               </CardContent>

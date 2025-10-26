@@ -7,6 +7,7 @@ Les secrets suivants sont déjà configurés dans votre environnement Replit :
 - `DATABASE_URL` - URL de connexion PostgreSQL
 - `STRIPE_SECRET_KEY` - Clé secrète Stripe pour les paiements (✓ Mise à jour le 28/07/2025)
 - `VITE_STRIPE_PUBLIC_KEY` - Clé publique Stripe pour le frontend (✓ Mise à jour le 28/07/2025)
+- `STRIPE_WEBHOOK_SECRET` - Secret de signature webhook Stripe (⚠️ À CONFIGURER - Requis pour la sécurité)
 - `BREVO_API_KEY` - Clé API Brevo pour les emails (✓ Mise à jour le 28/07/2025)
 - `SESSION_SECRET` - Secret pour les sessions utilisateur
 
