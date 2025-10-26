@@ -45,3 +45,18 @@ temp/
 
 # Cache
 .cache/
+
+# Android
+*.iml
+.gradle
+local.properties
+*.apk
+*.aab
+*.ap_
+*.dex
+.externalNativeBuild
+.cxx
+/app/build/
+/app/release/
+android.keystore
+app/keystore.properties

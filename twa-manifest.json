@@ -20,8 +20,8 @@
     "path": "/home/ia-solution/Téléchargements/equi/android.keystore",
     "alias": "EquiSaddles"
   },
-  "appVersionName": "1",
-  "appVersionCode": 1,
+  "appVersionName": "2.0",
+  "appVersionCode": 2,
   "shortcuts": [],
   "generatorApp": "bubblewrap-cli",
   "webManifestUrl": "https://www.equisaddles.com/manifest.json",
@@ -47,5 +47,5 @@
   "fileHandlers": [],
   "launchHandlerClientMode": "",
   "displayOverride": [],
-  "appVersion": "1"
+  "appVersion": "2.0"
 }
