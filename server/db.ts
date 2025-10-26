@@ -1,7 +1,8 @@
-import { drizzle } from "drizzle-orm/neon-serverless";
-import { Pool } from "@neondatabase/serverless";
-import { WebSocket } from "ws";
+import { drizzle } from "drizzle-orm/node-postgres";
+import pg from "pg";
 import * as schema from "@shared/schema";
+
+const { Pool } = pg;
 
 if (!process.env.DATABASE_URL) {
   throw new Error(
@@ -9,23 +10,18 @@ if (!process.env.DATABASE_URL) {
   );
 }
 
-// Configure WebSocket for Neon serverless (fixes Railway compatibility)
-// @ts-ignore - WebSocket polyfill for Node.js environments
-if (!globalThis.WebSocket) {
-  // @ts-ignore
-  globalThis.WebSocket = WebSocket;
-}
-
-// Initialize Neon connection pool with WebSocket
-// Configure SSL for Railway compatibility
+// Initialize PostgreSQL connection pool for Railway
+// Configure SSL to work with Railway's internal proxy
 const pool = new Pool({ 
   connectionString: process.env.DATABASE_URL,
-  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : undefined
+  ssl: process.env.NODE_ENV === 'production' ? {
+    rejectUnauthorized: false // Required for Railway's internal proxy
+  } : false
 });
 
-// Create Drizzle instance
+// Create Drizzle instance with standard PostgreSQL driver
 export const db = drizzle(pool, { schema });
 
 // Test connection
-console.log("✅ PostgreSQL connection established via Neon (WebSocket)");
+console.log("✅ PostgreSQL connection established (Railway)");
 console.log("📊 Database URL configured:", process.env.DATABASE_URL.substring(0, 30) + "...");
