@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import Stripe from "stripe";
 import { storage } from "./storage";
 import { registerUploadRoutes } from "./routes/upload";
+import { registerCloudinaryUploadRoutes } from "./routes/upload-cloudinary";
 import { setupChatWebSocket } from "./routes/chat";
 import { registerMigrationRoutes } from "./routes/migrations";
 import { insertProductSchema, insertGalleryImageSchema, insertProductImageSchema, insertOrderSchema } from "@shared/schema";
@@ -31,8 +32,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Register migration routes (admin only)
   registerMigrationRoutes(app);
   
-  // Register upload routes
-  registerUploadRoutes(app);
+  // Register upload routes (Cloudinary for persistent storage)
+  registerCloudinaryUploadRoutes(app);
   
   // Products API
   app.get("/api/products", async (req, res) => {
