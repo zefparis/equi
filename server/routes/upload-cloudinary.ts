@@ -1,24 +1,33 @@
 import type { Express } from "express";
 import multer from "multer";
-import { v2 as cloudinary } from "cloudinary";
 import { Readable } from "stream";
 
-// Configuration Cloudinary
-if (process.env.CLOUDINARY_URL) {
-  // Format: cloudinary://API_KEY:API_SECRET@CLOUD_NAME
-  cloudinary.config({
-    cloudinary_url: process.env.CLOUDINARY_URL
-  });
-  console.log("✅ Cloudinary configured");
-} else if (process.env.CLOUDINARY_CLOUD_NAME && process.env.CLOUDINARY_API_KEY && process.env.CLOUDINARY_API_SECRET) {
-  cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET,
-  });
-  console.log("✅ Cloudinary configured with separate credentials");
-} else {
-  console.warn("⚠️  Cloudinary not configured - images will be stored locally (will be lost on redeploy)");
+// Import conditionnel de Cloudinary
+let cloudinary: any = null;
+try {
+  const cloudinaryModule = require("cloudinary");
+  cloudinary = cloudinaryModule.v2;
+  
+  // Configuration Cloudinary
+  if (process.env.CLOUDINARY_URL) {
+    // Format: cloudinary://API_KEY:API_SECRET@CLOUD_NAME
+    cloudinary.config({
+      cloudinary_url: process.env.CLOUDINARY_URL
+    });
+    console.log("✅ Cloudinary configured");
+  } else if (process.env.CLOUDINARY_CLOUD_NAME && process.env.CLOUDINARY_API_KEY && process.env.CLOUDINARY_API_SECRET) {
+    cloudinary.config({
+      cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+      api_key: process.env.CLOUDINARY_API_KEY,
+      api_secret: process.env.CLOUDINARY_API_SECRET,
+    });
+    console.log("✅ Cloudinary configured with separate credentials");
+  } else {
+    console.warn("⚠️  Cloudinary not configured - images will be stored locally (will be lost on redeploy)");
+  }
+} catch (error) {
+  console.warn("⚠️  Cloudinary package not installed - using local storage (images will be lost on redeploy)");
+  cloudinary = null;
 }
 
 // Configuration multer pour stocker en mémoire avant upload vers Cloudinary
@@ -49,6 +58,10 @@ const upload = multer({
  * Upload un buffer vers Cloudinary
  */
 async function uploadToCloudinary(buffer: Buffer, originalName: string): Promise<string> {
+  if (!cloudinary) {
+    throw new Error('Cloudinary not available');
+  }
+  
   return new Promise((resolve, reject) => {
     const uploadStream = cloudinary.uploader.upload_stream(
       {
@@ -76,10 +89,7 @@ async function uploadToCloudinary(buffer: Buffer, originalName: string): Promise
 }
 
 export function registerCloudinaryUploadRoutes(app: Express) {
-  const isCloudinaryConfigured = !!(
-    process.env.CLOUDINARY_URL || 
-    (process.env.CLOUDINARY_CLOUD_NAME && process.env.CLOUDINARY_API_KEY && process.env.CLOUDINARY_API_SECRET)
-  );
+  const isCloudinaryAvailable = cloudinary !== null;
 
   // Route pour upload d'image unique
   app.post('/api/upload/image', upload.single('image'), async (req, res) => {
@@ -90,7 +100,7 @@ export function registerCloudinaryUploadRoutes(app: Express) {
 
       let imageUrl: string;
 
-      if (isCloudinaryConfigured) {
+      if (isCloudinaryAvailable) {
         // Upload vers Cloudinary
         imageUrl = await uploadToCloudinary(req.file.buffer, req.file.originalname);
         console.log(`✅ Image uploaded to Cloudinary: ${imageUrl}`);
@@ -138,7 +148,7 @@ export function registerCloudinaryUploadRoutes(app: Express) {
       for (const file of files) {
         let imageUrl: string;
 
-        if (isCloudinaryConfigured) {
+        if (isCloudinaryAvailable) {
           imageUrl = await uploadToCloudinary(file.buffer, file.originalname);
         } else {
           // Fallback local
@@ -178,7 +188,7 @@ export function registerCloudinaryUploadRoutes(app: Express) {
   // Route pour supprimer une image (uniquement Cloudinary)
   app.delete('/api/upload/:publicId', async (req, res) => {
     try {
-      if (!isCloudinaryConfigured) {
+      if (!isCloudinaryAvailable) {
         return res.status(501).json({ error: 'Cloudinary not configured' });
       }
 
