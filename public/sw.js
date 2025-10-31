@@ -1,5 +1,5 @@
 // Service Worker for Equi Saddles PWA
-const CACHE_NAME = 'equi-saddles-v9-translations-fix';
+const CACHE_NAME = 'equi-saddles-v10-network-first';
 const urlsToCache = [
   '/',
   '/catalog',
@@ -78,27 +78,46 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  // Network First strategy for JS/CSS files
+  const isJsOrCss = event.request.url.endsWith('.js') || event.request.url.endsWith('.css');
+  
+  if (isStaticAsset && isJsOrCss) {
+    // Network First: toujours chercher la dernière version
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          if (response && response.status === 200) {
+            const responseToCache = response.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, responseToCache);
+            });
+          }
+          return response;
+        })
+        .catch(() => {
+          // Fallback to cache if network fails
+          return caches.match(event.request);
+        })
+    );
+    return;
+  }
+
+  // Cache First strategy for other resources (images, fonts, etc.)
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
-        // Return cached version if available
         if (response) {
           console.log('[SW] Serving from cache:', event.request.url);
           return response;
         }
 
-        // Otherwise fetch from network
         return fetch(event.request).then((response) => {
-          // Check if response is valid
           if (!response || response.status !== 200 || response.type !== 'basic') {
             return response;
           }
 
-          // Only cache static assets and pages (not API responses)
           if (isStaticAsset || event.request.destination === 'document') {
-            // Clone response for caching
             const responseToCache = response.clone();
-
             caches.open(CACHE_NAME)
               .then((cache) => {
                 console.log('[SW] Caching:', event.request.url);
@@ -115,15 +134,12 @@ self.addEventListener('fetch', (event) => {
       .catch((error) => {
         console.error('[SW] Fetch failed:', error);
         
-        // Fallback strategies
         if (event.request.destination === 'document') {
-          // Return cached homepage for navigation requests
           return caches.match('/').then((cachedResponse) => {
             if (cachedResponse) {
               console.log('[SW] Serving cached homepage as fallback');
               return cachedResponse;
             }
-            // Return a simple offline page if nothing is cached
             return new Response(`
               <!DOCTYPE html>
               <html>
@@ -140,7 +156,6 @@ self.addEventListener('fetch', (event) => {
           });
         }
         
-        // For images, return a placeholder
         if (event.request.destination === 'image') {
           return new Response(
             '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="150" fill="#ddd"><rect width="100%" height="100%" fill="#f5f5f5"/><text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="#999">Image non disponible</text></svg>',
@@ -148,7 +163,6 @@ self.addEventListener('fetch', (event) => {
           );
         }
         
-        // For all other requests, let them fail naturally
         throw error;
       })
   );
