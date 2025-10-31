@@ -1,5 +1,5 @@
 // Service Worker for Equi Saddles PWA
-const CACHE_NAME = 'equi-saddles-v8-pwa-fix';
+const CACHE_NAME = 'equi-saddles-v9-translations-fix';
 const urlsToCache = [
   '/',
   '/catalog',
