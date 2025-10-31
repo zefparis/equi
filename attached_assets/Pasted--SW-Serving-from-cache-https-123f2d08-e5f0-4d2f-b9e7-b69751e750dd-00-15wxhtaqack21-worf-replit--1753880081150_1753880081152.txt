@@ -1,0 +1,120 @@
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@vite/client
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@react-refresh
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/vite/dist/client/env.mjs
+ [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=b38c6050
+ [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/react-dom_client.js?v=b38c6050
+ WebSocket connection to 'wss://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/?token=QQog6hhEdERn' failed: 
+setupWebSocket @ client:536
+client:536 Uncaught (in promise) SyntaxError: Failed to construct 'WebSocket': The URL 'wss://localhost:undefined/?token=QQog6hhEdERn' is invalid.
+    at setupWebSocket (client:536:19)
+    at fallback (client:509:16)
+    at WebSocket.<anonymous> (client:555:7)
+ [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/src/index.css?v=CnKr2Yjfir8HZD4Rhw-p_
+ [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-QCHXOAYK.js?v=b38c6050
+ [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-WOOG5QLI.js?v=b38c6050
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/src/hooks/use-language.tsx
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/src/contexts/AdminAuthContext.tsx
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/src/pages/admin.tsx
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/src/pages/not-found.tsx
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/react.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/src/lib/translations.ts
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/src/components/admin/AdminLogin.tsx
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/src/styles/admin-responsive.css
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/src/hooks/use-toast.ts
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/src/lib/utils.ts
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/src/lib/queryClient.ts
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/shared/schema.ts
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/src/components/ui/button.tsx
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/src/components/ui/card.tsx
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/src/components/ui/input.tsx
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/src/components/ui/label.tsx
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/src/components/ui/textarea.tsx
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/src/components/ui/select.tsx
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/src/components/ui/checkbox.tsx
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/src/components/ui/tabs.tsx
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/src/components/ui/badge.tsx
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/src/components/ui/separator.tsx
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/src/components/ui/dialog.tsx
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/react-hook-form.js?v=debfc5ad
+ [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=b38c6050
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@hookform_resolvers_zod.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/lucide-react.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/src/components/admin/product-image-manager.tsx
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/src/components/admin/chat-admin.tsx
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/src/components/admin/image-upload.tsx
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-QCHXOAYK.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-WOOG5QLI.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-KBTYAULA.js?v=debfc5ad
+ [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=b38c6050
+ [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=b38c6050
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/src/components/ui/alert.tsx
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/clsx.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/tailwind-merge.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/drizzle-orm_pg-core.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/drizzle-zod.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-slot.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/class-variance-authority.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-label.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-select.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-checkbox.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tabs.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-separator.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-dialog.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-visually-hidden.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-4BFJKWC4.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/src/components/chat/chat-widget.tsx
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-U7P2NEEE.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-S4QZGJXL.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-WGQNECLP.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-2K77HOHX.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-AXMZZQ2X.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-6ZMM2PAV.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-6CVPKL2T.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-43G6IMPT.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-JUSJUB55.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-4RO2SXZU.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-GQLTRFGN.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-BHADYF3B.js?v=debfc5ad
+ [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-WEX2OEAW.js?v=debfc5ad
+sw.js:83 [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-APZ5XZMQ.js?v=debfc5ad
+sw.js:83 [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-26IOYGTM.js?v=debfc5ad
+sw.js:83 [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-UABCPR3U.js?v=debfc5ad
+sw.js:83 [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-7SUNRGEF.js?v=debfc5ad
+sw.js:83 [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-5O7IYXTH.js?v=debfc5ad
+sw.js:101 [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/react.js?v=b38c6050
+sw.js:101 [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-KBTYAULA.js?v=b38c6050
+sw.js:101 [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/lucide-react.js?v=b38c6050
+sw.js:101 [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@stripe_react-stripe-js.js?v=b38c6050
+sw.js:101 [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@stripe_stripe-js.js?v=b38c6050
+sw.js:101 [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/react-hook-form.js?v=b38c6050
+sw.js:101 [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@hookform_resolvers_zod.js?v=b38c6050
+sw.js:101 [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/zod.js?v=b38c6050
+sw.js:101 [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-toast.js?v=b38c6050
+sw.js:101 [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/class-variance-authority.js?v=b38c6050
+sw.js:101 [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-Z4Z5NBTV.js?v=b38c6050
+sw.js:101 [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-QBU4JD5W.js?v=b38c6050
+sw.js:101 [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-ENKBXAVC.js?v=b38c6050
+sw.js:101 [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-VEXDAQAD.js?v=b38c6050
+sw.js:101 [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-KCFVMCIE.js?v=b38c6050
+sw.js:101 [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-D7ROJCUI.js?v=b38c6050
+sw.js:101 [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-WKGRLDFP.js?v=b38c6050
+sw.js:101 [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-C6R24THA.js?v=b38c6050
+sw.js:101 [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-NJQY2NV7.js?v=b38c6050
+sw.js:101 [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-KQESEILF.js?v=b38c6050
+sw.js:101 [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-U7P2NEEE.js?v=b38c6050
+sw.js:101 [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-slider.js?v=b38c6050
+sw.js:101 [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-6ZMM2PAV.js?v=b38c6050
+sw.js:101 [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-I6IJT7SC.js?v=b38c6050
+sw.js:101 [SW] Caching: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-4RO2SXZU.js?v=b38c6050
+chunk-RPCDYKBN.js?v=b38c6050:21551 Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+use-cart.tsx:73 Uncaught TypeError: RefreshRuntime.getRefreshReg is not a function
+    at use-cart.tsx:73:5
+sw.js:83 [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/manifest.webmanifest
+123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/:1 <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes">
+sw.js:83 [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/icons/icon-144.svg
+sw.js:83 [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/
+sw.js:83 [SW] Serving from cache: https://123f2d08-e5f0-4d2f-b9e7-b69751e750dd-00-15wxhtaqack21.worf.replit.dev/manifest.webmanifest
