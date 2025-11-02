@@ -413,7 +413,7 @@ export default function Accessories() {
                     setPriceRange([0, 500]);
                   }}
                 >
-                  Réinitialiser les filtres
+                  {t("accessories.resetFilters")}
                 </Button>
               )}
             </div>
@@ -445,7 +445,7 @@ export default function Accessories() {
                     setPriceRange([0, 500]);
                   }}
                 >
-                  Réinitialiser les filtres
+                  {t("accessories.resetFilters")}
                 </Button>
               </Card>
             ) : (
