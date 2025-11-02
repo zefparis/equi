@@ -52,7 +52,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             {product.name}
           </h3>
         </Link>
-        <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">{t(`product.description.${product.id}`) || product.description}</p>
+        <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">{product.description}</p>
         
         {/* Details produit - couleur, état, localisation */}
         <div className="space-y-2 mb-4 text-sm">

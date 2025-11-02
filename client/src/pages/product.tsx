@@ -141,7 +141,7 @@ export default function ProductPage() {
               </Badge>
               <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
               <p className="text-gray-600 text-lg leading-relaxed">
-                {t(`product.description.${product.id}`) || product.description}
+                {product.description}
               </p>
             </div>
 
