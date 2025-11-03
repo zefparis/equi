@@ -22,10 +22,13 @@ export default function Confirmation() {
   }, []);
 
   useEffect(() => {
-    const params = new URLSearchParams(location.split('?')[1] || '');
+    // Utiliser window.location.search pour récupérer la query string
+    const params = new URLSearchParams(window.location.search);
     const sessionIdParam = params.get('session_id');
     
-    console.log('🔍 Confirmation page loaded, session_id:', sessionIdParam);
+    console.log('🔍 Confirmation page loaded');
+    console.log('🔍 Full URL:', window.location.href);
+    console.log('🔍 session_id from URL:', sessionIdParam);
     
     // Ne traiter qu'une seule fois
     if (sessionIdParam && !processedRef.current) {
@@ -42,8 +45,10 @@ export default function Confirmation() {
       }
       
       // Vérifier et créer la commande si elle n'existe pas
-      console.log('📞 Calling verify-session API...');
+      console.log('📞 Calling verify-session API with session:', sessionIdParam);
       verifyAndCreateOrder(sessionIdParam);
+    } else if (!sessionIdParam) {
+      console.error('❌ No session_id found in URL!');
     }
   }, [location, clearCart]);
 
