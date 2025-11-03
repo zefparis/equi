@@ -25,16 +25,24 @@ export default function Confirmation() {
     const params = new URLSearchParams(location.split('?')[1] || '');
     const sessionIdParam = params.get('session_id');
     
+    console.log('🔍 Confirmation page loaded, session_id:', sessionIdParam);
+    
     // Ne traiter qu'une seule fois
     if (sessionIdParam && !processedRef.current) {
       processedRef.current = true;
       setSessionId(sessionIdParam);
       
-      // Clear cart after successful payment
-      console.log('🛒 Clearing cart after successful payment...');
+      console.log('🛒 Clearing cart...');
       clearCart();
       
+      // Force cart clear via localStorage
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('equi-saddles-cart');
+        console.log('✅ Cart cleared from localStorage');
+      }
+      
       // Vérifier et créer la commande si elle n'existe pas
+      console.log('📞 Calling verify-session API...');
       verifyAndCreateOrder(sessionIdParam);
     }
   }, [location, clearCart]);
