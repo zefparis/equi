@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link, useLocation } from "wouter";
 import { useCart } from "../hooks/use-cart";
 import { useLanguage } from "../hooks/use-language";
@@ -14,6 +14,7 @@ export default function Confirmation() {
   const [location] = useLocation();
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [orderCreated, setOrderCreated] = useState(false);
+  const processedRef = useRef(false);
 
   // Scroll to top when page loads
   useEffect(() => {
@@ -24,16 +25,19 @@ export default function Confirmation() {
     const params = new URLSearchParams(location.split('?')[1] || '');
     const sessionIdParam = params.get('session_id');
     
-    if (sessionIdParam && !sessionId) {
+    // Ne traiter qu'une seule fois
+    if (sessionIdParam && !processedRef.current) {
+      processedRef.current = true;
       setSessionId(sessionIdParam);
+      
       // Clear cart after successful payment
+      console.log('🛒 Clearing cart after successful payment...');
       clearCart();
       
       // Vérifier et créer la commande si elle n'existe pas
       verifyAndCreateOrder(sessionIdParam);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location]);
+  }, [location, clearCart]);
 
   const verifyAndCreateOrder = async (sessionId: string) => {
     try {
