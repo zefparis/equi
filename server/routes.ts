@@ -7,7 +7,7 @@ import { registerCloudinaryUploadRoutes } from "./routes/upload-cloudinary";
 import { setupChatWebSocket } from "./routes/chat";
 import { registerMigrationRoutes } from "./routes/migrations";
 import { insertProductSchema, insertGalleryImageSchema, insertProductImageSchema, insertOrderSchema } from "@shared/schema";
-import { sendChatNotificationToAdmin, sendChatResponseToCustomer, sendContactFormEmail } from "./services/brevo";
+import { sendChatNotificationToAdmin, sendChatResponseToCustomer, sendContactFormEmail, sendInvoiceEmail } from "./services/brevo";
 import { chatStorage } from "./storage/chat";
 import { z } from "zod";
 
@@ -271,7 +271,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
         success_url: `${req.headers.origin}/confirmation?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${req.headers.origin}/cart`,
         metadata: {
-          customerInfo: JSON.stringify(customerInfo || {})
+          customerInfo: JSON.stringify({
+            ...customerInfo,
+            items: items.map((item: any) => ({
+              id: item.id,
+              name: item.name,
+              price: item.price,
+              quantity: item.quantity,
+              imageUrl: item.imageUrl
+            }))
+          })
         },
         shipping_address_collection: {
           allowed_countries: ['BE', 'FR', 'NL', 'DE', 'ES', 'IT', 'LU'],
@@ -425,6 +434,83 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ 
         success: false,
         message: "Erreur lors de l'envoi du message: " + error.message 
+      });
+    }
+  });
+
+  // Send invoice email
+  app.post("/api/send-invoice", async (req, res) => {
+    try {
+      const { orderId, customerEmail, customerName } = req.body;
+      
+      if (!orderId || !customerEmail || !customerName) {
+        return res.status(400).json({ 
+          success: false,
+          message: "Données manquantes" 
+        });
+      }
+
+      // Récupérer la commande depuis la base de données
+      const order = await storage.getOrder(orderId);
+      
+      if (!order) {
+        return res.status(404).json({ 
+          success: false,
+          message: "Commande introuvable" 
+        });
+      }
+
+      // Parser les items
+      let items = [];
+      try {
+        items = JSON.parse(order.items);
+      } catch (e) {
+        items = [];
+      }
+
+      // Calculer les totaux
+      const subtotal = items.reduce((sum: number, item: any) => 
+        sum + (parseFloat(item.price) * item.quantity), 0
+      );
+      const shipping = parseFloat(order.shippingCost || "0");
+      const total = parseFloat(order.totalAmount);
+
+      // Formater la date
+      const orderDate = order.createdAt 
+        ? new Date(order.createdAt).toLocaleDateString('fr-FR', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })
+        : new Date().toLocaleDateString('fr-FR');
+
+      // Envoyer l'email
+      const result = await sendInvoiceEmail(customerName, customerEmail, {
+        orderId: order.id,
+        items: items.map((item: any) => ({
+          name: item.name,
+          quantity: item.quantity,
+          price: item.price
+        })),
+        subtotal,
+        shipping,
+        total,
+        address: order.customerAddress,
+        city: order.customerCity,
+        postalCode: order.customerPostalCode,
+        country: order.customerCountry,
+        orderDate
+      });
+
+      res.json({ 
+        success: result,
+        message: result ? "Facture envoyée avec succès" : "Échec de l'envoi de la facture"
+      });
+    } catch (error: any) {
+      console.error("Error sending invoice:", error);
+      res.status(500).json({ 
+        success: false,
+        message: "Erreur lors de l'envoi de la facture: " + error.message 
       });
     }
   });

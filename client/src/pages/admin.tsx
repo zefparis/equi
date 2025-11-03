@@ -21,10 +21,11 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, Di
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Settings, Package, Images, ShoppingCart, Plus, Edit, Trash2, MessageCircle, Star } from "lucide-react";
+import { Settings, Package, Images, ShoppingCart, Plus, Edit, Trash2, MessageCircle, Star, FileText } from "lucide-react";
 import ProductImageManager from "../components/admin/product-image-manager";
 import ImageUpload from "../components/admin/image-upload";
 import ChatAdmin from "../components/admin/chat-admin";
+import InvoiceGenerator from "../components/admin/invoice-generator";
 
 const categories = ["Obstacle", "Dressage", "Cross", "Mixte", "Poney", "Accessoires"];
 const saddleSizes = ["16", "16.5", "17", "17.5", "18", "18.5"];
@@ -59,6 +60,8 @@ export default function Admin() {
   const [imagesDialogOpen, setImagesDialogOpen] = useState(false);
   const [imagesProductId, setImagesProductId] = useState<number | null>(null);
   const [resumeEditAfterImages, setResumeEditAfterImages] = useState(false);
+  const [invoiceDialogOpen, setInvoiceDialogOpen] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
 
   // Scroll to top when page loads
   useEffect(() => {
@@ -597,6 +600,73 @@ export default function Admin() {
                         </div>
                       </div>
 
+                      {/* Articles commandés */}
+                      <div className="mt-4">
+                        <h4 className="font-semibold mb-3">Articles commandés</h4>
+                        {(() => {
+                          try {
+                            const items = JSON.parse(order.items);
+                            if (!items || items.length === 0) {
+                              return (
+                                <p className="text-sm text-gray-500 italic">
+                                  Aucun article dans cette commande
+                                </p>
+                              );
+                            }
+                            return (
+                              <div className="space-y-2">
+                                {items.map((item: any, index: number) => (
+                                  <div key={index} className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                                    {item.imageUrl && (
+                                      <img 
+                                        src={item.imageUrl} 
+                                        alt={item.name}
+                                        className="w-16 h-16 object-cover rounded"
+                                      />
+                                    )}
+                                    <div className="flex-1">
+                                      <p className="font-medium">{item.name}</p>
+                                      <p className="text-sm text-gray-600">
+                                        Quantité: {item.quantity}
+                                      </p>
+                                    </div>
+                                    <div className="text-right">
+                                      <p className="font-semibold text-primary">
+                                        {parseFloat(item.price).toFixed(2)} €
+                                      </p>
+                                      <p className="text-xs text-gray-500">
+                                        Total: {(parseFloat(item.price) * item.quantity).toFixed(2)} €
+                                      </p>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            );
+                          } catch (e) {
+                            return (
+                              <p className="text-sm text-red-500">
+                                Erreur lors du chargement des articles
+                              </p>
+                            );
+                          }
+                        })()}
+                      </div>
+
+                      {/* Actions */}
+                      <div className="mt-4 flex gap-2">
+                        <Button
+                          onClick={() => {
+                            setSelectedOrder(order);
+                            setInvoiceDialogOpen(true);
+                          }}
+                          variant="outline"
+                          className="flex-1"
+                        >
+                          <FileText className="h-4 w-4 mr-2" />
+                          Générer facture
+                        </Button>
+                      </div>
+
                       {/* Contact Info for Manual Processing */}
                       <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
                         <h4 className="font-semibold mb-2 text-blue-700 dark:text-blue-300">Action requise</h4>
@@ -960,6 +1030,15 @@ export default function Admin() {
             )}
           </DialogContent>
         </Dialog>
+
+        {/* Invoice Generator Dialog */}
+        {selectedOrder && (
+          <InvoiceGenerator
+            order={selectedOrder}
+            open={invoiceDialogOpen}
+            onOpenChange={setInvoiceDialogOpen}
+          />
+        )}
       </div>
     </div>
   );
