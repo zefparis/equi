@@ -438,6 +438,78 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Verify Stripe session and create order if not exists (pour dev local et backup)
+  app.post("/api/verify-session", async (req, res) => {
+    try {
+      if (!stripe) {
+        return res.status(500).json({ message: "Stripe is not configured" });
+      }
+
+      const { sessionId } = req.body;
+      
+      if (!sessionId) {
+        return res.status(400).json({ message: "Session ID is required" });
+      }
+
+      // Vérifier si la commande existe déjà
+      const existingOrders = await storage.getOrders();
+      const existingOrder = existingOrders.find(order => order.stripeSessionId === sessionId);
+      
+      if (existingOrder) {
+        console.log(`ℹ️ Order already exists for session ${sessionId}`);
+        return res.json({ 
+          success: true, 
+          message: "Order already exists",
+          orderId: existingOrder.id 
+        });
+      }
+
+      // Récupérer la session Stripe
+      const session = await stripe.checkout.sessions.retrieve(sessionId);
+      
+      if (session.payment_status !== 'paid') {
+        return res.status(400).json({ 
+          message: "Payment not completed",
+          status: session.payment_status 
+        });
+      }
+
+      // Créer la commande
+      const customerInfo = session.metadata?.customerInfo ? 
+        JSON.parse(session.metadata.customerInfo) : {};
+
+      const orderData = {
+        customerName: session.customer_details?.name || 
+          (customerInfo.firstName && customerInfo.lastName ? 
+            `${customerInfo.firstName} ${customerInfo.lastName}` : ""),
+        customerEmail: session.customer_details?.email || customerInfo.email || "",
+        customerPhone: session.customer_details?.phone || customerInfo.phone || "",
+        customerAddress: session.customer_details?.address?.line1 || customerInfo.address || "",
+        customerCity: session.customer_details?.address?.city || customerInfo.city || "",
+        customerPostalCode: session.customer_details?.address?.postal_code || customerInfo.postalCode || "",
+        customerCountry: session.customer_details?.address?.country || customerInfo.country || "",
+        items: JSON.stringify(customerInfo.items || []),
+        totalAmount: (session.amount_total! / 100).toString(),
+        shippingCost: session.total_details?.amount_shipping ? 
+          (session.total_details.amount_shipping / 100).toString() : "0",
+        status: "paid",
+        stripeSessionId: session.id,
+      };
+
+      const order = await storage.createOrder(orderData);
+      console.log(`✅ Order ${order.id} created via session verification (dev/backup mode)`);
+      
+      res.json({ 
+        success: true, 
+        message: "Order created successfully",
+        orderId: order.id 
+      });
+    } catch (error: any) {
+      console.error("Error verifying session:", error);
+      res.status(500).json({ message: "Error verifying session: " + error.message });
+    }
+  });
+
   // Send invoice email
   app.post("/api/send-invoice", async (req, res) => {
     try {

@@ -3,6 +3,7 @@ import { Link, useLocation } from "wouter";
 import { useCart } from "../hooks/use-cart";
 import { useLanguage } from "../hooks/use-language";
 import { scrollToTop } from "../lib/utils";
+import { apiRequest } from "../lib/queryClient";
 import { Button } from "../components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import { CheckCircle, Package, Truck, Mail } from "lucide-react";
@@ -12,6 +13,7 @@ export default function Confirmation() {
   const { t } = useLanguage();
   const [location] = useLocation();
   const [sessionId, setSessionId] = useState<string | null>(null);
+  const [orderCreated, setOrderCreated] = useState(false);
 
   // Scroll to top when page loads
   useEffect(() => {
@@ -22,12 +24,31 @@ export default function Confirmation() {
     const params = new URLSearchParams(location.split('?')[1] || '');
     const sessionIdParam = params.get('session_id');
     
-    if (sessionIdParam) {
+    if (sessionIdParam && !sessionId) {
       setSessionId(sessionIdParam);
       // Clear cart after successful payment
       clearCart();
+      
+      // Vérifier et créer la commande si elle n'existe pas
+      verifyAndCreateOrder(sessionIdParam);
     }
-  }, [location, clearCart]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location]);
+
+  const verifyAndCreateOrder = async (sessionId: string) => {
+    try {
+      const response = await apiRequest("POST", "/api/verify-session", { sessionId });
+      const data = await response.json();
+      
+      if (data.success) {
+        setOrderCreated(true);
+        console.log('✅ Order verified/created:', data.orderId);
+      }
+    } catch (error) {
+      console.error('Error verifying order:', error);
+      // La commande sera créée par le webhook Stripe en production
+    }
+  };
 
   return (
     <div className="min-h-screen bg-transparent">
