@@ -55,7 +55,7 @@ export default function Support() {
                     <Mail className="h-6 w-6 text-blue-600" />
                     <div>
                       <h3 className="font-semibold">Email</h3>
-                      <p className="text-sm text-gray-600">support@equisaddles.com</p>
+                      <p className="text-sm text-gray-600">equisaddles@gmail.com</p>
                       <Badge variant="secondary" className="mt-1">{t("support.email.response")}</Badge>
                     </div>
                   </div>

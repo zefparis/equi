@@ -352,7 +352,7 @@ export default function Delivery() {
                 <div className="flex flex-wrap gap-2">
                   <Button size="sm" variant="outline">
                     <Phone className="h-3 w-3 mr-1" />
-                    Standard : 0825 10 00 10
+                    Standard : +32 496 94 41 25
                   </Button>
                   <Button size="sm" variant="outline">
                     <Mail className="h-3 w-3 mr-1" />
