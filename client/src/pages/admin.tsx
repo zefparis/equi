@@ -27,7 +27,7 @@ import ImageUpload from "../components/admin/image-upload";
 import ChatAdmin from "../components/admin/chat-admin";
 import InvoiceGenerator from "../components/admin/invoice-generator";
 
-const categories = ["Obstacle", "Dressage", "Cross", "Mixte", "Poney", "Accessoires"];
+const categories = ["Obstacle", "Dressage", "Cross", "Mixte", "Poney", "Accessoires", "Autres"];
 const saddleSizes = ["16", "16.5", "17", "17.5", "18", "18.5"];
 const accessorySubcategories = ["Sangles", "Etrivieres", "Etriers", "Amortisseurs", "Tapis", "Briderie", "Couvertures", "Protections", "Autre"];
 const accessorySizes = ["S", "M", "L", "XL", "XXL", "Unique", "Poney", "Cheval", "Double Poney", "Full"];

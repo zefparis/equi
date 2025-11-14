@@ -9,7 +9,7 @@ import { Badge } from "../components/ui/badge";
 import Lightbox from "../components/ui/lightbox";
 import { Images, Filter } from "lucide-react";
 
-const categories = ["Toutes", "Obstacle", "Dressage", "Cross", "Mixte", "Poney"];
+const categories = ["Toutes", "Obstacle", "Dressage", "Cross", "Mixte", "Poney", "Autres"];
 
 export default function Gallery() {
   const { t } = useLanguage();
